@@ -1,0 +1,13 @@
+@media (max-width: 1024px) {
+	.articles-grid {
+		column-count: 1;
+	}
+
+	.feed-title {
+		font-size: 3.5rem;
+	}
+
+	.home-links-grid {
+		grid-template-columns: 1fr;
+	}
+}

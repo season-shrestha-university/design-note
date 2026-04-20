@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import { deriveCategory, formatCategoryLabel } from '../utils';
+
+type ActiveSection = string | 'home' | 'none';
+
+interface Props {
+	activeSection?: ActiveSection;
+}
+
+const { activeSection = 'none' } = Astro.props;
+
+const articles = await getCollection('articles');
+const categories = [...new Set(articles.map((article) => deriveCategory(article.id)))].sort().reverse();
+---
+
+<input type="checkbox" id="menu-check" />
+
+<nav class="top-nav">
+	<label for="menu-check" class="menu-toggle">
+		<div class="hamburger">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<span class="caps index-label">Index</span>
+	</label>
+
+	<div class="brand-block-mini">
+		<div class="brand-circle-mini">DN.</div>
+	</div>
+</nav>
+
+<aside class="sidebar-overlay">
+	<nav>
+		{
+			categories.map((category, index) => (
+				<a
+					class={`system-row system-link ${activeSection === category ? 'active' : ''}`}
+					href={`/categories/${category}/`}
+				>
+					<div class="index-circle t-mono-num">{categories.length - index}</div>
+					<div class="label-pill">
+						<span class="label-text caps">{formatCategoryLabel(category)}</span>
+						{activeSection === category && <div class="orange-tag">CURRENT</div>}
+					</div>
+				</a>
+			))
+		}
+		<a class={`system-row system-row-help system-link ${activeSection === 'home' ? 'active' : ''}`} href="/">
+			<div class="index-circle">0</div>
+			<div class="label-pill">
+				<span class="label-text caps">Introduction</span>
+				{activeSection === 'home' && <div class="orange-tag">CURRENT</div>}
+			</div>
+		</a>
+	</nav>
+</aside>

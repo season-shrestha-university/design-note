@@ -1,0 +1,41 @@
+---
+import { getCollection, render } from 'astro:content';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import Layout from '../../layouts/Layout.astro';
+import '../../styles/main.css';
+import { deriveCategory, formatCategoryLabel } from '../../utils';
+
+export async function getStaticPaths() {
+	const articles = await getCollection('articles');
+
+	return articles.map((article) => ({
+		params: { slug: article.id },
+		props: { article }
+	}));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+const articleCategory = deriveCategory(article.id);
+const { dateFormatter } = await import("../../utils");
+---
+
+<Layout title={`${article.data.title} / Design Note`}>
+	<Header activeSection={articleCategory} />
+	<main class="content-area">
+		<header class="feed-header">
+			<h1 class="feed-title caps">{article.data.title}</h1>
+			<div class="article-meta article-meta-center">
+				<span class="meta-pill">{dateFormatter.format(article.data.publishedAt)}</span>
+				<span class="meta-pill">Read: {article.data.readTime}</span>
+				<span class="meta-pill">{formatCategoryLabel(articleCategory)}</span>
+			</div>
+		</header>
+
+		<article class="article-content-pill article-mdx">
+			<Content />
+		</article>
+	</main>
+	<Footer />
+</Layout>
