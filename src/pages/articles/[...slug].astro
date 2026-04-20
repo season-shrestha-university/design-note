@@ -1,10 +1,19 @@
 ---
-import { getEntry, render } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import Layout from '../../layouts/Layout.astro';
 import '../../styles/main.css';
 import { deriveCategory, formatCategoryLabel } from '../../utils';
+
+export async function getStaticPaths() {
+	const articles = await getCollection('articles');
+
+	return articles.map((article) => ({
+		params: { slug: article.id }
+	}));
+}
+
 const slug = Astro.params.slug;
 const article = slug ? await getEntry('articles', slug) : undefined;
 
