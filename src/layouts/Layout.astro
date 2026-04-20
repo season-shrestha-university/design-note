@@ -1,5 +1,6 @@
 ---
 import Analytics from '@vercel/analytics/astro'
+import SpeedInsights from '@vercel/speed-insights/astro';
 const { title = "Astro Basics" } = Astro.props;
 ---
 
@@ -13,6 +14,8 @@ const { title = "Astro Basics" } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<Analytics />
+		<SpeedInsights />
+
 	</head>
 	<body>
 		<slot />
