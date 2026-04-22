@@ -32,6 +32,7 @@ const categories = [...new Set(articles.map((article) => deriveCategory(article.
 </nav>
 
 <aside class="sidebar-overlay">
+	<label for="menu-check" class="sidebar-close" aria-label="Close sidebar menu">×</label>
 	<nav>
 		{
 			categories.map((category, index) => (

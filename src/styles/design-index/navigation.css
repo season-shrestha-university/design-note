@@ -80,6 +80,29 @@
 	overflow-y: auto;
 }
 
+.sidebar-close {
+	position: absolute;
+	top: 1.5rem;
+	right: 1.5rem;
+	width: 44px;
+	height: 44px;
+	border: var(--stroke-width) solid var(--ink);
+	border-radius: var(--radius-circle);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2rem;
+	line-height: 1;
+	cursor: pointer;
+	background: var(--paper-bright);
+	z-index: 2;
+}
+
+.sidebar-close:hover {
+	background: var(--ink);
+	color: var(--paper-bright);
+}
+
 #menu-check:checked ~ .sidebar-overlay {
 	left: 0;
 }
