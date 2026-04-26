@@ -1,24 +1,24 @@
 ---
-import { getCollection, getEntry, render } from 'astro:content';
-import Footer from '../../components/Footer.astro';
-import Header from '../../components/Header.astro';
-import Layout from '../../layouts/Layout.astro';
-import '../../styles/main.css';
-import { deriveCategory, formatCategoryLabel } from '../../utils';
+import { getCollection, getEntry, render } from "astro:content";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import Layout from "../../layouts/Layout.astro";
+import "../../styles/main.css";
+import { deriveCategory, formatCategoryLabel } from "../../utils";
 
 export async function getStaticPaths() {
-	const articles = await getCollection('articles');
+  const articles = await getCollection("articles");
 
-	return articles.map((article) => ({
-		params: { slug: article.id }
-	}));
+  return articles.map((article) => ({
+    params: { slug: article.id },
+  }));
 }
 
 const slug = Astro.params.slug;
-const article = slug ? await getEntry('articles', slug) : undefined;
+const article = slug ? await getEntry("articles", slug) : undefined;
 
 if (!article) {
-	throw new Response('Article not found', { status: 404 });
+  throw new Response("Article not found", { status: 404 });
 }
 
 const { Content } = await render(article);
@@ -27,20 +27,21 @@ const { dateFormatter } = await import("../../utils");
 ---
 
 <Layout title={`${article.data.title} / Design Note`}>
-	<Header activeSection={articleCategory} />
-	<main class="content-area">
-		<header class="feed-header">
-			<h1 class="feed-title caps">{article.data.title}</h1>
-			<div class="article-meta article-meta-center">
-				<span class="meta-pill">{dateFormatter.format(article.data.publishedAt)}</span>
-				<span class="meta-pill">Read: {article.data.readTime}</span>
-				<span class="meta-pill">{formatCategoryLabel(articleCategory)}</span>
-			</div>
-		</header>
-
-		<article class="article-content-pill article-mdx">
-			<Content />
-		</article>
-	</main>
-	<Footer />
+  <Header activeSection={articleCategory} />
+  <main class="content-area">
+    <header class="feed-header">
+      <h1 class="feed-title">{article.data.title}</h1>
+      <div class="article-meta article-meta-center">
+        <span class="meta-pill"
+          >{dateFormatter.format(article.data.publishedAt)}</span
+        >
+        <span class="meta-pill">Read: {article.data.readTime}</span>
+        <span class="meta-pill">{formatCategoryLabel(articleCategory)}</span>
+      </div>
+    </header>
+    <article class="article-content-pill article-mdx">
+      <Content />
+    </article>
+  </main>
+  <Footer />
 </Layout>

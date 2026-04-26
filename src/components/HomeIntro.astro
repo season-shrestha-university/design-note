@@ -1,42 +1,46 @@
 ---
-import { getCollection } from 'astro:content';
-import { deriveCategory, formatCategoryLabel } from '../utils';
+import { getCollection } from "astro:content";
+import { deriveCategory, formatCategoryLabel } from "../utils";
 
-const articles = await getCollection('articles');
+const articles = await getCollection("articles");
 const categoryMap = new Map<string, number>();
 
 for (const article of articles) {
-	const category = deriveCategory(article.id);
-	categoryMap.set(category, (categoryMap.get(category) ?? 0) + 1);
+  const category = deriveCategory(article.id);
+  categoryMap.set(category, (categoryMap.get(category) ?? 0) + 1);
 }
 
 const categoryCards = [...categoryMap.entries()]
-	.map(([category, count]) => ({
-		title: formatCategoryLabel(category),
-		description: `${count} article${count === 1 ? '' : 's'} in this collection.`,
-		href: `/categories/${category}/`
-	}))
-	.sort((a, b) => a.title.localeCompare(b.title));
+  .map(([category, count]) => ({
+    title: formatCategoryLabel(category),
+    description: `${count} article${count === 1 ? "" : "s"} read`,
+    href: `/categories/${category}/`,
+  }))
+  .sort((a, b) => a.title.localeCompare(b.title));
 ---
 
 <main class="content-area">
-	<header class="feed-header">
-		<h1 class="feed-title caps">Design Note</h1>
-		<p class="feed-subtitle">
-			A learning log and reference library across typography, grid systems, visual theory, and
-			design history.
-		</p>
-	</header>
+  <header class="feed-header">
+    <h1 class="feed-title">Design Note</h1>
+    <p class="feed-subtitle">
+      A UI design reference system that explains everyday interface patterns and
+      why they work through typography, grids, visual hierarchy, interactions,
+      and core design principles.
+    </p>
+  </header>
 
-	<section class="home-links-grid">
-		{
-			categoryCards.map((card) => (
-				<a class="article-content-pill home-link-card" href={card.href}>
-					<h2 class="article-title">{card.title}</h2>
-					<p class="article-excerpt">{card.description}</p>
-					<div class="read-more">Open Category</div>
-				</a>
-			))
-		}
-	</section>
+  <section class="home-links-grid">
+    {
+      categoryCards.map((card, index) => (
+        <a class="article-content-pill home-link-card" href={card.href}>
+          <div class="article-large-num t-mono-num">
+            {String(index + 1).padStart(2, "0")}
+          </div>
+          <h2 class="article-title">{card.title}</h2>
+          <p class="article-excerpt">{card.description}</p>
+          <div class="read-more">Open Category</div>
+        </a>
+      ))
+    }
+  </section>
 </main>

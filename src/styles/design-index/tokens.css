@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
 :root {
   --ink: #000000;
   --paper: #f2f2f2;
@@ -7,5 +9,5 @@
   --stroke-width: 2.5px;
   --radius-pill: 9999px;
   --radius-circle: 50%;
-  --font-main: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-main: "Inter", sans-serif;
 }
