@@ -1,189 +1,189 @@
 .top-nav {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 80px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 0 3rem;
-	background: rgb(242 242 242 / 90%);
-	backdrop-filter: blur(10px);
-	z-index: 100;
-	border-bottom: 1px solid var(--grid-line);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  background: rgb(242 242 242 / 90%);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  border-bottom: 1px solid var(--grid-line);
 }
 
 .menu-toggle {
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-	cursor: pointer;
-	z-index: 110;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  z-index: 110;
 }
 
 .hamburger {
-	width: 30px;
-	height: 20px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .hamburger span {
-	display: block;
-	height: 3px;
-	width: 100%;
-	background: var(--ink);
-	transition: 0.3s;
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: var(--ink);
+  transition: 0.3s;
 }
 
 .index-label {
-	font-weight: 700;
+  font-weight: 700;
 }
 
 .brand-block-mini {
-	display: flex;
-	align-items: center;
-	gap: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .brand-circle-mini {
-	width: 40px;
-	height: 40px;
-	background: var(--ink);
-	color: var(--paper-bright);
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 1rem;
-	font-weight: 700;
+  width: 40px;
+  height: 40px;
+  background: var(--ink);
+  color: var(--paper-bright);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .brand-name {
-	font-size: 0.9rem;
-	font-weight: 800;
+  font-size: 0.9rem;
+  font-weight: 800;
 }
 
 .sidebar-overlay {
-	position: fixed;
-	top: 0;
-	left: -100%;
-	width: 400px;
-	height: 100vh;
-	background: var(--paper-bright);
-	z-index: 105;
-	transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-	padding: 120px 3rem 4rem;
-	box-shadow: 20px 0 60px rgb(0 0 0 / 10%);
-	overflow-y: auto;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 400px;
+  height: 100vh;
+  background: var(--paper-bright);
+  z-index: 105;
+  transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+  padding: 120px 3rem 4rem;
+  box-shadow: 20px 0 60px rgb(0 0 0 / 10%);
+  overflow-y: auto;
 }
 
 .sidebar-close {
-	position: absolute;
-	top: 1.5rem;
-	right: 1.5rem;
-	width: 44px;
-	height: 44px;
-	border: var(--stroke-width) solid var(--ink);
-	border-radius: var(--radius-circle);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 2rem;
-	line-height: 1;
-	cursor: pointer;
-	background: var(--paper-bright);
-	z-index: 2;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border: var(--stroke-width) solid var(--ink);
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  background: var(--paper-bright);
+  z-index: 2;
 }
 
 .sidebar-close:hover {
-	background: var(--ink);
-	color: var(--paper-bright);
+  background: var(--ink);
+  color: var(--paper-bright);
 }
 
 #menu-check:checked ~ .sidebar-overlay {
-	left: 0;
+  left: 0;
 }
 
 #menu-check:checked ~ .top-nav .hamburger span:nth-child(1) {
-	transform: translateY(8.5px) rotate(45deg);
+  transform: translateY(8.5px) rotate(45deg);
 }
 
 #menu-check:checked ~ .top-nav .hamburger span:nth-child(2) {
-	opacity: 0;
+  opacity: 0;
 }
 
 #menu-check:checked ~ .top-nav .hamburger span:nth-child(3) {
-	transform: translateY(-8.5px) rotate(-45deg);
+  transform: translateY(-8.5px) rotate(-45deg);
 }
 
 .system-row {
-	display: flex;
-	align-items: center;
-	gap: 1.5rem;
-	margin-bottom: 1.25rem;
-	cursor: pointer;
-	position: relative;
-	transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease;
 }
 
 .system-row-help {
-	margin-top: 3rem;
+  margin-top: 3rem;
 }
 
 .system-row:hover {
-	transform: translateX(10px);
+  transform: translateX(10px);
 }
 
 .system-link {
-	text-decoration: none;
-	color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 .index-circle {
-	width: 60px;
-	height: 60px;
-	border: var(--stroke-width) solid var(--ink);
-	border-radius: var(--radius-circle);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 1.8rem;
-	font-weight: 300;
-	background: var(--paper-bright);
-	flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border: var(--stroke-width) solid var(--ink);
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 300;
+  background: var(--paper-bright);
+  flex-shrink: 0;
 }
 
 .label-pill {
-	height: 60px;
-	border: var(--stroke-width) solid var(--ink);
-	border-radius: var(--radius-pill);
-	display: flex;
-	align-items: center;
-	padding: 0 2rem;
-	background: var(--paper-bright);
-	flex-grow: 1;
+  height: 60px;
+  border: var(--stroke-width) solid var(--ink);
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  background: var(--paper-bright);
+  flex-grow: 1;
 }
 
 .system-row.active .index-circle,
 .system-row.active .label-pill,
 .system-row:hover .index-circle,
 .system-row:hover .label-pill {
-	background: var(--ink);
-	color: var(--paper-bright);
+  background: var(--ink);
+  color: var(--paper-bright);
 }
 
 .orange-tag {
-	background-color: var(--tape-orange);
-	color: var(--ink);
-	font-size: 0.75rem;
-	font-weight: 700;
-	padding: 4px 12px;
-	position: absolute;
-	top: -10px;
-	right: 1.5rem;
-	z-index: 3;
-	transform: rotate(-2deg);
+  background-color: var(--tape-orange);
+  color: var(--ink);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  position: absolute;
+  top: -10px;
+  right: 1.5rem;
+  z-index: 3;
+  transform: rotate(-2deg);
 }

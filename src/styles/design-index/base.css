@@ -1,19 +1,20 @@
 * {
-	box-sizing: border-box;
-	-webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-	margin: 0;
-	padding: 0;
-	background-color: var(--paper);
-	background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
-		linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-	background-size: 40px 40px;
-	color: var(--ink);
-	font-family: var(--font-main);
-	min-height: 100vh;
-	overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: var(--ink);
+  font-family: var(--font-main);
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 h1,
@@ -21,20 +22,20 @@ h2,
 h3,
 p,
 span {
-	margin: 0;
+  margin: 0;
 }
 
 .t-mono-num {
-	font-feature-settings: "tnum";
-	font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
 }
 
 .caps {
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-	font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
 }
 
 #menu-check {
-	display: none;
+  display: none;
 }

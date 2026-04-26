@@ -1,11 +1,11 @@
 :root {
-	--ink: #000000;
-	--paper: #f2f2f2;
-	--paper-bright: #ffffff;
-	--tape-orange: #ff4d00;
-	--grid-line: #d8d8d8;
-	--stroke-width: 2.5px;
-	--radius-pill: 9999px;
-	--radius-circle: 50%;
-	--font-main: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --ink: #000000;
+  --paper: #f2f2f2;
+  --paper-bright: #ffffff;
+  --tape-orange: #ff4d00;
+  --grid-line: #d8d8d8;
+  --stroke-width: 2.5px;
+  --radius-pill: 9999px;
+  --radius-circle: 50%;
+  --font-main: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
