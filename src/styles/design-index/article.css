@@ -35,7 +35,7 @@
 
 .article-content-pill {
   border: var(--stroke-width) solid var(--ink);
-  border-radius: 40px;
+  /* border-radius: 40px; */
   background: var(--paper-bright);
   padding: 2rem;
   transition: all 0.3s ease;
@@ -94,6 +94,17 @@
   color: var(--paper-bright);
 }
 
+.article-read {
+  background-color: var(--ink);
+  rotate: -2deg;
+  padding: 0.5rem 1rem;
+  width: fit-content;
+  margin-bottom: 1.75rem;
+  color: var(--paper-bright);
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .article-meta {
   display: flex;
   align-items: center;
@@ -118,7 +129,7 @@
   display: inline-block;
   border: 1px solid var(--ink);
   padding: 10px 24px;
-  border-radius: 24px;
+  /* border-radius: 24px; */
   font-size: 0.85rem;
   text-transform: uppercase;
   font-weight: 700;

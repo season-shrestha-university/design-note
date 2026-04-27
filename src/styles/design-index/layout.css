@@ -19,11 +19,12 @@
 }
 
 .feed-subtitle {
-  font-size: 1.4rem;
   color: #666;
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
+  rotate: -2deg;
   line-height: 1.4;
+  text-align: left;
 }
 
 .home-links-grid {
@@ -74,4 +75,13 @@
 .articles-grid {
   column-count: 2;
   column-gap: 3rem;
+}
+
+.highlighter {
+  padding: 1em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  background-color: whitesmoke;
+  border-left: 4px solid var(--tape-orange);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 34%);
 }
