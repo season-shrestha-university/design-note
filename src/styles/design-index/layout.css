@@ -19,11 +19,10 @@
 }
 
 .feed-subtitle {
-  color: #666;
+  text-align: center;
   max-width: 600px;
   margin: 0 auto;
-  rotate: -2deg;
-  line-height: 1.4;
+  line-height: 1.5;
   text-align: left;
 }
 
@@ -78,10 +77,18 @@
 }
 
 .highlighter {
+  color: var(--ink);
   padding: 1em;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
   background-color: whitesmoke;
-  border-left: 4px solid var(--tape-orange);
-  box-shadow: 0 4px 12px rgb(0 0 0 / 34%);
+  /* border-left: 4px solid var(--tape-orange); */
+  /* box-shadow: 0 4px 12px rgb(0 0 0 / 34%); */
+}
+
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--ink);
+  font-weight: 500;
 }

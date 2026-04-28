@@ -1,7 +1,28 @@
 * {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
+  cursor:
+    url("/pencil.svg") 0 32,
+    auto !important;
 }
+
+a:hover {
+  cursor: pointer;
+}
+
+::selection {
+  background-color: var(--tape-orange);
+  color: var(--ink);
+}
+
+::-moz-selection {
+  background-color: var(--tape-orange);
+  color: var(--ink);
+}
+
+/* a, button, [role="button"], label, input, .menu-toggle, .article-content-pill {
+  cursor: url("/pencil.svg") 0 32, pointer !important;
+} */
 
 body {
   margin: 0;

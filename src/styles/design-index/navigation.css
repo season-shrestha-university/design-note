@@ -11,7 +11,7 @@
   background: rgb(242 242 242 / 90%);
   backdrop-filter: blur(10px);
   z-index: 100;
-  border-bottom: 2px solid var(--ink);
+  /* border-bottom: 2px solid var(--ink); */
 }
 
 .menu-toggle {
@@ -185,4 +185,8 @@
   right: 1.5rem;
   z-index: 3;
   transform: rotate(-2deg);
+}
+
+.label-text {
+  font-weight: 600;
 }

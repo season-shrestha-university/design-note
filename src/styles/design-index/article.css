@@ -184,3 +184,11 @@
     transform: translateY(0);
   }
 }
+
+.article-content-main {
+  max-width: 80ch;
+  margin: 0 auto;
+  padding: 0 3rem;
+  background-color: rgb(250, 250, 250);
+  padding: 6rem 3rem;
+}
