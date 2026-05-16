@@ -28,18 +28,18 @@ const { dateFormatter } = await import("../../utils");
 
 <Layout title={`${article.data.title} / Design Note`}>
   <Header activeSection={articleCategory} />
-  <main class="content-area">
+  <main class="content">
     <header class="feed-header">
-      <h1 class="feed-title">{article.data.title}</h1>
-      <div class="article-meta article-meta-center">
-        <span class="meta-pill"
+      <h1 class="feed-header__title">{article.data.title}</h1>
+      <div class="feed-header__meta">
+        <span class="feed-header__meta-pill"
           >{dateFormatter.format(article.data.publishedAt)}</span
         >
-        <span class="meta-pill">Read: {article.data.readTime}</span>
-        <span class="meta-pill">{formatCategoryLabel(articleCategory)}</span>
+        <span class="feed-header__meta-pill">Read: {article.data.readTime}</span>
+        <span class="feed-header__meta-pill">{formatCategoryLabel(articleCategory)}</span>
       </div>
     </header>
-    <article class="article-content-main article-mdx">
+    <article class="article-detail article-body">
       <Content />
     </article>
   </main>

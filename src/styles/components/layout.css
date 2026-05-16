@@ -1,4 +1,4 @@
-.content-area {
+.content {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
@@ -10,7 +10,7 @@
   text-align: center;
 }
 
-.feed-title {
+.feed-header__title {
   font-size: 5rem;
   font-weight: 700;
   line-height: 0.9;
@@ -18,7 +18,7 @@
   margin-bottom: 1.5rem;
 }
 
-.feed-subtitle {
+.feed-header__subtitle {
   text-align: center;
   max-width: 600px;
   margin: 0 auto;
@@ -26,24 +26,56 @@
   text-align: left;
 }
 
-.home-links-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem;
+.feed-header__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
 }
 
-.home-link-card {
+.feed-header__meta-pill {
+  border: 1px solid var(--ink);
+  border-radius: 50px;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  background: var(--paper-bright);
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid--cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid--cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid--cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid--gap-large {
+  gap: 3rem;
+}
+
+.grid__item-link {
   text-decoration: none;
   color: inherit;
   display: block;
 }
 
-.sub-category-label {
+.sub-category__label {
   font-size: 0.8rem;
   margin-bottom: 0.75rem;
 }
 
-.sub-category-list {
+.sub-category__list {
   list-style: none;
   padding: 0;
   margin: 0 0 1.75rem;
@@ -52,11 +84,11 @@
   gap: 0.5rem;
 }
 
-.sub-category-list-center {
+.sub-category__list--center {
   justify-content: center;
 }
 
-.sub-category-item {
+.sub-category__item {
   border: var(--stroke-width) solid var(--ink);
   border-radius: 14px;
   padding: 10px 16px;
@@ -67,14 +99,11 @@
   transition: transform 0.2s ease;
 }
 
-.sub-category-item:hover {
+.sub-category__item:hover {
   transform: translateY(-2px);
 }
 
-.articles-grid {
-  column-count: 2;
-  column-gap: 3rem;
-}
+
 
 .highlighter {
   color: var(--ink);

@@ -26,36 +26,34 @@ const categoryArticles = (
 
 <Layout title={`${formatCategoryLabel(category)} / Design Note`}>
   <Header activeSection={category} />
-  <main class="content-area">
+  <main class="content">
     <header class="feed-header">
-      <h1 class="feed-title">{formatCategoryLabel(category)}</h1>
-      <p class="">Collection managed with MDX content files.</p>
+      <h1 class="feed-header__title">{formatCategoryLabel(category)}</h1>
+      <p class="feed-header__subtitle">Collection managed with MDX content files.</p>
     </header>
-    <div class="articles-grid">
+    <div class="grid grid--cols-2 grid--gap-large">
       {
         categoryArticles.map((article, index) => (
           <article
-            class="article-block"
+            class="card"
             style={`animation-delay: ${(index + 1) * 0.1}s`}
           >
-            <div class="article-meta">
-              <span class="meta-pill">
+            <div class="card__meta">
+              <span class="card__meta-pill">
                 {dateFormatter.format(article.data.publishedAt)}
               </span>
-              <span class="meta-pill">Read: {article.data.readTime}</span>
+              <span class="card__meta-pill">Read: {article.data.readTime}</span>
             </div>
-            <div class="article-main">
-              <a class="article-link" href={`/articles/${article.id}/`}>
-                <div class="article-content-pill">
-                  <div class="article-large-num t-mono-num">
-                    {String(index + 1).padStart(2, "0")}
-                  </div>
-                  <h3 class="article-title">{article.data.title}</h3>
-                  <p class="article-excerpt">{article.data.excerpt}</p>
-                  <div class="read-more">Read Entry</div>
+            <a class="card__link" href={`/articles/${article.id}/`}>
+              <div class="card__box">
+                <div class="card__number text--mono-num">
+                  {String(index + 1).padStart(2, "0")}
                 </div>
-              </a>
-            </div>
+                <h3 class="card__title">{article.data.title}</h3>
+                <p class="card__excerpt">{article.data.excerpt}</p>
+                <div class="card__action">Read Entry</div>
+              </div>
+            </a>
           </article>
         ))
       }

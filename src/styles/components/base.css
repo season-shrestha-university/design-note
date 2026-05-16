@@ -39,17 +39,17 @@ span {
   margin: 0;
 }
 
-.t-mono-num {
+.text--mono-num {
   font-feature-settings: "tnum";
   font-variant-numeric: tabular-nums;
 }
 
-.caps {
+.text--caps {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 500;
 }
 
-#menu-check {
+.nav__checkbox {
   display: none;
 }
