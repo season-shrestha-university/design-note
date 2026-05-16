@@ -103,16 +103,11 @@
   transform: translateY(-2px);
 }
 
-
-
 .highlighter {
   color: var(--ink);
   padding: 1em;
   box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
   background-color: whitesmoke;
-  /* border-left: 4px solid var(--tape-orange); */
-  /* box-shadow: 0 4px 12px rgb(0 0 0 / 34%); */
 }
 
 p {

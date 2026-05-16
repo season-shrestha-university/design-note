@@ -35,8 +35,11 @@ const { dateFormatter } = await import("../../utils");
         <span class="feed-header__meta-pill"
           >{dateFormatter.format(article.data.publishedAt)}</span
         >
-        <span class="feed-header__meta-pill">Read: {article.data.readTime}</span>
-        <span class="feed-header__meta-pill">{formatCategoryLabel(articleCategory)}</span>
+        <span class="feed-header__meta-pill">Read: {article.data.readTime}</span
+        >
+        <span class="feed-header__meta-pill"
+          >{formatCategoryLabel(articleCategory)}</span
+        >
       </div>
     </header>
     <article class="article-detail article-body">
