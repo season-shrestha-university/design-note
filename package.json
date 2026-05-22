@@ -15,15 +15,15 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/mdx": "^5.0.3",
-    "@astrojs/vercel": "^10.0.4",
+    "@astrojs/mdx": "^5.0.6",
+    "@astrojs/vercel": "^10.0.7",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
-    "astro": "^6.1.8",
+    "astro": "^6.3.4",
     "astro-icon": "^1.1.5"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.8",
+    "@astrojs/check": "^0.9.9",
     "@typescript-eslint/eslint-plugin": "^8.59.0",
     "@typescript-eslint/parser": "^8.59.0",
     "eslint": "^10.2.1",
