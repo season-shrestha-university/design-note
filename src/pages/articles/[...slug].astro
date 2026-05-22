@@ -3,7 +3,6 @@ import { getCollection, getEntry, render } from "astro:content";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import Layout from "../../layouts/Layout.astro";
-import "../../styles/main.css";
 import { deriveCategory, formatCategoryLabel } from "../../utils";
 
 export async function getStaticPaths() {
@@ -28,21 +27,21 @@ const { dateFormatter } = await import("../../utils");
 
 <Layout title={`${article.data.title} / Design Note`}>
   <Header activeSection={articleCategory} />
-  <main class="content">
-    <header class="feed-header">
-      <h1 class="feed-header__title">{article.data.title}</h1>
-      <div class="feed-header__meta">
-        <span class="feed-header__meta-pill"
-          >{dateFormatter.format(article.data.publishedAt)}</span
+  <main>
+    <header>
+      <h1>{article.data.title}</h1>
+      <div>
+        <span>
+          {dateFormatter.format(article.data.publishedAt)}</span
         >
-        <span class="feed-header__meta-pill">Read: {article.data.readTime}</span
+        <span>Read: {article.data.readTime}</span
         >
-        <span class="feed-header__meta-pill"
-          >{formatCategoryLabel(articleCategory)}</span
+        <span>
+          {formatCategoryLabel(articleCategory)}</span
         >
       </div>
     </header>
-    <article class="article-detail article-body">
+    <article>
       <Content />
     </article>
   </main>

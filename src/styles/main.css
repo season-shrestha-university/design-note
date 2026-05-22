@@ -1,7 +1,4 @@
-@import "./components/tokens.css";
 @import "./components/base.css";
-@import "./components/navigation.css";
 @import "./components/layout.css";
-@import "./components/article.css";
-@import "./components/footer.css";
-@import "./components/responsive.css";
+@import "./components/typography.css";
+@import "./components/tab.css";

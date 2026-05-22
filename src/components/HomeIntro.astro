@@ -18,32 +18,74 @@ const categoryCards = [...categoryMap.entries()]
   .sort((a, b) => a.title.localeCompare(b.title));
 ---
 
-<main class="content">
-  <header class="feed-header">
-    <h1 class="feed-header__title">Design Note</h1>
-    <p class="feed-header__subtitle highlighter">
+<main>
+  <header class="page-header">
+    <h1 class="page-title">Design Note</h1>
+    <p class="page-subtitle">
       A UI design reference system that explains everyday interface patterns and
       why they work through typography, grids, visual hierarchy, interactions,
       and core design principles.
     </p>
   </header>
 
-  <section class="grid grid--cols-3">
-    {
+  <section>
+    <!-- {
       categoryCards.map((card, index) => (
-        <article class="card grid__item-link">
-          <a class="card__link" href={card.href}>
-            <div class="card__box">
-              <div class="card__number text--mono-num">
-                {String(index + 1).padStart(2, "0")}
-              </div>
-              <h2 class="card__title">{card.title}</h2>
-              <p class="card__read-time">{card.description}</p>
-              <div class="card__action">Open Category</div>
+        <article>
+          <a href={card.href}>
+            <div>
+              <div>{String(index + 1).padStart(2, "0")}</div>
+              <h2>{card.title}</h2>
+              <p>{card.description}</p>
+              <div>Open Category</div>
             </div>
           </a>
         </article>
       ))
-    }
+    } -->
+
+    <div class="tab">
+      <input
+        class="tab__radio tab__radio--1"
+        type="radio"
+        name="tab"
+        id="tab-1"
+        checked
+      />
+      <input
+        class="tab__radio tab__radio--2"
+        type="radio"
+        name="tab"
+        id="tab-2"
+      />
+
+      <nav class="tab__nav">
+        <label class="tab__button tab__button--1" for="tab-1">
+          <img
+            src="/icons/latest-article-icon.svg"
+            alt=""
+            height="32"
+            width="32"
+          /> Latest Notes</label
+        >
+        <label class="tab__button tab__button--2" for="tab-2">
+          <img
+            src="/public/icons/category-icon.svg"
+            alt=""
+            height="32"
+            width="32"
+          /> View Category</label
+        >
+      </nav>
+
+      <div class="tab__panels">
+        <div class="tab__panel tab__panel--1">
+          <p>Categories content goes here.</p>
+        </div>
+        <div class="tab__panel tab__panel--2">
+          <p>Recent content goes here.</p>
+        </div>
+      </div>
+    </div>
   </section>
 </main>

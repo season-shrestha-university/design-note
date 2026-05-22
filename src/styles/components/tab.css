@@ -1,0 +1,59 @@
+/* ── Tab Block ── */
+/* CSS-only tabs using hidden radio inputs */
+
+.tab {
+  margin-top: 48px;
+}
+
+.tab__radio {
+  display: none;
+}
+
+/* ── Tab Navigation ── */
+
+.tab__nav {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+
+.tab__button {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 48px;
+  background: var(--surface);
+  border-radius: 32px;
+  color: var(--text-color);
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  gap: 8px;
+  color: var(--primary-color);
+}
+
+.tab__button:hover {
+  box-shadow: 0 0 0 1px var(--primary-color);
+}
+
+/* ── Tab Panels ── */
+
+.tab__panels {
+  margin-top: 32px;
+}
+
+.tab__panel {
+  display: none;
+}
+
+/* ── Active State (radio toggle) ── */
+
+.tab__radio--1:checked ~ .tab__nav .tab__button--1,
+.tab__radio--2:checked ~ .tab__nav .tab__button--2 {
+  color: var(--primary-color);
+  box-shadow: 0 0 0 1px var(--primary-color);
+}
+
+.tab__radio--1:checked ~ .tab__panels .tab__panel--1,
+.tab__radio--2:checked ~ .tab__panels .tab__panel--2 {
+  display: block;
+}
