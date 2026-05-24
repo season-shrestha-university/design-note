@@ -1,0 +1,56 @@
+---
+import { formatCategoryLabel } from "../utils";
+
+interface Props {
+  title: string;
+  excerpt: string;
+  readTime: string;
+  category: string;
+  index: number;
+  href: string;
+}
+
+const { title, excerpt, readTime, category, index, href } = Astro.props;
+
+const displayIndex = String(index).padStart(2, "0");
+const categoryLabel = formatCategoryLabel(category);
+
+/* Map each category to an SVG icon path */
+const categoryIcons: Record<string, string> = {
+  interaction:
+    "M15.042 21.672L13.684 16.6l-4.024-2.896 8.193.864 1.548 5.206-2.627-2.378-2.08 5.072-1.078-.462 1.87-4.548-2.444 4.214zM7.88 11.696L6.504 9.464l2.164-1.248 1.376 2.232-2.164 1.248z",
+  foundations: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5",
+  components: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5",
+  layout: "M3 3h7v7H3V3zm11 0h7v7h-7V3zm0 11h7v7h-7v-7zM3 14h7v7H3v-7z",
+  psychology:
+    "M12 2a9 9 0 0 0-9 9c0 3.9 2.5 7.1 6 8.3V21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1.7c3.5-1.2 6-4.4 6-8.3a9 9 0 0 0-9-9zm-2 16v-1h4v1h-4zm4-3h-4v-1h4v1z",
+};
+
+const iconPath = categoryIcons[category] || categoryIcons["foundations"];
+---
+
+<a href={href} class="card" id={`card-${displayIndex}`}>
+  <div class="card__header">
+    <span class="card__tag">
+      <span class="card__tag-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d={iconPath}></path>
+        </svg>
+      </span>
+      {categoryLabel}
+    </span>
+    <span class="card__index">{displayIndex}</span>
+  </div>
+
+  <div class="card__body">
+    <h2 class="card__title">{title}</h2>
+    <p class="card__excerpt">{excerpt}</p>
+    <span class="card__badge">{readTime} Reads</span>
+  </div>
+</a>

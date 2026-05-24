@@ -18,56 +18,35 @@ const categories = [
   .reverse();
 ---
 
-<input type="checkbox" id="nav-toggle" class="nav__checkbox" />
-
-<nav class="nav">
-  <label for="nav-toggle" class="nav__toggle">
-    <div class="hamburger">
-      <span class="hamburger__line"></span>
-      <span class="hamburger__line"></span>
-      <span class="hamburger__line"></span>
+<!-- <input type="checkbox" id="nav-toggle" /> --><!-- <nav>
+  <label for="nav-toggle">
+    <div>
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
   </label>
-
-  <div class="brand">
-    <div class="brand__logo">DN.</div>
-  </div>
-</nav>
-
-<aside class="sidebar">
-  <label for="nav-toggle" class="sidebar__close" aria-label="Close sidebar menu"
-    >×</label
-  >
+</nav> -->
+<aside>
+  <!-- <label for="nav-toggle" aria-label="Close sidebar menu">×</label>
   <nav>
     {
       categories.map((category, index) => (
-        <a
-          class={`nav-item ${activeSection === category ? "nav-item--active" : ""}`}
-          href={`/categories/${category}/`}
-        >
-          <div class="nav-item__index text--mono-num">
-            {categories.length - index}
-          </div>
-          <div class="nav-item__label">
-            <span class="nav-item__text text--caps">
-              {formatCategoryLabel(category)}
-            </span>
-            {activeSection === category && (
-              <div class="tag tag--orange">CURRENT</div>
-            )}
+        <a href={`/categories/${category}/`}>
+          <div>{categories.length - index}</div>
+          <div>
+            <span>{formatCategoryLabel(category)}</span>
+            {activeSection === category && <div>CURRENT</div>}
           </div>
         </a>
       ))
     }
-    <a
-      class={`nav-item nav-item--help ${activeSection === "home" ? "nav-item--active" : ""}`}
-      href="/"
-    >
-      <div class="nav-item__index">0</div>
-      <div class="nav-item__label">
-        <span class="nav-item__text text--caps">Introduction</span>
-        {activeSection === "home" && <div class="tag tag--orange">CURRENT</div>}
+    <a href="/">
+      <div>0</div>
+      <div>
+        <span>Introduction</span>
+        {activeSection === "home" && <div>CURRENT</div>}
       </div>
     </a>
-  </nav>
+  </nav> -->
 </aside>

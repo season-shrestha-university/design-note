@@ -1,55 +1,137 @@
-* {
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-}
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 
-a:hover {
-  cursor: pointer;
-}
+@import "./token.css";
 
-::selection {
-  background-color: var(--tape-orange);
-  color: var(--ink);
-}
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
 
-::-moz-selection {
-  background-color: var(--tape-orange);
-  color: var(--ink);
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--paper);
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 40px 40px;
-  color: var(--ink);
-  font-family: var(--font-main);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
 h1,
 h2,
 h3,
+h4,
+h5,
+h6,
 p,
-span {
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+  font-family: "IBM Plex Sans", sans-serif;
+  background-color: var(--background);
+  color: var(--text-color);
 }
 
-.text--mono-num {
-  font-feature-settings: "tnum";
-  font-variant-numeric: tabular-nums;
+ol,
+ul {
+  list-style: none;
 }
-
-.text--caps {
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 500;
+blockquote,
+q {
+  quotes: none;
 }
-
-.nav__checkbox {
-  display: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }

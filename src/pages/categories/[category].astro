@@ -3,7 +3,6 @@ import { getCollection } from "astro:content";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import Layout from "../../layouts/Layout.astro";
-import "../../styles/main.css";
 import { dateFormatter, formatCategoryLabel } from "../../utils";
 
 export async function getStaticPaths() {
@@ -26,34 +25,33 @@ const categoryArticles = (
 
 <Layout title={`${formatCategoryLabel(category)} / Design Note`}>
   <Header activeSection={category} />
-  <main class="content">
-    <header class="feed-header">
-      <h1 class="feed-header__title">{formatCategoryLabel(category)}</h1>
-      <p class="feed-header__subtitle">
+  <main>
+    <header>
+      <h1>{formatCategoryLabel(category)}</h1>
+      <p>
         Collection managed with MDX content files.
       </p>
     </header>
-    <div class="grid grid--cols-2 grid--gap-large">
+    <div>
       {
         categoryArticles.map((article, index) => (
           <article
-            class="card"
             style={`animation-delay: ${(index + 1) * 0.1}s`}
           >
-            <div class="card__meta">
-              <span class="card__meta-pill">
+            <div>
+              <span>
                 {dateFormatter.format(article.data.publishedAt)}
               </span>
-              <span class="card__meta-pill">Read: {article.data.readTime}</span>
+              <span>Read: {article.data.readTime}</span>
             </div>
-            <a class="card__link" href={`/articles/${article.id}/`}>
-              <div class="card__box">
-                <div class="card__number text--mono-num">
+            <a href={`/articles/${article.id}/`}>
+              <div>
+                <div>
                   {String(index + 1).padStart(2, "0")}
                 </div>
-                <h3 class="card__title">{article.data.title}</h3>
-                <p class="card__excerpt">{article.data.excerpt}</p>
-                <div class="card__action">Read Entry</div>
+                <h3>{article.data.title}</h3>
+                <p>{article.data.excerpt}</p>
+                <div>Read Entry</div>
               </div>
             </a>
           </article>
