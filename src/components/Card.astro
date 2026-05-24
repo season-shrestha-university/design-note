@@ -51,6 +51,26 @@ const iconPath = categoryIcons[category] || categoryIcons["foundations"];
   <div class="card__body">
     <h2 class="card__title">{title}</h2>
     <p class="card__excerpt">{excerpt}</p>
-    <span class="card__badge">{readTime} Reads</span>
+    <!-- change readTime to views -->
+    <span class="card__badge">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="17"
+        height="17"
+        fill="none"
+        viewBox="0 0 17 17"
+        ><path
+          stroke="#b17a28"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M2.301 9.15c2.213-5.414 9.408-5.665 11.993-.419"></path><path
+          stroke="#b17a28"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M7.62 11.48a2 2 0 1 0 1.401-3.748 2 2 0 0 0-1.4 3.748"></path></svg
+      >{readTime} Views
+    </span>
   </div>
 </a>
