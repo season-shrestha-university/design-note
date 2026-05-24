@@ -4,4 +4,22 @@
   --primary-color: #ffa329;
   --text-color: #9ca18f;
   --surface: #071e27;
+
+  --icon-size: 24px;
+  --border-radius: 24px;
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 96px;
+
+  /* Typography */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 24px;
+  --font-size-xl: 45px;
 }
