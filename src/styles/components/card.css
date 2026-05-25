@@ -17,6 +17,14 @@
 
 .card:hover {
   box-shadow: 0 0 0 1px var(--primary-color);
+  transform: translateY(-4px);
+  cursor: pointer;
+}
+.card:hover .card__badge {
+  transform: translateY(-4px);
+}
+.card:hover .card__tag {
+  transform: rotate(-2deg);
 }
 
 /* ── Card Header ── */
@@ -34,12 +42,16 @@
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-sm);
-  padding: 6px 14px;
+  padding: 6px 12px;
   background: var(--background);
   border-radius: var(--border-radius);
   font-size: var(--font-size-xs);
   font-weight: 500;
   color: var(--primary-color);
+  transition: all 0.2s ease;
+}
+.card__tag:hover {
+  box-shadow: 0 0 0 1px var(--primary-color);
 }
 
 .card__tag-icon {
@@ -50,17 +62,6 @@
   width: 20px;
   height: 20px;
   color: var(--text-color);
-}
-
-/* Orange dot indicator on the icon */
-.card__tag-icon::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 6px;
-  height: 6px;
-  background: var(--primary-color);
 }
 
 /* ── Index Number ── */
@@ -104,9 +105,6 @@
   color: var(--background);
   transition: all 0.2s ease;
   transform: rotate(-2.5deg);
-}
-
-.card:hover .card__badge {
 }
 
 /* ── Card Grid (for category view) ── */
