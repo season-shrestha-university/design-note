@@ -1,0 +1,31 @@
+.floating-sidebar {
+  position: fixed;
+  bottom: -50%;
+  right: 10%;
+  width: fit-content;
+  height: 100vh;
+}
+
+.floating-sidebar__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.floating-sidebar__item {
+  padding: var(--spacing-md);
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.floating-sidebar__item:hover {
+  color: var(--primary-color);
+  box-shadow: 0 0 0 1px var(--primary-color);
+  transform: translateY(-4px);
+}
+.floating-sidebar__item--active {
+  color: var(--primary-color);
+  box-shadow: 0 0 0 1px var(--primary-color);
+}
