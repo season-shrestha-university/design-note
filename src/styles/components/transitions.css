@@ -19,3 +19,13 @@
     transform: scale(1);
   }
 }
+
+/* Prevent white flash during view transitions */
+::view-transition-group(root) {
+  animation-duration: 0s;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+}
