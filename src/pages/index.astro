@@ -6,10 +6,43 @@ import Layout from "../layouts/Layout.astro";
 import "../styles/main.css";
 
 const isHomePage = Astro.url.pathname === "/";
+
+const zoomIn = {
+  forwards: {
+    old: {
+      name: "zoomFadeOut",
+      duration: "0.2s",
+      easing: "ease-in",
+      fillMode: "forwards",
+    },
+    new: {
+      name: "zoomFadeIn",
+      duration: "0.3s",
+      easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+      fillMode: "backwards",
+    },
+  },
+  backwards: {
+    old: {
+      name: "zoomFadeOut",
+      duration: "0.2s",
+      easing: "ease-in",
+      fillMode: "forwards",
+    },
+    new: {
+      name: "zoomFadeIn",
+      duration: "0.3s",
+      easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+      fillMode: "backwards",
+    },
+  },
+};
 ---
 
 <Layout class="container">
-  {!isHomePage && <Header activeSection="home" />}
-  <HomeIntro />
-  <Footer />
+  <div transition:animate={zoomIn}>
+    {!isHomePage && <Header activeSection="home" />}
+    <HomeIntro />
+    <Footer />
+  </div>
 </Layout>

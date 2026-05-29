@@ -4,10 +4,11 @@ import SpeedInsights from "@vercel/speed-insights/astro";
 const { title = "Design Note" } = Astro.props;
 import "../styles/main.css";
 import QuickAccess from "../components/quick-access.astro";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" transition:name="root" transition:animate="none">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -15,6 +16,7 @@ import QuickAccess from "../components/quick-access.astro";
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <ClientRouter />
     <Analytics />
     <SpeedInsights />
   </head>
