@@ -23,7 +23,7 @@
 .floating-sidebar__item:hover {
   color: var(--primary-color);
   box-shadow: 0 0 0 1px var(--primary-color);
-  transform: translateY(-4px);
+  transform: scale(1.2);
 }
 .floating-sidebar__item--active {
   color: var(--primary-color);

@@ -4,10 +4,12 @@ import Header from "../components/Header.astro";
 import HomeIntro from "../components/HomeIntro.astro";
 import Layout from "../layouts/Layout.astro";
 import "../styles/main.css";
+
+const isHomePage = Astro.url.pathname === "/";
 ---
 
 <Layout class="container">
-  <Header activeSection="home" />
+  {!isHomePage && <Header activeSection="home" />}
   <HomeIntro />
   <Footer />
 </Layout>

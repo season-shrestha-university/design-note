@@ -1,0 +1,20 @@
+.note__header {
+  position: relative;
+}
+.note__visual {
+  position: fixed;
+  top: 10%;
+  right: 20%;
+  z-index: -1;
+}
+.note__takeaway__number {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--primary-color);
+  opacity: 20%;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.note__description {
+  margin: var(--spacing-2xl) 0;
+}

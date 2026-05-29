@@ -1,0 +1,11 @@
+.note__takeaway {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  list-style-type: decimal-leading-zero;
+}
+
+.note__takeaway__item {
+  display: flex;
+  gap: var(--spacing-2xl);
+}

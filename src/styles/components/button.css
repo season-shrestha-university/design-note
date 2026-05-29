@@ -1,0 +1,19 @@
+.back__btn {
+  height: 32px;
+  width: 32px;
+  display: block;
+  background: var(--primary-color);
+  color: black;
+  border-radius: 50%;
+  padding: var(--spacing-sm);
+  cursor: pointer;
+  position: fixed;
+  top: 30px;
+  left: 15%;
+  border: 16px solid var(--surface);
+  z-index: 100;
+  transition: all 0.2s ease;
+}
+.back__btn:hover {
+  transform: scale(1.2);
+}

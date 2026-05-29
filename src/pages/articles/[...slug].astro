@@ -22,28 +22,52 @@ if (!article) {
 
 const { Content } = await render(article);
 const articleCategory = deriveCategory(article.id);
-const { dateFormatter } = await import("../../utils");
 ---
 
-<Layout title={`${article.data.title} / Design Note`}>
+<Layout title={`title / Design Note`}>
   <Header activeSection={articleCategory} />
   <main>
-    <header>
-      <h1>{article.data.title}</h1>
-      <div>
-        <span>
-          {dateFormatter.format(article.data.publishedAt)}</span
-        >
-        <span>Read: {article.data.readTime}</span
-        >
-        <span>
-          {formatCategoryLabel(articleCategory)}</span
-        >
-      </div>
+    <header class="note__header">
+      <h1 class="note__title">The Ripple / Impact Shape</h1>
+      <span class="note_category card__badge">Interaction</span>
+      <p class="note__subtitle">
+        The tendency for people to get overwhelmed when they are presented with
+        a large number of options, often used interchangeably with the term
+        paradox of choice.
+      </p>
+      <img class="note__visual" src="/interaction-fade.svg" alt="" />
     </header>
-    <article>
-      <Content />
-    </article>
+    <ol class="note__takeaway">
+      <li class="note__takeaway__item">
+        <span class="note__takeaway__number">01</span>
+        <p>
+          The core of the interface is defined by a monolithic, dark-chrome
+          pillar rising seamlessly from a matte, charcoal-grey canvas. It is
+          static, commanding, and perfectly still—until the moment of contact.
+        </p>
+      </li>
+      <li class="note__takeaway__item">
+        <span class="note__takeaway__number">02</span>
+        <p>
+          The core of the interface is defined by a monolithic, dark-chrome
+          pillar rising seamlessly from a matte, charcoal-grey canvas. It is
+          static, commanding, and perfectly still—until the moment of contact.
+        </p>
+      </li>
+      <li class="note__takeaway__item">
+        <span class="note__takeaway__number">03</span>
+        <p>
+          The core of the interface is defined by a monolithic, dark-chrome
+          pillar rising seamlessly from a matte, charcoal-grey canvas. It is
+          static, commanding, and perfectly still—until the moment of contact.
+        </p>
+      </li>
+    </ol>
+    <p class="note__description">
+      The core of the interface is defined by a monolithic, dark-chrome pillar
+      rising seamlessly from a matte, charcoal-grey canvas. It is static,
+      commanding, and perfectly still—until the moment of contact.
+    </p>
   </main>
-  <Footer />
 </Layout>
+<Footer />
