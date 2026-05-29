@@ -21,7 +21,9 @@
   /* Typography */
   --font-size-xs: 12px;
   --font-size-sm: 14px;
-  --font-size-md: 18px;
+  --font-size-md: 20px;
   --font-size-lg: 24px;
-  --font-size-xl: 45px;
+  --font-size-xl: 32px;
+  --font-size-2xl: 48px;
+  --font-size-3xl: 50px;
 }

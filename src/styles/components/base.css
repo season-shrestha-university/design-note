@@ -148,7 +148,7 @@ p {
 }
 
 h1 {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-2xl);
   font-weight: 700;
   font-family: "IBM Plex Sans", sans-serif;
   line-height: 1.3;

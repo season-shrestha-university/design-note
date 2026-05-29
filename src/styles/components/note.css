@@ -1,14 +1,24 @@
+.note__title {
+  margin-bottom: var(--spacing-sm);
+}
+
+.note__subtitle {
+  margin-top: var(--spacing-3xl);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-4xl);
+}
+
 .note__header {
   position: relative;
 }
 .note__visual {
-  position: fixed;
+  position: absolute;
   top: 10%;
-  right: 20%;
+  right: -25%;
   z-index: -1;
 }
 .note__takeaway__number {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-2xl);
   font-weight: 700;
   color: var(--primary-color);
   opacity: 20%;
