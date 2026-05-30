@@ -8,3 +8,9 @@
 @import "./components/list.css";
 @import "./components/note.css";
 @import "./components/transitions.css";
+
+/* In main.css */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none !important;
+}
