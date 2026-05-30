@@ -19,7 +19,7 @@ import { ClientRouter } from "astro:transitions";
     <Analytics />
     <ClientRouter />
   </head>
-  <body class="container">
+  <body class="container" transition:persist>
     <slot />
     <QuickAccess />
     <SpeedInsights />
