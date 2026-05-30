@@ -5,16 +5,16 @@ import Header from "../../components/Header.astro";
 import Layout from "../../layouts/Layout.astro";
 import { deriveCategory } from "../../utils";
 
-const zoomIn = {
+const fadeUp = {
   forwards: {
     old: {
-      name: "zoomFadeOut",
+      name: "fadeUpOut",
       duration: "0.2s",
       easing: "ease-in",
       fillMode: "forwards",
     },
     new: {
-      name: "zoomFadeIn",
+      name: "fadeUpIn",
       duration: "0.3s",
       easing: "cubic-bezier(0.22, 1, 0.36, 1)",
       fillMode: "backwards",
@@ -22,13 +22,13 @@ const zoomIn = {
   },
   backwards: {
     old: {
-      name: "zoomFadeOut",
+      name: "fadeUpOut",
       duration: "0.2s",
       easing: "ease-in",
       fillMode: "forwards",
     },
     new: {
-      name: "zoomFadeIn",
+      name: "fadeUpIn",
       duration: "0.3s",
       easing: "cubic-bezier(0.22, 1, 0.36, 1)",
       fillMode: "backwards",
@@ -56,7 +56,7 @@ const articleCategory = deriveCategory(article.id);
 ---
 
 <Layout title={`title / Design Note`}>
-  <div transition:animate={zoomIn}>
+  <div transition:animate={fadeUp}>
     <Header activeSection={articleCategory} />
     <main>
       <header class="note__header">
