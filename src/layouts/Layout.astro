@@ -1,27 +1,28 @@
 ---
 import Analytics from "@vercel/analytics/astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
-const { title = "Design Note" } = Astro.props;
 import QuickAccess from "../components/quick-access.astro";
 import "../styles/main.css";
+
 import { ClientRouter } from "astro:transitions";
 ---
 
 <!doctype html>
-<html lang="en" transition:animate="none">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>Design Note</title>
+
     <Analytics />
-    <SpeedInsights />
     <ClientRouter />
   </head>
   <body class="container">
     <slot />
     <QuickAccess />
+    <SpeedInsights />
   </body>
 </html>
