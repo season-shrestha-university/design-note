@@ -4,18 +4,17 @@ import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import Layout from "../../layouts/Layout.astro";
 import { deriveCategory } from "../../utils";
-
 const fadeUp = {
   forwards: {
     old: {
       name: "fadeUpOut",
-      duration: "0.2s",
+      duration: "0.45s",
       easing: "ease-in",
       fillMode: "forwards",
     },
     new: {
       name: "fadeUpIn",
-      duration: "0.3s",
+      duration: "0.55s",
       easing: "cubic-bezier(0.22, 1, 0.36, 1)",
       fillMode: "backwards",
     },
@@ -23,13 +22,13 @@ const fadeUp = {
   backwards: {
     old: {
       name: "fadeUpOut",
-      duration: "0.2s",
+      duration: "0.45s",
       easing: "ease-in",
       fillMode: "forwards",
     },
     new: {
       name: "fadeUpIn",
-      duration: "0.3s",
+      duration: "0.55s",
       easing: "cubic-bezier(0.22, 1, 0.36, 1)",
       fillMode: "backwards",
     },
