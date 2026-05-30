@@ -28,27 +28,19 @@ const categoryArticles = (
   <main>
     <header>
       <h1>{formatCategoryLabel(category)}</h1>
-      <p>
-        Collection managed with MDX content files.
-      </p>
+      <p>Collection managed with MDX content files.</p>
     </header>
     <div>
       {
         categoryArticles.map((article, index) => (
-          <article
-            style={`animation-delay: ${(index + 1) * 0.1}s`}
-          >
+          <article style={`animation-delay: ${(index + 1) * 0.1}s`}>
             <div>
-              <span>
-                {dateFormatter.format(article.data.publishedAt)}
-              </span>
+              <span>{dateFormatter.format(article.data.publishedAt)}</span>
               <span>Read: {article.data.readTime}</span>
             </div>
             <a href={`/articles/${article.id}/`}>
               <div>
-                <div>
-                  {String(index + 1).padStart(2, "0")}
-                </div>
+                <div>{String(index + 1).padStart(2, "0")}</div>
                 <h3>{article.data.title}</h3>
                 <p>{article.data.excerpt}</p>
                 <div>Read Entry</div>

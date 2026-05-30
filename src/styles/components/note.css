@@ -26,5 +26,46 @@
 }
 
 .note__description {
-  margin: var(--spacing-2xl) 0;
+  margin-top: var(--spacing-2xl);
+
+  margin-bottom: var(--spacing-3xl);
+}
+
+.note__further__reading__title {
+  font-size: var(--font-size-xl);
+}
+.note__further__reading__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+}
+
+.note__further__reading__item {
+  background: var(--surface);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
+.note__further__reading__item:hover {
+  box-shadow: 0 0 0 1px var(--primary-color);
+}
+
+.note__further__reading__item__title {
+  margin-bottom: var(--spacing-xs);
+}
+
+.note__further__reading__item svg {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.2s ease;
+}
+.note__further__reading__item:hover svg {
+  opacity: 1;
+  transform: translateX(0);
 }
