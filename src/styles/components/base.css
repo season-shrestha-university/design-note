@@ -116,7 +116,6 @@ html {
 body {
   line-height: 1;
   font-family: "IBM Plex Sans", sans-serif;
-  background-color: var(--background);
   color: var(--text-color);
 }
 
