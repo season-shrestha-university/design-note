@@ -13,8 +13,8 @@ export default defineConfig({
       enabled: true, // set to false when using @vercel/analytics@1.4.0
     },
   }),
-  output: "static",
-  build: {
-    inlineStylesheets: "always",
-  },
+  // output: "static",
+  // build: {
+  //   inlineStylesheets: "always",
+  // },
 });
