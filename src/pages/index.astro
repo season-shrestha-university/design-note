@@ -1,10 +1,7 @@
 ---
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import HomeIntro from "../components/HomeIntro.astro";
-import Layout from "../layouts/Layout.astro";
-
-const isHomePage = Astro.url.pathname === "/";
+import Footer from "@components/common/Footer.astro";
+import Card from "@components/ui/Card.astro";
+import Layout from "@layouts/Layout.astro";
 
 const fadeUp = {
   forwards: {
@@ -40,8 +37,66 @@ const fadeUp = {
 
 <Layout class="container">
   <div transition:animate={fadeUp}>
-    {!isHomePage && <Header activeSection="home" />}
-    <HomeIntro />
+    <!-- {!isHomePage && <Header activeSection="home" />} -->
+    <main>
+      <header class="page-header">
+        <div
+          style="display: flex; justify-content: space-between; align-items: flex-start; gap: var(--spacing-md);"
+        >
+          <div>
+            <h1 class="page-title">Design Note</h1>
+            <p class="page-subtitle">
+              A UI design reference system that explains everyday interface
+              patterns and why they work through typography, grids, visual
+              hierarchy, interactions, and core design principles.
+            </p>
+          </div>
+        </div>
+      </header>
+      <section>
+        <Card
+          title={"Feedback Makes Interaction Feel Real"}
+          excerpt={"Why interface need to respond instantly to user actions, even in small ways. We all expect a physical product to react when we touch, move, or change it."}
+          readTime={"20"}
+          category={"fundamentals"}
+          index={1}
+          href={"/articles/interaction/feedback-makes-interaction-feel-real/"}
+        />
+
+        <Card
+          title={"The Ripple / Impact Shape"}
+          excerpt={"An object mid-interaction. A central sphere or geometric pillar being struck or pressed, sending out perfect, expanding 3D concentric ripples (like a stone dropped in perfectly still water)."}
+          readTime={"16"}
+          category={"interaction"}
+          index={2}
+          href={"/articles/interaction/feedback-makes-interaction-feel-real/"}
+        />
+        <Card
+          title={"Kinetic Friction & Kinetic "}
+          excerpt={"Exploring the intersection of physics and motion design. How simulating mechanical drag, surface resistance, and momentum weights can turn static UI text into a tactile, living brand asset."}
+          readTime={"14"}
+          category={"layout"}
+          index={3}
+          href={"/articles/interaction/feedback-makes-interaction-feel-real/"}
+        />
+        <Card
+          title={"TNeomorphic Depth in Dark Modes"}
+          excerpt={"A deep dive into utilizing dual drop-shadows and subtle inner glows to forge realistic, indented tactile surfaces without muddying contrast thresholds on high-end OLED displays."}
+          readTime={"12"}
+          category={"ui design"}
+          index={4}
+          href={"/articles/interaction/feedback-makes-interaction-feel-real/"}
+        />
+        <Card
+          title={"Micro-Gestures and Spatial Audio"}
+          excerpt={"Designing for the subconscious. By pairing sub-100ms haptic triggers with localized 3D audio pings, we can create UI boundaries that users feel and hear before they even process them visually."}
+          readTime={"11"}
+          category={"psychology"}
+          index={5}
+          href={"/articles/interaction/feedback-makes-interaction-feel-real/"}
+        />
+      </section>
+    </main>
     <Footer />
   </div>
 </Layout>

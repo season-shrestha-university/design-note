@@ -1,9 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import Footer from "../../components/Footer.astro";
-import Header from "../../components/Header.astro";
-import Layout from "../../layouts/Layout.astro";
-import { dateFormatter, formatCategoryLabel } from "../../utils";
+
+import { dateFormatter, formatCategoryLabel } from "@/utils";
+import Layout from "@layouts/Layout.astro";
 
 export async function getStaticPaths() {
   const articles = await getCollection("articles");
@@ -24,7 +23,7 @@ const categoryArticles = (
 ---
 
 <Layout title={`${formatCategoryLabel(category)} / Design Note`}>
-  <Header activeSection={category} />
+  <Headers activeSection={category} />
   <main>
     <header>
       <h1>{formatCategoryLabel(category)}</h1>
@@ -51,5 +50,4 @@ const categoryArticles = (
       }
     </div>
   </main>
-  <Footer />
 </Layout>

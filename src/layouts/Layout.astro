@@ -1,6 +1,6 @@
 ---
-import QuickAccess from "../components/quick-access.astro";
-import "../styles/main.css";
+import QuickAccess from "@components/common/QuickAccess.astro";
+import "@styles/main.css";
 
 import { ClientRouter } from "astro:transitions";
 ---
@@ -14,12 +14,10 @@ import { ClientRouter } from "astro:transitions";
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>Design Note</title>
-    <!-- <Analytics /> -->
     <ClientRouter />
   </head>
   <body class="container" transition:persist>
     <slot />
     <QuickAccess />
-    <!-- <SpeedInsights /> -->
   </body>
 </html>

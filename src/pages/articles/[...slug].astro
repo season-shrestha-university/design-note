@@ -1,9 +1,9 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
-import Footer from "../../components/Footer.astro";
-import Header from "../../components/Header.astro";
-import Layout from "../../layouts/Layout.astro";
-import { deriveCategory } from "../../utils";
+
+import { deriveCategory } from "@/utils";
+import Header from "@components/Header.astro";
+import Layout from "@layouts/Layout.astro";
 const fadeUp = {
   forwards: {
     old: {
@@ -173,5 +173,4 @@ const articleCategory = deriveCategory(article.id);
       </ul>
     </main>
   </div>
-  <Footer />
 </Layout>
