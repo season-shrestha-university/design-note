@@ -1,5 +1,6 @@
 ---
 import QuickAccess from "@components/common/QuickAccess.astro";
+import Modal from "@components/ui/Modal.astro";
 import "@styles/main.css";
 
 import { ClientRouter } from "astro:transitions";
@@ -19,5 +20,14 @@ import { ClientRouter } from "astro:transitions";
   <body class="container" transition:persist>
     <slot />
     <QuickAccess />
+    <Modal id="system-info-modal">
+      <p>
+        Design Note is a curated collection of interface patterns, layout
+        principles, and interaction psychology for product teams.
+      </p>
+    </Modal>
+    <script>
+      import "@/scripts/modal-controller.ts";
+    </script>
   </body>
 </html>
