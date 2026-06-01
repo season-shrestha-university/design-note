@@ -50,7 +50,7 @@ if (!article) {
   throw new Response("Article not found", { status: 404 });
 }
 
-const { Content } = await render(article);
+// const { Content } = await render(article);
 const articleCategory = deriveCategory(article.id);
 ---
 
