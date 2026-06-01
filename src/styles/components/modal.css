@@ -46,12 +46,12 @@
 }
 
 .modal.modal--closing .modal__panel {
-  animation: fadeUpOut 0.2s ease-in forwards;
+  animation: fadeUpOut 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .modal.modal--closing::backdrop {
   opacity: 0;
-  transition: opacity 0.2s ease-in;
+  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .modal__header {

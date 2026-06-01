@@ -1,4 +1,4 @@
-const CLOSE_MS = 200;
+const CLOSE_MS = 500;
 
 function closeModal(dialog: HTMLDialogElement) {
   if (!dialog.open || dialog.classList.contains("modal--closing")) return;
@@ -13,6 +13,16 @@ function closeModal(dialog: HTMLDialogElement) {
 document.addEventListener("click", (event) => {
   const target = event.target;
   if (!(target instanceof Element)) return;
+
+  const closeButton = target.closest(".modal__close");
+  if (closeButton) {
+    const dialog = closeButton.closest("dialog.modal");
+    if (dialog instanceof HTMLDialogElement) {
+      event.preventDefault();
+      closeModal(dialog);
+    }
+    return;
+  }
 
   const opener = target.closest("[data-open-modal]");
   if (opener) {
