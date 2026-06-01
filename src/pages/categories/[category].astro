@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
+import Header from "@/components/Header.astro";
 import { dateFormatter, formatCategoryLabel } from "@/utils";
 import Layout from "@layouts/Layout.astro";
 
@@ -23,7 +24,7 @@ const categoryArticles = (
 ---
 
 <Layout title={`${formatCategoryLabel(category)} / Design Note`}>
-  <Headers activeSection={category} />
+  <Header activeSection={category} />
   <main>
     <header>
       <h1>{formatCategoryLabel(category)}</h1>
