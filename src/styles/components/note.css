@@ -10,12 +10,25 @@
 
 .note__header {
   position: relative;
+  overflow: hidden;
 }
 .note__visual {
   position: absolute;
   top: 10%;
-  right: -25%;
+  right: -10%;
+  max-width: 60%;
+  height: auto;
   z-index: -1;
+}
+
+@media (min-width: 768px) {
+  .note__header {
+    overflow: visible;
+  }
+  .note__visual {
+    right: -25%;
+    max-width: none;
+  }
 }
 .note__takeaway__number {
   font-size: var(--font-size-2xl);

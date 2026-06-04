@@ -7,5 +7,11 @@
 
 .note__takeaway__item {
   display: flex;
-  gap: var(--spacing-2xl);
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .note__takeaway__item {
+    gap: var(--spacing-2xl);
+  }
 }

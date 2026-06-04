@@ -1,15 +1,21 @@
 .floating-sidebar {
   position: fixed;
-  bottom: -50%;
-  right: 10%;
-  width: fit-content;
-  height: 100vh;
+  bottom: var(--spacing-md);
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: auto;
+  z-index: 100;
 }
 
 .floating-sidebar__list {
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
+  flex-direction: row;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: var(--surface);
+  border-radius: 999px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .floating-sidebar__item {
@@ -28,4 +34,22 @@
 .floating-sidebar__item--active {
   color: var(--primary-color);
   box-shadow: 0 0 0 1px var(--primary-color);
+}
+
+@media (min-width: 1024px) {
+  .floating-sidebar {
+    bottom: auto;
+    left: auto;
+    top: 50%;
+    right: var(--spacing-xl);
+    transform: translateY(-50%);
+  }
+
+  .floating-sidebar__list {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
 }

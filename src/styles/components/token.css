@@ -13,17 +13,17 @@
   --spacing-md: 16px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
-  --spacing-2xl: 48px;
-  --spacing-3xl: 64px;
-  --spacing-4xl: 96px;
-  --spacing-5xl: 120px;
+  --spacing-2xl: clamp(32px, 6vw, 48px);
+  --spacing-3xl: clamp(40px, 8vw, 64px);
+  --spacing-4xl: clamp(56px, 12vw, 96px);
+  --spacing-5xl: clamp(64px, 14vw, 120px);
 
   /* Typography */
   --font-size-xs: 12px;
   --font-size-sm: 14px;
-  --font-size-md: 20px;
-  --font-size-lg: 24px;
-  --font-size-xl: 32px;
-  --font-size-2xl: 48px;
-  --font-size-3xl: 50px;
+  --font-size-md: clamp(16px, 2.5vw, 20px);
+  --font-size-lg: clamp(20px, 3vw, 24px);
+  --font-size-xl: clamp(24px, 4vw, 32px);
+  --font-size-2xl: clamp(32px, 6vw, 48px);
+  --font-size-3xl: clamp(36px, 7vw, 50px);
 }
