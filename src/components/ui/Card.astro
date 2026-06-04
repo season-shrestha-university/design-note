@@ -1,5 +1,5 @@
 ---
-import { formatCategoryLabel } from "@/utils";
+import { CATEGORY_ICONS, formatCategoryLabel } from "@/utils";
 
 interface Props {
   title: string;
@@ -15,17 +15,8 @@ const { title, excerpt, readTime, category, index, href } = Astro.props;
 const displayIndex = String(index).padStart(2, "0");
 const categoryLabel = formatCategoryLabel(category);
 
-const categoryIcons: Record<string, string> = {
-  interaction: "/icons/categories/interaction-icon.svg",
-  foundations: "/icons/categories/fundamental-icon.svg",
-  layout: "/icons/categories/layout-icon.svg",
-  psychology: "/icons/categories/psychology-icon.svg",
-  components: "/icons/categories/typography-icon.svg",
-  typography: "/icons/categories/typography-icon.svg",
-};
-
 const iconSrc =
-  categoryIcons[category] ?? "/icons/categories/fundamental-icon.svg";
+  CATEGORY_ICONS[category] ?? "/icons/categories/fundamental-icon.svg";
 ---
 
 <a href={href} class="card" id={`card-${displayIndex}`}>

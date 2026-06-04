@@ -1,8 +1,11 @@
 ---
+import { getCollection } from "astro:content";
+
 import Header from "@/components/Header.astro";
 import Footer from "@components/common/Footer.astro";
 import Card from "@components/ui/Card.astro";
 import Layout from "@layouts/Layout.astro";
+import { deriveCategory } from "@/utils";
 
 const fadeUp = {
   forwards: {
@@ -36,6 +39,13 @@ const fadeUp = {
 };
 
 const isHomePage = Astro.url.pathname === "/";
+
+const articles = (await getCollection("articles")).sort((a, b) => {
+  if (a.data.featured !== b.data.featured) {
+    return Number(b.data.featured) - Number(a.data.featured);
+  }
+  return b.data.publishedAt.getTime() - a.data.publishedAt.getTime();
+});
 ---
 
 <Layout class="container">
@@ -57,47 +67,18 @@ const isHomePage = Astro.url.pathname === "/";
         </div>
       </header>
       <section>
-        <Card
-          title={"Feedback Makes Interaction Feel Real"}
-          excerpt={"Why interface need to respond instantly to user actions, even in small ways. We all expect a physical product to react when we touch, move, or change it."}
-          readTime={"20"}
-          category={"fundamentals"}
-          index={1}
-          href={"/articles/interaction/feedback-makes-interaction-feel-real/"}
-        />
-
-        <Card
-          title={"The Ripple / Impact Shape"}
-          excerpt={"An object mid-interaction. A central sphere or geometric pillar being struck or pressed, sending out perfect, expanding 3D concentric ripples (like a stone dropped in perfectly still water)."}
-          readTime={"16"}
-          category={"interaction"}
-          index={2}
-          href={"/articles/interaction/feedback-makes-interaction-feel-real/"}
-        />
-        <Card
-          title={"Kinetic Friction & Kinetic "}
-          excerpt={"Exploring the intersection of physics and motion design. How simulating mechanical drag, surface resistance, and momentum weights can turn static UI text into a tactile, living brand asset."}
-          readTime={"14"}
-          category={"layout"}
-          index={3}
-          href={"/articles/interaction/feedback-makes-interaction-feel-real/"}
-        />
-        <Card
-          title={"TNeomorphic Depth in Dark Modes"}
-          excerpt={"A deep dive into utilizing dual drop-shadows and subtle inner glows to forge realistic, indented tactile surfaces without muddying contrast thresholds on high-end OLED displays."}
-          readTime={"12"}
-          category={"ui design"}
-          index={4}
-          href={"/articles/interaction/feedback-makes-interaction-feel-real/"}
-        />
-        <Card
-          title={"Micro-Gestures and Spatial Audio"}
-          excerpt={"Designing for the subconscious. By pairing sub-100ms haptic triggers with localized 3D audio pings, we can create UI boundaries that users feel and hear before they even process them visually."}
-          readTime={"11"}
-          category={"psychology"}
-          index={5}
-          href={"/articles/interaction/feedback-makes-interaction-feel-real/"}
-        />
+        {
+          articles.map((article, index) => (
+            <Card
+              title={article.data.title}
+              excerpt={article.data.excerpt}
+              readTime={article.data.readTime}
+              category={deriveCategory(article.id)}
+              index={index + 1}
+              href={`/articles/${article.id}/`}
+            />
+          ))
+        }
       </section>
     </main>
     <Footer />

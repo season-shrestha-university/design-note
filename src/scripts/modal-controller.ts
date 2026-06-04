@@ -1,10 +1,21 @@
 const CLOSE_MS = 500;
 
+//function to lock the body scroll
+function lockBodyScroll() {
+  document.body.style.overflow = "hidden";
+}
+
+//function to unlock the body scroll
+function unlockBodyScroll() {
+  document.body.style.overflow = "auto";
+}
+
 function closeModal(dialog: HTMLDialogElement) {
   if (!dialog.open || dialog.classList.contains("modal--closing")) return;
 
   dialog.classList.add("modal--closing");
   window.setTimeout(() => {
+    unlockBodyScroll();
     dialog.close();
     dialog.classList.remove("modal--closing");
   }, CLOSE_MS);
@@ -26,6 +37,7 @@ document.addEventListener("click", (event) => {
 
   const opener = target.closest("[data-open-modal]");
   if (opener) {
+    lockBodyScroll();
     const modalId = opener.getAttribute("data-open-modal");
     const dialog = modalId ? document.getElementById(modalId) : null;
     if (dialog instanceof HTMLDialogElement) {

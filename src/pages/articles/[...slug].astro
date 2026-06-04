@@ -1,7 +1,7 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 
-import { deriveCategory } from "@/utils";
+import { deriveCategory, formatCategoryLabel } from "@/utils";
 import Header from "@components/Header.astro";
 import Layout from "@layouts/Layout.astro";
 const fadeUp = {
@@ -54,13 +54,15 @@ if (!article) {
 const articleCategory = deriveCategory(article.id);
 ---
 
-<Layout title={`title / Design Note`}>
+<Layout title={`${article.data.title} / Design Note`}>
   <div transition:animate={fadeUp}>
     <Header activeSection={articleCategory} />
     <main>
       <header class="note__header">
-        <h1 class="note__title">The Ripple / Impact Shape</h1>
-        <span class="note_category card__badge">Interaction</span>
+        <h1 class="note__title">{article.data.title}</h1>
+        <span class="note_category card__badge"
+          >{formatCategoryLabel(articleCategory)}</span
+        >
         <p class="note__subtitle">
           The tendency for people to get overwhelmed when they are presented
           with a large number of options, often used interchangeably with the
