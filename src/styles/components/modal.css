@@ -4,7 +4,7 @@
   margin: auto;
   background: transparent;
   color: inherit;
-  overflow: visible;
+  overflow: scroll;
 }
 
 .modal::backdrop {
@@ -54,7 +54,6 @@
 .modal__header {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
   gap: var(--spacing-md);
 }
 
@@ -66,10 +65,20 @@
   padding: var(--spacing-sm);
   cursor: pointer;
   border: 16px solid var(--surface);
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease;
   line-height: 0;
+  position: fixed;
+  top: 10%;
+  right: 15%;
+  z-index: 100;
 }
 
+@media (min-width: 768px) {
+  .modal__close {
+    top: 10%;
+    right: 15%;
+  }
+}
 .modal__close:hover {
   transform: scale(1.2);
 }

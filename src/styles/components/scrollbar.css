@@ -1,0 +1,18 @@
+/* scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 10px;
+  position: relative;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  display: none;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface);
+  border-radius: 10px;
+  height: 10px;
+}

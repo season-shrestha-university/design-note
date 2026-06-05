@@ -1,4 +1,4 @@
-const CLOSE_MS = 500;
+const CLOSE_MS = 200;
 
 //function to lock the body scroll
 function lockBodyScroll() {
@@ -15,7 +15,7 @@ function closeModal(dialog: HTMLDialogElement) {
 
   dialog.classList.add("modal--closing");
   window.setTimeout(() => {
-    unlockBodyScroll();
+    // unlockBodyScroll();
     dialog.close();
     dialog.classList.remove("modal--closing");
   }, CLOSE_MS);
@@ -37,7 +37,7 @@ document.addEventListener("click", (event) => {
 
   const opener = target.closest("[data-open-modal]");
   if (opener) {
-    lockBodyScroll();
+    // lockBodyScroll();
     const modalId = opener.getAttribute("data-open-modal");
     const dialog = modalId ? document.getElementById(modalId) : null;
     if (dialog instanceof HTMLDialogElement) {
