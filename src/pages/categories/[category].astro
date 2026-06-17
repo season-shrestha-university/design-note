@@ -2,7 +2,12 @@
 import { getCollection } from "astro:content";
 
 import Header from "@/components/Header.astro";
-import { fadeTitle, fadeUp, formatCategoryLabel } from "@/utils";
+import {
+  CATEGORY_ICONS,
+  fadeTitle,
+  fadeUp,
+  formatCategoryLabel,
+} from "@/utils";
 import Layout from "@layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -26,12 +31,13 @@ const categoryArticles = (
 <Layout title={`${formatCategoryLabel(category)} / Design Note`}>
   <Header />
   <main>
-    <header>
-      <h1
-        class="page-title"
-        transition:name="page-title"
-        transition:animate={fadeTitle}
-      >
+    <header
+      class="category-title"
+      transition:name="page-title"
+      transition:animate={fadeTitle}
+    >
+      <img src={CATEGORY_ICONS[category]} alt={formatCategoryLabel(category)} />
+      <h1>
         {formatCategoryLabel(category)}
       </h1>
     </header>
@@ -82,3 +88,13 @@ const categoryArticles = (
     </div>
   </main>
 </Layout>
+
+<style>
+  .category-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-2xl);
+    color: var(--primary-color);
+  }
+</style>

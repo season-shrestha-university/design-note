@@ -16,8 +16,8 @@ export const ARTICLE_CATEGORIES = [
     icon: "/icons/categories/user-interaction-icon.svg",
   },
   {
-    slug: "usability-testing-interaction",
-    icon: "/icons/categories/layout-icon.svg",
+    slug: "usability-testing",
+    icon: "/icons/categories/usability-testing-icon.svg",
   },
 ] as const;
 
