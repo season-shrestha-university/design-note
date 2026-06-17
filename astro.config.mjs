@@ -9,11 +9,11 @@ import icon from "astro-icon";
 export default defineConfig({
   output: "static",
   integrations: [mdx(), icon()],
-  adapter: vercel({
-    webAnalytics: {
-      enabled: true,
-    },
-  }),
+  // adapter: vercel({
+  //   webAnalytics: {
+  //     enabled: true,
+  //   },
+  // }),
   markdown: {
     processor: satteri({
       features: { directive: true },
