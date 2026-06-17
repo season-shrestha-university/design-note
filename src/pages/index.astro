@@ -25,13 +25,7 @@ const articles = (await getCollection("articles")).sort((a, b) => {
         style="display: flex; justify-content: space-between; align-items: flex-start; gap: var(--spacing-md);"
       >
         <div>
-          <h1
-            class="page-title"
-            transition:name="page-title"
-            transition:animate={fadeTitle}
-          >
-            Design Note
-          </h1>
+          <h1 class="page-title">Design Note</h1>
           <p class="page-subtitle">
             A UI design reference system that explains everyday interface
             patterns and why they work through typography, grids, visual
