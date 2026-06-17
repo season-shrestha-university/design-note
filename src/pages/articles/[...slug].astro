@@ -1,39 +1,9 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 
-import { deriveCategory, formatCategoryLabel } from "@/utils";
+import { deriveCategory, fadeUp, formatCategoryLabel } from "@/utils";
 import Header from "@components/Header.astro";
 import Layout from "@layouts/Layout.astro";
-const fadeUp = {
-  forwards: {
-    old: {
-      name: "fadeUpOut",
-      duration: "0.45s",
-      easing: "ease-in",
-      fillMode: "forwards",
-    },
-    new: {
-      name: "fadeUpIn",
-      duration: "0.55s",
-      easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-      fillMode: "backwards",
-    },
-  },
-  backwards: {
-    old: {
-      name: "fadeUpOut",
-      duration: "0.45s",
-      easing: "ease-in",
-      fillMode: "forwards",
-    },
-    new: {
-      name: "fadeUpIn",
-      duration: "0.55s",
-      easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-      fillMode: "backwards",
-    },
-  },
-};
 
 export async function getStaticPaths() {
   const articles = await getCollection("articles");

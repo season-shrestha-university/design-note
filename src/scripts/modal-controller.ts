@@ -1,29 +1,67 @@
-const CLOSE_MS = 200;
+import {
+  isTransitionBeforeSwapEvent,
+  navigate,
+} from "astro:transitions/client";
 
-//function to lock the body scroll
-function lockBodyScroll() {
-  document.body.style.overflow = "hidden";
+const NAV_OVERLAY_ID = "nav-overlay";
+let pendingModalNavigation = false;
+
+function showNavOverlay() {
+  document.getElementById(NAV_OVERLAY_ID)?.classList.add("is-visible");
 }
 
-//function to unlock the body scroll
-function unlockBodyScroll() {
-  document.body.style.overflow = "auto";
+function hideNavOverlay() {
+  document.getElementById(NAV_OVERLAY_ID)?.classList.remove("is-visible");
+}
+
+function endModalNavigation() {
+  hideNavOverlay();
 }
 
 function closeModal(dialog: HTMLDialogElement) {
-  if (!dialog.open || dialog.classList.contains("modal--closing")) return;
+  if (!dialog.open) return;
 
-  dialog.classList.add("modal--closing");
-  window.setTimeout(() => {
-    // unlockBodyScroll();
-    dialog.close();
-    dialog.classList.remove("modal--closing");
-  }, CLOSE_MS);
+  dialog.close();
+}
+
+function navigateFromModal(link: HTMLAnchorElement, dialog: HTMLDialogElement) {
+  const href = link.getAttribute("href");
+  if (!href) return;
+
+  pendingModalNavigation = true;
+  showNavOverlay();
+  closeModal(dialog);
+
+  const handleBeforeSwap = (event: Event) => {
+    if (!pendingModalNavigation || !isTransitionBeforeSwapEvent(event)) return;
+
+    void event.viewTransition.finished.then(() => {
+      pendingModalNavigation = false;
+      endModalNavigation();
+    });
+  };
+
+  document.addEventListener("astro:before-swap", handleBeforeSwap, { once: true });
+
+  void navigate(href).catch(() => {
+    pendingModalNavigation = false;
+    endModalNavigation();
+  });
 }
 
 document.addEventListener("click", (event) => {
   const target = event.target;
   if (!(target instanceof Element)) return;
+
+  const navLink = target.closest(".modal a[href]");
+  if (navLink instanceof HTMLAnchorElement) {
+    const dialog = navLink.closest("dialog.modal");
+    if (dialog instanceof HTMLDialogElement && dialog.open) {
+      event.preventDefault();
+      navigateFromModal(navLink, dialog);
+    }
+    return;
+  }
 
   const closeButton = target.closest(".modal__close");
   if (closeButton) {
@@ -37,7 +75,6 @@ document.addEventListener("click", (event) => {
 
   const opener = target.closest("[data-open-modal]");
   if (opener) {
-    // lockBodyScroll();
     const modalId = opener.getAttribute("data-open-modal");
     const dialog = modalId ? document.getElementById(modalId) : null;
     if (dialog instanceof HTMLDialogElement) {

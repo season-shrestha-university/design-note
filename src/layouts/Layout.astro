@@ -24,6 +24,12 @@ import { ClientRouter } from "astro:transitions";
     <Modal id="system-info-modal" title="Categories">
       <CategoryMenu />
     </Modal>
+    <div
+      id="nav-overlay"
+      data-astro-transition-persist="nav-overlay"
+      aria-hidden="true"
+    >
+    </div>
     <script>
       import "@/scripts/modal-controller.ts";
     </script>

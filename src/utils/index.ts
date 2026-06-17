@@ -6,3 +6,5 @@ export {
 } from "./categories";
 
 export { dateFormatter } from "./dateFormatter";
+
+export { fadeUp } from "./transitions";

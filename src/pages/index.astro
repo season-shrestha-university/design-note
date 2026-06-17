@@ -5,38 +5,7 @@ import Header from "@/components/Header.astro";
 import Footer from "@components/common/Footer.astro";
 import Card from "@components/ui/Card.astro";
 import Layout from "@layouts/Layout.astro";
-import { deriveCategory } from "@/utils";
-
-const fadeUp = {
-  forwards: {
-    old: {
-      name: "fadeUpOut",
-      duration: "0.2s",
-      easing: "ease-in",
-      fillMode: "forwards",
-    },
-    new: {
-      name: "fadeUpIn",
-      duration: "0.3s",
-      easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-      fillMode: "backwards",
-    },
-  },
-  backwards: {
-    old: {
-      name: "fadeUpOut",
-      duration: "0.2s",
-      easing: "ease-in",
-      fillMode: "forwards",
-    },
-    new: {
-      name: "fadeUpIn",
-      duration: "0.3s",
-      easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-      fillMode: "backwards",
-    },
-  },
-};
+import { deriveCategory, fadeUp } from "@/utils";
 
 const isHomePage = Astro.url.pathname === "/";
 

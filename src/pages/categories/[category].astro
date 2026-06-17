@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 
 import Header from "@/components/Header.astro";
-import { dateFormatter, formatCategoryLabel } from "@/utils";
+import { fadeUp, formatCategoryLabel } from "@/utils";
 import Layout from "@layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -24,31 +24,57 @@ const categoryArticles = (
 ---
 
 <Layout title={`${formatCategoryLabel(category)} / Design Note`}>
-  <Header activeSection={category} />
-  <main>
-    <header>
-      <h1>{formatCategoryLabel(category)}</h1>
-      <p>Collection managed with MDX content files.</p>
-    </header>
-    <div>
-      {
-        categoryArticles.map((article, index) => (
-          <article style={`animation-delay: ${(index + 1) * 0.1}s`}>
-            <div>
-              <span>{dateFormatter.format(article.data.publishedAt)}</span>
-              <span>Read: {article.data.readTime}</span>
-            </div>
-            <a href={`/articles/${article.id}/`}>
-              <div>
-                <div>{String(index + 1).padStart(2, "0")}</div>
-                <h3>{article.data.title}</h3>
-                <p>{article.data.excerpt}</p>
-                <div>Read Entry</div>
-              </div>
-            </a>
-          </article>
-        ))
-      }
-    </div>
-  </main>
+  <div transition:animate={fadeUp}>
+    <Header activeSection={category} />
+    <main>
+      <header>
+        <h1 class="page-title">{formatCategoryLabel(category)}</h1>
+      </header>
+      <div>
+        {
+          categoryArticles.map((article, index) => (
+            <article style={`animation-delay: ${(index + 1) * 0.1}s`}>
+              <a href={`/articles/${article.id}/`} class="card">
+                <div class="card__body">
+                  <span class="card__index">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h2 class="card__title">{article.data.title}</h2>
+                  <p class="card__excerpt">{article.data.excerpt}</p>
+                  <span class="card__badge">
+                    {" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="17"
+                      height="17"
+                      fill="none"
+                      viewBox="0 0 17 17"
+                    >
+                      <>
+                        <path
+                          stroke="#b17a28"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M2.301 9.15c2.213-5.414 9.408-5.665 11.993-.419"
+                        />
+                        <path
+                          stroke="#b17a28"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M7.62 11.48a2 2 0 1 0 1.401-3.748 2 2 0 0 0-1.4 3.748"
+                        />
+                      </>
+                    </svg>
+                    5m Views
+                  </span>
+                </div>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </main>
+  </div>
 </Layout>

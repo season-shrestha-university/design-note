@@ -42,15 +42,6 @@
   animation: fadeUpIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) backwards;
 }
 
-.modal.modal--closing .modal__panel {
-  animation: fadeUpOut 0.2s ease-in forwards;
-}
-
-.modal.modal--closing::backdrop {
-  opacity: 0;
-  transition: opacity 0.2s ease-in;
-}
-
 .modal__header {
   display: flex;
   align-items: baseline;
