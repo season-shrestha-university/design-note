@@ -1,4 +1,16 @@
-<aside>
+---
+interface Props {
+  hidden?: boolean;
+}
+
+const { hidden = false } = Astro.props;
+---
+
+<aside
+  transition:persist="site-header"
+  transition:animate="none"
+  class:list={["site-header", { "site-header--hidden": hidden }]}
+>
   <button type="button" onclick="window.history.back();">
     <svg
       class="back__btn"

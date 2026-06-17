@@ -5,7 +5,7 @@ import Header from "@/components/Header.astro";
 import Footer from "@components/common/Footer.astro";
 import Card from "@components/ui/Card.astro";
 import Layout from "@layouts/Layout.astro";
-import { deriveCategory, fadeUp } from "@/utils";
+import { deriveCategory, fadeTitle, fadeUp } from "@/utils";
 
 const isHomePage = Astro.url.pathname === "/";
 
@@ -18,23 +18,29 @@ const articles = (await getCollection("articles")).sort((a, b) => {
 ---
 
 <Layout class="container">
-  <div transition:animate={fadeUp}>
-    {!isHomePage && <Header activeSection="home" />}
-    <main>
-      <header class="page-header">
-        <div
-          style="display: flex; justify-content: space-between; align-items: flex-start; gap: var(--spacing-md);"
-        >
-          <div>
-            <h1 class="page-title">Design Note</h1>
-            <p class="page-subtitle">
-              A UI design reference system that explains everyday interface
-              patterns and why they work through typography, grids, visual
-              hierarchy, interactions, and core design principles.
-            </p>
-          </div>
+  <Header hidden={isHomePage} />
+  <main>
+    <header class="page-header">
+      <div
+        style="display: flex; justify-content: space-between; align-items: flex-start; gap: var(--spacing-md);"
+      >
+        <div>
+          <h1
+            class="page-title"
+            transition:name="page-title"
+            transition:animate={fadeTitle}
+          >
+            Design Note
+          </h1>
+          <p class="page-subtitle">
+            A UI design reference system that explains everyday interface
+            patterns and why they work through typography, grids, visual
+            hierarchy, interactions, and core design principles.
+          </p>
         </div>
-      </header>
+      </div>
+    </header>
+    <div transition:animate={fadeUp}>
       <section>
         {
           articles.map((article, index) => (
@@ -49,7 +55,7 @@ const articles = (await getCollection("articles")).sort((a, b) => {
           ))
         }
       </section>
-    </main>
-    <Footer />
-  </div>
+    </div>
+  </main>
+  <Footer />
 </Layout>

@@ -7,4 +7,4 @@ export {
 
 export { dateFormatter } from "./dateFormatter";
 
-export { fadeUp } from "./transitions";
+export { fadeTitle, fadeUp } from "./transitions";

@@ -25,8 +25,8 @@ const articleCategory = deriveCategory(article.id);
 ---
 
 <Layout title={`${article.data.title} / Design Note`}>
+  <Header />
   <div transition:animate={fadeUp}>
-    <Header activeSection={articleCategory} />
     <main>
       <header class="note__header">
         <h1 class="note__title">{article.data.title}</h1>

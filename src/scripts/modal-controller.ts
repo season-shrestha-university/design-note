@@ -1,6 +1,6 @@
 import {
-  isTransitionBeforeSwapEvent,
   navigate,
+  type TransitionBeforeSwapEvent,
 } from "astro:transitions/client";
 
 const NAV_OVERLAY_ID = "nav-overlay";
@@ -14,9 +14,22 @@ function hideNavOverlay() {
   document.getElementById(NAV_OVERLAY_ID)?.classList.remove("is-visible");
 }
 
-function endModalNavigation() {
+function finishModalNavigation() {
+  pendingModalNavigation = false;
   hideNavOverlay();
 }
+
+// The header is persisted across navigations, so its hidden state carries over
+// from the previous page. Re-sync it to the current route on every page load.
+function syncHeaderVisibility() {
+  const header = document.querySelector<HTMLElement>(".site-header");
+  header?.classList.toggle(
+    "site-header--hidden",
+    window.location.pathname === "/",
+  );
+}
+
+document.addEventListener("astro:page-load", syncHeaderVisibility);
 
 function closeModal(dialog: HTMLDialogElement) {
   if (!dialog.open) return;
@@ -32,21 +45,25 @@ function navigateFromModal(link: HTMLAnchorElement, dialog: HTMLDialogElement) {
   showNavOverlay();
   closeModal(dialog);
 
-  const handleBeforeSwap = (event: Event) => {
-    if (!pendingModalNavigation || !isTransitionBeforeSwapEvent(event)) return;
+  let swapSeen = false;
+  const handleBeforeSwap = (event: TransitionBeforeSwapEvent) => {
+    if (!pendingModalNavigation) return;
+    swapSeen = true;
 
-    void event.viewTransition.finished.then(() => {
-      pendingModalNavigation = false;
-      endModalNavigation();
-    });
+    void event.viewTransition.finished.then(finishModalNavigation);
   };
 
-  document.addEventListener("astro:before-swap", handleBeforeSwap, { once: true });
-
-  void navigate(href).catch(() => {
-    pendingModalNavigation = false;
-    endModalNavigation();
+  document.addEventListener("astro:before-swap", handleBeforeSwap, {
+    once: true,
   });
+
+  void navigate(href)
+    .then(() => {
+      // Failsafe: navigation resolved without a view transition (e.g. aborted
+      // or unsupported), so the overlay would otherwise stay stuck on screen.
+      if (pendingModalNavigation && !swapSeen) finishModalNavigation();
+    })
+    .catch(finishModalNavigation);
 }
 
 document.addEventListener("click", (event) => {

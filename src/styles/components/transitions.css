@@ -20,10 +20,32 @@
   }
 }
 
+@keyframes titleFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes titleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 #nav-overlay {
   position: fixed;
   inset: 0;
-  z-index: 90;
+  z-index: 110;
   background: var(--background);
   opacity: 0;
   pointer-events: none;
