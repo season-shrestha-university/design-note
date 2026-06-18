@@ -1,10 +1,10 @@
 .floating-sidebar {
   position: fixed;
   bottom: var(--spacing-md);
-  left: 50%;
+  right: 10%;
   transform: translateX(-50%);
-  width: auto;
-  height: auto;
+  width: 64px;
+  height: 64px;
 }
 
 .floating-sidebar__list {
@@ -38,9 +38,8 @@
 @media (min-width: 1024px) {
   .floating-sidebar {
     bottom: auto;
-    left: auto;
+    right: 10%;
     top: 50%;
-    right: var(--spacing-xl);
     transform: translateY(-50%);
   }
 

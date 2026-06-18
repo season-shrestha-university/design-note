@@ -1,8 +1,6 @@
 ---
-import CategoryMenu from "@/components/common/CategoryMenu.astro";
-import Header from "@/components/Header.astro";
+import Header from "@/components/common/Header.astro";
 import QuickAccess from "@components/common/QuickAccess.astro";
-import Modal from "@components/ui/Modal.astro";
 import "@styles/main.css";
 
 import { ClientRouter } from "astro:transitions";
@@ -17,23 +15,18 @@ import { ClientRouter } from "astro:transitions";
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>Design Note</title>
+    <noscript>
+      <style>
+        #nav-overlay {
+          display: none !important;
+        }
+      </style>
+    </noscript>
     <ClientRouter />
   </head>
   <body class="container">
     <slot />
     <Header hidden={Astro.url.pathname === "/"} />
     <QuickAccess />
-    <Modal id="system-info-modal" title="Categories">
-      <CategoryMenu />
-    </Modal>
-    <div
-      id="nav-overlay"
-      data-astro-transition-persist="nav-overlay"
-      aria-hidden="true"
-    >
-    </div>
-    <script>
-      import "@/scripts/modal-controller.ts";
-    </script>
   </body>
 </html>

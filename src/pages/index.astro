@@ -14,7 +14,7 @@ const articles = (await getCollection("articles")).sort((a, b) => {
 ---
 
 <Layout class="container">
-  <main>
+  <main transition:animate={fadeUp}>
     <header class="page-header">
       <div
         style="display: flex; justify-content: space-between; align-items: flex-start; gap: var(--spacing-md);"
@@ -29,7 +29,7 @@ const articles = (await getCollection("articles")).sort((a, b) => {
         </div>
       </div>
     </header>
-    <div transition:animate={fadeUp}>
+    <div>
       <section>
         {
           articles.map((article, index) => (

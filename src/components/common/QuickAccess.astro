@@ -5,7 +5,7 @@ const isHomePage = Astro.url.pathname === "/";
 <aside>
   <nav class="floating-sidebar">
     <ul class="floating-sidebar__list">
-      <li class="floating-sidebar__item" data-sidebar-tab="tab-featured">
+      <!-- <li class="floating-sidebar__item" data-sidebar-tab="tab-featured">
         <a href="/" class={isHomePage ? "floating-sidebar__item--active" : ""}>
           <label
             for="tab-featured"
@@ -25,14 +25,10 @@ const isHomePage = Astro.url.pathname === "/";
             </svg>
           </label>
         </a>
-      </li>
-      <li
-        class="floating-sidebar__item"
-        data-sidebar-tab="tab-categories"
-        data-open-modal="system-info-modal"
-      >
-        <label
-          for="tab-categories"
+      </li> -->
+      <li class="floating-sidebar__item" data-sidebar-tab="tab-categories">
+        <a
+          href="/categories/"
           style="cursor: pointer; display: flex; align-items: center; justify-content: center;"
         >
           <svg
@@ -47,7 +43,7 @@ const isHomePage = Astro.url.pathname === "/";
               d="m8.667 14.667 7.333-12 7.333 12zm14.666 14.667q-2.5 0-4.249-1.75-1.75-1.75-1.75-4.25-.002-2.501 1.75-4.25 1.751-1.748 4.25-1.75 2.496-.003 4.25 1.75 1.753 1.755 1.75 4.25-.004 2.495-1.75 4.25t-4.25 1.75M4 28.667V18h10.667v10.667zm19.333-2q1.401 0 2.367-.967.966-.966.967-2.366 0-1.401-.967-2.367-.966-.966-2.367-.967-1.4 0-2.366.967-.967.966-.967 2.367 0 1.4.967 2.366.966.967 2.366.967M6.667 26H12v-5.333H6.667zM13.4 12h5.2L16 7.8z"
             ></path>
           </svg>
-        </label>
+        </a>
       </li>
     </ul>
   </nav>
