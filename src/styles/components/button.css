@@ -11,7 +11,7 @@
   top: 30px;
   left: var(--spacing-md);
   border: 16px solid var(--surface);
-  z-index: 100;
+  z-index: 120;
   transition: all 0.2s ease;
 }
 

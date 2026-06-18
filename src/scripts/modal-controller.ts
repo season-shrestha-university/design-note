@@ -19,8 +19,6 @@ function finishModalNavigation() {
   hideNavOverlay();
 }
 
-// The header is persisted across navigations, so its hidden state carries over
-// from the previous page. Re-sync it to the current route on every page load.
 function syncHeaderVisibility() {
   const header = document.querySelector<HTMLElement>(".site-header");
   header?.classList.toggle(
@@ -29,7 +27,9 @@ function syncHeaderVisibility() {
   );
 }
 
-document.addEventListener("astro:page-load", syncHeaderVisibility);
+document.addEventListener("astro:after-swap", () => {
+  syncHeaderVisibility();
+});
 
 function closeModal(dialog: HTMLDialogElement) {
   if (!dialog.open) return;
