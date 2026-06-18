@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 
-import Header from "@/components/Header.astro";
 import {
   CATEGORY_ICONS,
   fadeTitle,
@@ -29,7 +28,6 @@ const categoryArticles = (
 ---
 
 <Layout title={`${formatCategoryLabel(category)} / Design Note`}>
-  <Header />
   <main>
     <header
       class="category-title"

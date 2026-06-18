@@ -1,5 +1,6 @@
 ---
 import CategoryMenu from "@/components/common/CategoryMenu.astro";
+import Header from "@/components/Header.astro";
 import QuickAccess from "@components/common/QuickAccess.astro";
 import Modal from "@components/ui/Modal.astro";
 import "@styles/main.css";
@@ -20,6 +21,7 @@ import { ClientRouter } from "astro:transitions";
   </head>
   <body class="container">
     <slot />
+    <Header hidden={Astro.url.pathname === "/"} />
     <QuickAccess />
     <Modal id="system-info-modal" title="Categories">
       <CategoryMenu />

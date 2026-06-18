@@ -119,7 +119,7 @@
 
 .card--category {
   border-radius: var(--border-radius);
-  transition: all 0.2s linear;
+  transition: all 0.2s ease;
   padding: var(--spacing-lg);
   background: var(--surface);
 }

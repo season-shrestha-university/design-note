@@ -1,14 +1,10 @@
 ---
 import { getCollection } from "astro:content";
 
-import Header from "@/components/Header.astro";
 import Footer from "@components/common/Footer.astro";
 import Card from "@components/ui/Card.astro";
 import Layout from "@layouts/Layout.astro";
-import { deriveCategory, fadeTitle, fadeUp } from "@/utils";
-
-const isHomePage = Astro.url.pathname === "/";
-
+import { deriveCategory, fadeUp } from "@/utils";
 const articles = (await getCollection("articles")).sort((a, b) => {
   if (a.data.featured !== b.data.featured) {
     return Number(b.data.featured) - Number(a.data.featured);
@@ -18,7 +14,6 @@ const articles = (await getCollection("articles")).sort((a, b) => {
 ---
 
 <Layout class="container">
-  <Header hidden={isHomePage} />
   <main>
     <header class="page-header">
       <div

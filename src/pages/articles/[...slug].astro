@@ -2,7 +2,6 @@
 import { getCollection, getEntry } from "astro:content";
 
 import { deriveCategory, fadeUp, formatCategoryLabel } from "@/utils";
-import Header from "@components/Header.astro";
 import Layout from "@layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -25,7 +24,6 @@ const articleCategory = deriveCategory(article.id);
 ---
 
 <Layout title={`${article.data.title} / Design Note`}>
-  <Header />
   <div transition:animate={fadeUp}>
     <main>
       <header class="note__header">
