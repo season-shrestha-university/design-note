@@ -19,8 +19,9 @@ if (!article) {
   throw new Response("Article not found", { status: 404 });
 }
 
-// const { Content } = await render(article);
 const articleCategory = deriveCategory(article.id);
+const takeaways = article.data.takeaways;
+console.log(article);
 ---
 
 <Layout title={`${article.data.title} / Design Note`}>
@@ -32,42 +33,24 @@ const articleCategory = deriveCategory(article.id);
           >{formatCategoryLabel(articleCategory)}</span
         >
         <p class="note__subtitle">
-          The tendency for people to get overwhelmed when they are presented
-          with a large number of options, often used interchangeably with the
-          term paradox of choice.
+          {article.data.excerpt}
         </p>
         <img class="note__visual" src="/interaction-fade.svg" alt="" />
       </header>
       <ol class="note__takeaway">
-        <li class="note__takeaway__item">
-          <span class="note__takeaway__number">01</span>
-          <p>
-            The core of the interface is defined by a monolithic, dark-chrome
-            pillar rising seamlessly from a matte, charcoal-grey canvas. It is
-            static, commanding, and perfectly still—until the moment of contact.
-          </p>
-        </li>
-        <li class="note__takeaway__item">
-          <span class="note__takeaway__number">02</span>
-          <p>
-            The core of the interface is defined by a monolithic, dark-chrome
-            pillar rising seamlessly from a matte, charcoal-grey canvas. It is
-            static, commanding, and perfectly still—until the moment of contact.
-          </p>
-        </li>
-        <li class="note__takeaway__item">
-          <span class="note__takeaway__number">03</span>
-          <p>
-            The core of the interface is defined by a monolithic, dark-chrome
-            pillar rising seamlessly from a matte, charcoal-grey canvas. It is
-            static, commanding, and perfectly still—until the moment of contact.
-          </p>
-        </li>
+        {
+          takeaways?.map((takeaway, index) => (
+            <li class="note__takeaway__item">
+              <span class="note__takeaway__number">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <p>{takeaway}</p>
+            </li>
+          ))
+        }
       </ol>
       <p class="note__description">
-        The core of the interface is defined by a monolithic, dark-chrome pillar
-        rising seamlessly from a matte, charcoal-grey canvas. It is static,
-        commanding, and perfectly still—until the moment of contact.
+        {article.body}
       </p>
 
       <h2 class="note__further__reading__title">Further Reading</h2>

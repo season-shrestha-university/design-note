@@ -5,7 +5,7 @@
 .note__subtitle {
   margin-top: var(--spacing-3xl);
   font-size: var(--font-size-lg);
-  margin-bottom: var(--spacing-4xl);
+  margin-bottom: var(--spacing-3xl);
 }
 
 .note__header {
