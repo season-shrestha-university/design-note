@@ -7,7 +7,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build:index": "node scripts/build-search-index.js",
+    "build": "npm run build:index && astro build && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
@@ -18,10 +19,12 @@
     "@astrojs/markdown-satteri": "^0.3.0",
     "@astrojs/mdx": "^6.0.3",
     "@astrojs/vercel": "^10.0.8",
+    "@google/genai": "^2.8.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "astro": "^6.4.7",
-    "astro-icon": "^1.1.5"
+    "astro-icon": "^1.1.5",
+    "pagefind": "^1.5.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
@@ -31,5 +34,11 @@
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "^6.0.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@google/genai",
+      "protobufjs"
+    ]
   }
 }
