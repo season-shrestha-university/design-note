@@ -2,18 +2,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { GoogleGenAI } from '@google/genai';
-import { cosineSimilarity } from '../../utils/similarity';
-import searchIndex from '../../data/search-index.json';
-
-interface SearchEntry {
-  id: string;
-  title: string;
-  excerpt: string;
-  slug: string;
-  embedding: number[];
-}
-
-const typedSearchIndex = searchIndex as SearchEntry[];
+import { supabase } from '../../db/supabase';
 
 const apiKey = import.meta.env.GEMINI_API_KEY;
 const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
@@ -31,10 +20,18 @@ export const GET: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify([]), { status: 200 });
   }
 
+  if (!supabase) {
+    console.warn('Supabase client is not configured. Cannot run database vector search.');
+    return new Response(JSON.stringify([]), { status: 200 });
+  }
+
   try {
     const response = await ai.models.embedContent({
       model: 'gemini-embedding-2',
       contents: query,
+      config: {
+        outputDimensionality: 768,
+      }
     });
     const queryEmbedding = response.embeddings?.[0]?.values;
 
@@ -42,23 +39,25 @@ export const GET: APIRoute = async ({ request }) => {
       throw new Error("No embedding values returned from API");
     }
 
-    const results = typedSearchIndex.map(article => {
-      const score = cosineSimilarity(queryEmbedding, article.embedding);
-      return {
-        id: article.id,
-        title: article.title,
-        excerpt: article.excerpt,
-        slug: article.slug,
-        score: score
-      };
+    const { data: matchedArticles, error: supabaseError } = await supabase.rpc('match_articles', {
+      query_embedding: queryEmbedding,
+      match_threshold: 0.3,
+      match_count: 5,
     });
 
-    const sortedResults = results
-      .filter(item => item.score > 0.3)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 5);
+    if (supabaseError) {
+      throw supabaseError;
+    }
 
-    return new Response(JSON.stringify(sortedResults), {
+    const results = (matchedArticles || []).map((article: any) => ({
+      id: article.id,
+      title: article.title,
+      excerpt: article.excerpt,
+      slug: article.slug,
+      score: article.similarity
+    }));
+
+    return new Response(JSON.stringify(results), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });

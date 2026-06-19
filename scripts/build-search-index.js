@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { GoogleGenAI } from '@google/genai';
+import { createClient } from '@supabase/supabase-js';
 
 // Load local .env file if it exists (for local development)
 const envPath = path.join(process.cwd(), '.env');
@@ -22,18 +23,20 @@ if (fs.existsSync(envPath)) {
 }
 
 const apiKey = process.env.GEMINI_API_KEY;
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_KEY;
 
 if (!apiKey) {
   console.warn('⚠️ GEMINI_API_KEY environment variable is not set. Skipping search index embedding generation.');
-  const outputPath = path.join(process.cwd(), 'src/data/search-index.json');
-  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-  if (!fs.existsSync(outputPath)) {
-    fs.writeFileSync(outputPath, JSON.stringify([]));
-  }
   process.exit(0);
 }
 
 const ai = new GoogleGenAI({ apiKey });
+const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
+
+if (!supabase) {
+  console.warn('⚠️ SUPABASE_URL or SUPABASE_KEY environment variable is not set. Skipping database sync.');
+}
 
 function getFiles(dir) {
   let results = [];
@@ -96,6 +99,9 @@ async function run() {
       const response = await ai.models.embedContent({
         model: 'gemini-embedding-2',
         contents: textToEmbed,
+        config: {
+          outputDimensionality: 768,
+        }
       });
       
       const embedding = response.embeddings?.[0]?.values;
@@ -103,22 +109,39 @@ async function run() {
         throw new Error("No embedding values returned from API");
       }
 
+      const slug = `/articles/${id}/`;
+
       searchIndex.push({
         id,
         title,
         excerpt,
-        slug: `/articles/${id}/`,
+        slug,
         embedding,
       });
+
+      if (supabase) {
+        console.log(`Syncing ${title} to Supabase...`);
+        const { error } = await supabase
+          .from('articles')
+          .upsert({
+            slug,
+            title,
+            excerpt,
+            embedding,
+          }, { onConflict: 'slug' });
+
+        if (error) {
+          console.error(`❌ Failed to sync ${title} to Supabase:`, error.message);
+        } else {
+          console.log(`✅ Successfully synced ${title} to Supabase`);
+        }
+      }
     } catch (e) {
       console.error(`Failed to generate embedding for ${title}:`, e);
     }
   }
   
-  const outputPath = path.join(process.cwd(), 'src/data/search-index.json');
-  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-  fs.writeFileSync(outputPath, JSON.stringify(searchIndex, null, 2));
-  console.log(`Successfully generated search index at ${outputPath}`);
+  console.log('Successfully completed building search index and syncing to Supabase!');
 }
 
 run().catch(console.error);
