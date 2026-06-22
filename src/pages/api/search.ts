@@ -28,7 +28,7 @@ export const GET: APIRoute = async ({ request }) => {
   try {
     const response = await ai.models.embedContent({
       model: 'gemini-embedding-2',
-      contents: query,
+      contents: `task: search result | query: ${query}`,
       config: {
         outputDimensionality: 768,
       }
