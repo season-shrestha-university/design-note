@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "build:index": "node scripts/build-search-index.js",
-    "build": "npm run build:index && astro build && pagefind --site dist",
+    "build": "pnpm run build:index && astro build && pagefind --site dist && pagefind --site .vercel/output/static",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
