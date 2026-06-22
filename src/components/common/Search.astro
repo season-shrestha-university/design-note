@@ -1,22 +1,42 @@
 ---
 // src/components/common/Search.astro
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 
-const articles = await getCollection('articles');
-const searchMetadata = articles.map(article => ({
+const articles = await getCollection("articles");
+const searchMetadata = articles.map((article) => ({
   id: article.id,
   title: article.data.title,
   excerpt: article.data.excerpt,
-  slug: `/articles/${article.id}/`
+  slug: `/articles/${article.id}/`,
 }));
 ---
 
-<astro-search class="search-container" data-metadata={JSON.stringify(searchMetadata)}>
+<astro-search
+  class="search-container"
+  data-metadata={JSON.stringify(searchMetadata)}
+>
   <div class="search-field">
-    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    <svg
+      class="search-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
     </svg>
-    <input type="text" class="search-input" placeholder="Search notes..." aria-label="Search articles" />
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Search notes..."
+      aria-label="Search articles"
+    />
   </div>
   <div class="search-status" aria-live="polite"></div>
   <ul class="search-results"></ul>
@@ -42,7 +62,8 @@ const searchMetadata = articles.map(article => ({
   }
   .search-input {
     width: 100%;
-    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) calc(var(--spacing-xl) + var(--spacing-xs));
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md)
+      calc(var(--spacing-xl) + var(--spacing-xs));
     border: 1.5px solid var(--border-color);
     border-radius: var(--border-radius);
     background: var(--surface);
@@ -99,6 +120,11 @@ const searchMetadata = articles.map(article => ({
     opacity: 0.8;
     line-height: 1.4;
   }
+  .search-results :global(mark) {
+    background: transparent;
+    color: inherit;
+    font-weight: inherit;
+  }
   .search-results :global(.ai-badge) {
     font-size: var(--font-size-xs);
     background: #b17a28;
@@ -112,6 +138,25 @@ const searchMetadata = articles.map(article => ({
 </style>
 
 <script>
+  interface SearchMetadata {
+    id: string;
+    title: string;
+    excerpt: string;
+    slug: string;
+  }
+
+  interface PagefindResult {
+    url: string;
+    meta: { title: string };
+    excerpt: string;
+  }
+
+  interface AiSearchResult {
+    title: string;
+    excerpt: string;
+    slug: string;
+  }
+
   class AstroSearch extends HTMLElement {
     private input: HTMLInputElement | null = null;
     private status: HTMLDivElement | null = null;
@@ -119,18 +164,21 @@ const searchMetadata = articles.map(article => ({
     private debounceTimer: number | undefined;
     private pagefind: any = null;
     private isPagefindUnavailable = false;
-    private metadata: any[] = [];
+    private metadata: SearchMetadata[] = [];
+    private searchGeneration = 0;
+    private abortController: AbortController | null = null;
+    private boundHandleInput = () => this.handleInput();
 
     constructor() {
       super();
     }
 
     async connectedCallback() {
-      this.input = this.querySelector('.search-input');
-      this.status = this.querySelector('.search-status');
-      this.results = this.querySelector('.search-results');
+      this.input = this.querySelector(".search-input");
+      this.status = this.querySelector(".search-status");
+      this.results = this.querySelector(".search-results");
 
-      const metadataAttr = this.getAttribute('data-metadata');
+      const metadataAttr = this.getAttribute("data-metadata");
       if (metadataAttr) {
         try {
           this.metadata = JSON.parse(metadataAttr);
@@ -140,7 +188,18 @@ const searchMetadata = articles.map(article => ({
       }
 
       if (this.input) {
-        this.input.addEventListener('input', () => this.handleInput());
+        this.input.addEventListener("input", this.boundHandleInput);
+      }
+    }
+
+    disconnectedCallback() {
+      clearTimeout(this.debounceTimer);
+      if (this.abortController) {
+        this.abortController.abort();
+        this.abortController = null;
+      }
+      if (this.input) {
+        this.input.removeEventListener("input", this.boundHandleInput);
       }
     }
 
@@ -148,92 +207,140 @@ const searchMetadata = articles.map(article => ({
       if (!this.pagefind && !this.isPagefindUnavailable) {
         try {
           // @ts-ignore
-          const pagefindPath = '/pagefind/pagefind.js';
+          const pagefindPath = "/pagefind/pagefind.js";
           this.pagefind = await import(/* @vite-ignore */ pagefindPath);
           await this.pagefind.init();
         } catch (e) {
-          console.warn("Pagefind index is not available. Falling back to semantic search API.");
+          console.warn(
+            "Pagefind index is not available. Falling back to semantic search API.",
+          );
           this.isPagefindUnavailable = true;
         }
       }
     }
 
-    private searchLocalMetadata(query: string): any[] {
+    private searchLocalMetadata(query: string): PagefindResult[] {
       if (!this.metadata || this.metadata.length === 0) return [];
       const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
       if (terms.length === 0) return [];
 
-      const matches = this.metadata.filter(article => {
-        const titleLower = (article.title || '').toLowerCase();
-        const excerptLower = (article.excerpt || '').toLowerCase();
-        return terms.every(term => titleLower.includes(term) || excerptLower.includes(term));
+      const matches = this.metadata.filter((article) => {
+        const titleLower = (article.title || "").toLowerCase();
+        const excerptLower = (article.excerpt || "").toLowerCase();
+        return terms.every(
+          (term) => titleLower.includes(term) || excerptLower.includes(term),
+        );
       });
 
-      // Map to the Pagefind result structure so we can use renderResults(matches, false)
-      return matches.slice(0, 5).map(article => ({
+      return matches.slice(0, 5).map((article) => ({
         url: article.slug,
         meta: {
-          title: article.title
+          title: article.title,
         },
-        excerpt: article.excerpt
+        excerpt: article.excerpt,
       }));
+    }
+
+    private stripMarkTags(text: string): string {
+      return text.replace(/<\/?mark>/gi, "");
+    }
+
+    private isSafeUrl(url: string): boolean {
+      return url.startsWith("/") && !url.startsWith("//");
     }
 
     private handleInput() {
       clearTimeout(this.debounceTimer);
-      const query = this.input?.value.trim() || '';
+      if (this.abortController) {
+        this.abortController.abort();
+        this.abortController = null;
+      }
+
+      const query = this.input?.value.trim() || "";
 
       if (query.length < 3) {
-        this.clearResults();
+        this.clearAll();
         return;
       }
 
-      this.debounceTimer = window.setTimeout(async () => {
-        this.updateStatus('Searching...');
+      this.debounceTimer = window.setTimeout(() => this.runSearch(query), 300);
+    }
 
-        // 1. Try Keyword Search with Pagefind
-        await this.initPagefind();
+    private async runSearch(query: string) {
+      const generation = ++this.searchGeneration;
+      const isStale = () => generation !== this.searchGeneration;
 
-        if (this.pagefind) {
-          const search = await this.pagefind.search(query);
+      this.updateStatus("Searching...");
 
-          if (search.results.length > 0) {
-            // Found keyword results
-            this.updateStatus(`Found ${search.results.length} matches`);
-            const topResults = search.results.slice(0, 5);
-            const loadedResults = await Promise.all(topResults.map((r: any) => r.data()));
-            this.renderResults(loadedResults, false);
-            return;
-          }
-        } else {
-          // Pagefind is unavailable, perform client-side keyword fallback
-          const localResults = this.searchLocalMetadata(query);
-          if (localResults.length > 0) {
-            this.updateStatus(`Found ${localResults.length} matches`);
-            this.renderResults(localResults, false);
-            return;
-          }
+      // 1. Try keyword search with Pagefind
+      await this.initPagefind();
+      if (isStale()) return;
+
+      if (this.pagefind) {
+        const search = await this.pagefind.search(query);
+        if (isStale()) return;
+
+        if (search.results.length > 0) {
+          this.updateStatus(`Found ${search.results.length} matches`);
+          const topResults = search.results.slice(0, 5);
+          const loadedResults = await Promise.all(
+            topResults.map((r: any) => r.data()),
+          );
+          if (isStale()) return;
+          this.renderResults(loadedResults, false);
+          return;
         }
+      }
 
-        // 2. Fallback to Gemini AI Semantic Search
-        this.updateStatus('No exact matches. Asking AI to find recommendations...');
+      // 2. Client-side keyword fallback (pagefind unavailable or no hits)
+      const localResults = this.searchLocalMetadata(query);
+      if (isStale()) return;
+      if (localResults.length > 0) {
+        this.updateStatus(`Found ${localResults.length} matches`);
+        this.renderResults(localResults, false);
+        return;
+      }
 
-        try {
-          const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
-          const aiResults = await res.json();
-          
-          if (aiResults.length > 0) {
-            this.updateStatus('AI Recommendations:');
-            this.renderResults(aiResults, true);
+      // 3. Fallback to Gemini AI semantic search
+      this.updateStatus(
+        "No exact matches. Asking AI to find recommendations...",
+      );
+
+      this.abortController = new AbortController();
+      try {
+        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`, {
+          signal: this.abortController.signal,
+        });
+        if (isStale()) return;
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          if (res.status === 429) {
+            this.updateStatus("Too many searches. Please try again later.");
           } else {
-            this.updateStatus('No articles found matching your query.');
-            this.clearResults();
+            this.updateStatus("Search request failed.");
           }
-        } catch (err) {
-          this.updateStatus('Search request failed.');
-          console.error(err);
+          this.clearResults();
+          return;
         }
-      }, 300);
+
+        if (!Array.isArray(data) || data.length === 0) {
+          this.updateStatus("No articles found matching your query.");
+          this.clearResults();
+          return;
+        }
+
+        this.updateStatus("AI Recommendations:");
+        this.renderResults(data as AiSearchResult[], true);
+      } catch (err) {
+        if (err instanceof DOMException && err.name === "AbortError") return;
+        if (isStale()) return;
+        this.updateStatus("Search request failed.");
+        console.error(err);
+      } finally {
+        this.abortController = null;
+      }
     }
 
     private updateStatus(text: string) {
@@ -241,34 +348,66 @@ const searchMetadata = articles.map(article => ({
     }
 
     private clearResults() {
-      if (this.results) this.results.innerHTML = '';
-      if (this.status) this.status.innerText = '';
+      if (this.results) this.results.replaceChildren();
     }
 
-    private renderResults(articles: any[], isAI: boolean) {
+    private clearAll() {
+      this.clearResults();
+      if (this.status) this.status.innerText = "";
+    }
+
+    private renderResults(
+      articles: PagefindResult[] | AiSearchResult[],
+      isAI: boolean,
+    ) {
       if (!this.results) return;
 
-      this.results.innerHTML = articles.map(article => {
-        const title = isAI ? article.title : article.meta.title;
-        const url = isAI ? article.slug : article.url;
-        const excerpt = isAI ? article.excerpt : article.excerpt;
+      this.results.replaceChildren();
 
-        return `
-          <li>
-            <a href="${url}">
-              <h4>
-                <span>${title}</span> 
-                ${isAI ? '<span class="ai-badge">AI</span>' : ''}
-              </h4>
-              <p>${excerpt}</p>
-            </a>
-          </li>
-        `;
-      }).join('');
+      for (const article of articles) {
+        const rawTitle = isAI
+          ? (article as AiSearchResult).title
+          : (article as PagefindResult).meta?.title;
+        const title = rawTitle ? this.stripMarkTags(String(rawTitle)) : "";
+        const rawUrl = isAI
+          ? (article as AiSearchResult).slug
+          : (article as PagefindResult).url;
+        const url = String(rawUrl || "");
+
+        if (!this.isSafeUrl(url)) continue;
+
+        const excerpt = article.excerpt
+          ? this.stripMarkTags(String(article.excerpt))
+          : "";
+
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = url;
+
+        const h4 = document.createElement("h4");
+        const titleSpan = document.createElement("span");
+        titleSpan.textContent = title;
+        h4.appendChild(titleSpan);
+
+        if (isAI) {
+          const badge = document.createElement("span");
+          badge.className = "ai-badge";
+          badge.textContent = "AI";
+          h4.appendChild(badge);
+        }
+
+        const p = document.createElement("p");
+        p.textContent = excerpt;
+
+        a.appendChild(h4);
+        a.appendChild(p);
+        li.appendChild(a);
+        this.results.appendChild(li);
+      }
     }
   }
 
-  if (!customElements.get('astro-search')) {
-    customElements.define('astro-search', AstroSearch);
+  if (!customElements.get("astro-search")) {
+    customElements.define("astro-search", AstroSearch);
   }
 </script>
