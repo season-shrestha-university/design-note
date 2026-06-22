@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import crypto from "crypto";
 import { GoogleGenAI } from "@google/genai";
 import { createClient } from "@supabase/supabase-js";
 
@@ -84,6 +85,19 @@ async function run() {
     process.exit(1);
   }
 
+  const existingHashes = new Map();
+  if (supabase) {
+    console.log("Fetching existing article hashes from database...");
+    const { data, error } = await supabase.from("articles").select("slug, content_hash");
+    if (!error && data) {
+      for (const row of data) {
+        existingHashes.set(row.slug, row.content_hash);
+      }
+    } else if (error) {
+      console.warn("Could not fetch existing hashes (does the content_hash column exist?):", error.message);
+    }
+  }
+
   const files = getFiles(articlesDir);
   const searchIndex = [];
 
@@ -98,6 +112,14 @@ async function run() {
     const title = data.title || id;
     const excerpt = data.excerpt || "";
     const textToEmbed = `title: ${title} | text: ${title}\n${excerpt}\n${body}`;
+    const slug = `/articles/${id}/`;
+
+    const hash = crypto.createHash("sha256").update(textToEmbed).digest("hex");
+
+    if (supabase && existingHashes.get(slug) === hash) {
+      console.log(`⏩ Skipped ${title} (No changes detected)`);
+      continue;
+    }
 
     console.log(`Generating embedding for: ${title}`);
     try {
@@ -114,14 +136,13 @@ async function run() {
         throw new Error("No embedding values returned from API");
       }
 
-      const slug = `/articles/${id}/`;
-
       searchIndex.push({
         id,
         title,
         excerpt,
         slug,
         embedding,
+        content_hash: hash,
       });
 
       if (supabase) {
@@ -132,6 +153,7 @@ async function run() {
             title,
             excerpt,
             embedding,
+            content_hash: hash,
           },
           { onConflict: "slug" },
         );
