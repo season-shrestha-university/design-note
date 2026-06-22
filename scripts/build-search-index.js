@@ -100,6 +100,7 @@ async function run() {
 
   const files = getFiles(articlesDir);
   const searchIndex = [];
+  const currentSlugs = new Set();
 
   for (const file of files) {
     const relativePath = path.relative(articlesDir, file);
@@ -113,6 +114,7 @@ async function run() {
     const excerpt = data.excerpt || "";
     const textToEmbed = `title: ${title} | text: ${title}\n${excerpt}\n${body}`;
     const slug = `/articles/${id}/`;
+    currentSlugs.add(slug);
 
     const hash = crypto.createHash("sha256").update(textToEmbed).digest("hex");
 
@@ -169,6 +171,33 @@ async function run() {
       }
     } catch (e) {
       console.error(`Failed to generate embedding for ${title}:`, e);
+    }
+  }
+
+  if (supabase) {
+    const orphanedSlugs = [...existingHashes.keys()].filter(
+      (slug) => !currentSlugs.has(slug),
+    );
+
+    if (orphanedSlugs.length > 0) {
+      console.log(
+        `Removing ${orphanedSlugs.length} orphaned article(s) from Supabase...`,
+      );
+      const { error } = await supabase
+        .from("articles")
+        .delete()
+        .in("slug", orphanedSlugs);
+
+      if (error) {
+        console.error(
+          "❌ Failed to remove orphaned articles from Supabase:",
+          error.message,
+        );
+      } else {
+        for (const slug of orphanedSlugs) {
+          console.log(`🗑️ Deleted orphaned article: ${slug}`);
+        }
+      }
     }
   }
 
