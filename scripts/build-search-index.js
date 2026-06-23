@@ -88,13 +88,18 @@ async function run() {
   const existingHashes = new Map();
   if (supabase) {
     console.log("Fetching existing article hashes from database...");
-    const { data, error } = await supabase.from("articles").select("slug, content_hash");
+    const { data, error } = await supabase
+      .from("articles")
+      .select("slug, content_hash");
     if (!error && data) {
       for (const row of data) {
         existingHashes.set(row.slug, row.content_hash);
       }
     } else if (error) {
-      console.warn("Could not fetch existing hashes (does the content_hash column exist?):", error.message);
+      console.warn(
+        "Could not fetch existing hashes (does the content_hash column exist?):",
+        error.message,
+      );
     }
   }
 
