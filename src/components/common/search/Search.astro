@@ -1,0 +1,18 @@
+---
+import { getCollection } from "astro:content";
+import SearchUI from "./SearchUI.astro";
+
+const articles = await getCollection("articles");
+const searchMetadata = articles.map((article) => ({
+  id: article.id,
+  title: article.data.title,
+  excerpt: article.data.excerpt,
+  slug: `/articles/${article.id}/`,
+}));
+---
+
+<SearchUI
+  metadata={searchMetadata}
+  placeholder="Search notes..."
+  ariaLabel="Search articles"
+/>
