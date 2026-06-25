@@ -1,0 +1,149 @@
+---
+interface SearchMetadata {
+  id: string;
+  title: string;
+  excerpt: string;
+  slug: string;
+}
+
+interface Props {
+  metadata: SearchMetadata[];
+  placeholder?: string;
+  ariaLabel?: string;
+}
+
+const {
+  metadata,
+  placeholder = "Search notes...",
+  ariaLabel = "Search articles",
+} = Astro.props as Props;
+---
+
+<astro-search class="search-container" data-metadata={JSON.stringify(metadata)}>
+  <div class="search-field">
+    <svg
+      class="search-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+    </svg>
+    <input
+      type="text"
+      class="search-input"
+      placeholder={placeholder}
+      aria-label={ariaLabel}
+    />
+  </div>
+  <div class="search-status" aria-live="polite"></div>
+  <ul class="search-results"></ul>
+</astro-search>
+
+<style>
+  .search-container {
+    display: block;
+    width: 100%;
+    margin: var(--spacing-md) 0;
+  }
+  .search-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .search-icon {
+    position: absolute;
+    left: var(--spacing-md);
+    color: var(--text-color);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .search-input {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md)
+      calc(var(--spacing-xl) + var(--spacing-xs));
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: var(--surface);
+    color: inherit;
+    font-family: inherit;
+    font-size: var(--font-size-md);
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  .search-input:focus {
+    border-color: var(--primary-color);
+  }
+  .search-status {
+    font-size: var(--font-size-sm);
+    color: var(--primary-color);
+    margin-top: var(--spacing-xs);
+    font-style: italic;
+    min-height: 20px;
+  }
+  .search-results {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-sm) 0 0 0;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  .search-results :global(li) {
+    margin-bottom: var(--spacing-sm);
+    border-radius: var(--border-radius);
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+  }
+  .search-results :global(li:hover) {
+    transform: translateX(4px);
+    border-color: var(--primary-color);
+  }
+  .search-results :global(a) {
+    display: block;
+    padding: var(--spacing-md);
+    text-decoration: none;
+    color: inherit;
+  }
+  .search-results :global(h4) {
+    margin: 0 0 var(--spacing-xs) 0;
+    font-size: var(--font-size-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .search-results :global(p) {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    opacity: 0.8;
+    line-height: 1.4;
+  }
+  .search-results :global(mark) {
+    background: transparent;
+    color: inherit;
+    font-weight: inherit;
+  }
+  .search-results :global(.ai-badge) {
+    font-size: var(--font-size-xs);
+    background: #b17a28;
+    color: black;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+</style>
+
+<script>
+  import { registerSearchElement } from "./controller";
+
+  registerSearchElement();
+</script>
