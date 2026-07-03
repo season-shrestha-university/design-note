@@ -22,13 +22,13 @@ const { hidden = false } = Astro.props;
 </aside>
 
 <script>
-  // document.addEventListener("click", (e) => {
-  //   const link = (e.target as Element)?.closest?.("[data-back-button]");
-  //   if (!link) return;
-  //   if (window.history.length > 1) {
-  //     history.back();
-  //   } else {
-  //     window.location.href = "/";
-  //   }
-  // });
+  document.addEventListener("click", (e) => {
+    const link = (e.target as Element)?.closest?.("[data-back-button]");
+    if (!link) return;
+    if (window.history.length > 1) {
+      history.back();
+    } else {
+      window.location.href = "/";
+    }
+  });
 </script>

@@ -28,12 +28,8 @@ const categoryArticles = (
 ---
 
 <Layout title={`${formatCategoryLabel(category)} / Design Note`}>
-  <main>
-    <header
-      class="category-title"
-      transition:name="page-title"
-      transition:animate={fadeTitle}
-    >
+  <main transition:animate={fadeUp}>
+    <header class="category-title">
       <img src={CATEGORY_ICONS[category]} alt={formatCategoryLabel(category)} />
       <h1>
         {formatCategoryLabel(category)}

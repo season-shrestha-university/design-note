@@ -1,7 +1,8 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 
 import { deriveCategory, fadeUp, formatCategoryLabel } from "@/utils";
+import Figure from "@components/ui/Figure.astro";
 import Layout from "@layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -21,6 +22,7 @@ if (!article) {
 
 const articleCategory = deriveCategory(article.id);
 const takeaways = article.data.takeaways;
+const { Content } = await render(article);
 ---
 
 <Layout title={`${article.data.title} / Design Note`}>
@@ -48,9 +50,9 @@ const takeaways = article.data.takeaways;
           ))
         }
       </ol>
-      <p class="note__description">
-        {article.body}
-      </p>
+      <div class="note__description">
+        <Content components={{ Figure }} />
+      </div>
 
       <h2 class="note__further__reading__title">Further Reading</h2>
       <ul class="note__further__reading__list">

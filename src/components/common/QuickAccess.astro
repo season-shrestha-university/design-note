@@ -1,4 +1,5 @@
 ---
+const currentPath = Astro.url.pathname;
 ---
 
 <aside>
@@ -25,25 +26,29 @@
           </label>
         </a>
       </li> -->
-      <li class="floating-sidebar__item" data-sidebar-tab="tab-categories">
-        <a
-          href="/categories/"
-          style="cursor: pointer; display: flex; align-items: center; justify-content: center;"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            fill="none"
-            viewBox="0 0 32 32"
-          >
-            <path
-              fill="currentColor"
-              d="m8.667 14.667 7.333-12 7.333 12zm14.666 14.667q-2.5 0-4.249-1.75-1.75-1.75-1.75-4.25-.002-2.501 1.75-4.25 1.751-1.748 4.25-1.75 2.496-.003 4.25 1.75 1.753 1.755 1.75 4.25-.004 2.495-1.75 4.25t-4.25 1.75M4 28.667V18h10.667v10.667zm19.333-2q1.401 0 2.367-.967.966-.966.967-2.366 0-1.401-.967-2.367-.966-.966-2.367-.967-1.4 0-2.366.967-.967.966-.967 2.367 0 1.4.967 2.366.966.967 2.366.967M6.667 26H12v-5.333H6.667zM13.4 12h5.2L16 7.8z"
-            ></path>
-          </svg>
-        </a>
-      </li>
+      {
+        currentPath !== "/categories/" && (
+          <li class="floating-sidebar__item" data-sidebar-tab="tab-categories">
+            <a
+              href="/categories/"
+              style="cursor: pointer; display: flex; align-items: center; justify-content: center;"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                fill="none"
+                viewBox="0 0 32 32"
+              >
+                <path
+                  fill="currentColor"
+                  d="m8.667 14.667 7.333-12 7.333 12zm14.666 14.667q-2.5 0-4.249-1.75-1.75-1.75-1.75-4.25-.002-2.501 1.75-4.25 1.751-1.748 4.25-1.75 2.496-.003 4.25 1.75 1.753 1.755 1.75 4.25-.004 2.495-1.75 4.25t-4.25 1.75M4 28.667V18h10.667v10.667zm19.333-2q1.401 0 2.367-.967.966-.966.967-2.366 0-1.401-.967-2.367-.966-.966-2.367-.967-1.4 0-2.366.967-.967.966-.967 2.367 0 1.4.967 2.366.966.967 2.366.967M6.667 26H12v-5.333H6.667zM13.4 12h5.2L16 7.8z"
+                />
+              </svg>
+            </a>
+          </li>
+        )
+      }
     </ul>
   </nav>
 </aside>

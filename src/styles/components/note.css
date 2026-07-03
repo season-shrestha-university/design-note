@@ -44,6 +44,10 @@
   margin-bottom: var(--spacing-3xl);
 }
 
+.note__description > p + p {
+  margin-top: var(--spacing-lg);
+}
+
 .note__further__reading__title {
   font-size: var(--font-size-xl);
 }
