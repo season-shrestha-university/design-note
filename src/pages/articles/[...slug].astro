@@ -1,7 +1,12 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
 
-import { deriveCategory, fadeUp, formatCategoryLabel } from "@/utils";
+import {
+  CATEGORY_ICONS,
+  deriveCategory,
+  fadeUp,
+  formatCategoryLabel,
+} from "@/utils";
 import Figure from "@components/ui/Figure.astro";
 import Layout from "@layouts/Layout.astro";
 
@@ -21,6 +26,8 @@ if (!article) {
 }
 
 const articleCategory = deriveCategory(article.id);
+const categoryIcon =
+  CATEGORY_ICONS[articleCategory] ?? "/icons/categories/fundamental-icon.svg";
 const takeaways = article.data.takeaways;
 const { Content } = await render(article);
 ---
@@ -36,7 +43,7 @@ const { Content } = await render(article);
         <p class="note__subtitle">
           {article.data.excerpt}
         </p>
-        <img class="note__visual" src="/interaction-fade.svg" alt="" />
+        <img class="note__visual" src={categoryIcon} alt="" />
       </header>
       <ol class="note__takeaway">
         {
