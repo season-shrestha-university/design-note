@@ -6,17 +6,10 @@ interface Props {
 }
 
 const { title, subtitle, href } = Astro.props;
-const isExternal = /^https?:\/\//.test(href);
 ---
 
 <li class="note__further__reading__item">
-  <a
-    href={href}
-    {...(isExternal && {
-      target: "_blank",
-      rel: "noopener noreferrer",
-    })}
-  >
+  <a href={href}>
     <h3 class="note__further__reading__item__title">{title}</h3>
     <p class="note__further__reading__item__source">{subtitle}</p>
     <svg
