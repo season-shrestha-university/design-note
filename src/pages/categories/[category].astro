@@ -42,32 +42,30 @@ const categoryArticles = (
                 <h2 class="card__title">{article.data.title}</h2>
                 <p class="card__excerpt">{article.data.excerpt}</p>
                 <span class="card__badge">
-                  {" "}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="17"
                     height="17"
                     fill="none"
                     viewBox="0 0 17 17"
+                    aria-hidden="true"
                   >
-                    <>
-                      <path
-                        stroke="#b17a28"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="1.5"
-                        d="M2.301 9.15c2.213-5.414 9.408-5.665 11.993-.419"
-                      />
-                      <path
-                        stroke="#b17a28"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="1.5"
-                        d="M7.62 11.48a2 2 0 1 0 1.401-3.748 2 2 0 0 0-1.4 3.748"
-                      />
-                    </>
+                    <circle
+                      cx="8.5"
+                      cy="8.5"
+                      r="6.25"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    />
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M8.5 5.25V8.5l2.125 1.062"
+                    />
                   </svg>
-                  5m Views
+                  {article.data.readTime} read
                 </span>
               </div>
             </a>
