@@ -1,20 +1,33 @@
 ---
 import Header from "@/components/common/Header.astro";
 import QuickAccess from "@components/common/QuickAccess.astro";
+import SEO from "@components/common/SEO.astro";
+import { SITE, websiteSchema, type JsonLd, type SeoProps } from "@/utils";
 import "@styles/main.css";
 
 import { ClientRouter } from "astro:transitions";
+
+interface Props extends SeoProps {
+  class?: string;
+}
+
+const { class: className, jsonLd, ...seo } = Astro.props;
+
+// Every page carries the WebSite schema; pages may append their own (Article, Breadcrumb).
+const structuredData: JsonLd[] = [
+  websiteSchema({ site: Astro.site }),
+  ...(jsonLd ?? []),
+];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={SITE.lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Design Note</title>
+    <SEO {...seo} jsonLd={structuredData} />
     <noscript>
       <style>
         #nav-overlay {
@@ -24,7 +37,7 @@ import { ClientRouter } from "astro:transitions";
     </noscript>
     <ClientRouter />
   </head>
-  <body class="container">
+  <body class:list={["container", className]}>
     <slot />
     <Header hidden={Astro.url.pathname === "/"} />
     <QuickAccess />

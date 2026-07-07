@@ -8,3 +8,14 @@ export {
 export { dateFormatter } from "./dateFormatter";
 
 export { fadeTitle, fadeUp } from "./transitions";
+
+export {
+  SITE,
+  buildTitle,
+  absoluteUrl,
+  serializeJsonLd,
+  websiteSchema,
+  articleSchema,
+  breadcrumbSchema,
+} from "./seo";
+export type { JsonLd, SeoProps, SeoType } from "./seo";

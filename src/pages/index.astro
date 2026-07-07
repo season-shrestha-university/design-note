@@ -10,11 +10,15 @@ const articles = (await getCollection("articles")).sort((a, b) => {
   if (a.data.featured !== b.data.featured) {
     return Number(b.data.featured) - Number(a.data.featured);
   }
-  return b.data.publishedAt.getTime() - a.data.publishedAt.getTime();
+  const aTime = a.data.publishedAt?.getTime() ?? 0;
+  const bTime = b.data.publishedAt?.getTime() ?? 0;
+  return bTime - aTime;
 });
 ---
 
-<Layout class="container">
+<Layout
+  description="A UI design reference system that explains everyday interface patterns and why they work — typography, grids, visual hierarchy, interactions, and core design principles."
+>
   <main transition:animate={fadeUp}>
     <header class="page-header">
       <div

@@ -1,7 +1,12 @@
 ---
 import { getCollection } from "astro:content";
 
-import { CATEGORY_ICONS, fadeUp, formatCategoryLabel } from "@/utils";
+import {
+  CATEGORY_ICONS,
+  breadcrumbSchema,
+  fadeUp,
+  formatCategoryLabel,
+} from "@/utils";
 import Layout from "@layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -19,10 +24,34 @@ const category = Astro.params.category as string;
 
 const categoryArticles = (
   await getCollection("articles", ({ id }) => id.split("/")[0] === category)
-).sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+).sort((a, b) => {
+  const aTime = a.data.publishedAt?.getTime() ?? 0;
+  const bTime = b.data.publishedAt?.getTime() ?? 0;
+  return bTime - aTime;
+});
+
+const categoryLabel = formatCategoryLabel(category);
+const description = `Design notes on ${categoryLabel.toLowerCase()} — ${categoryArticles.length} browsable references on interface patterns and why they work.`;
+
+const structuredData = [
+  breadcrumbSchema({
+    items: [
+      { name: "Home", url: new URL("/", Astro.site).toString() },
+      { name: "Categories", url: new URL("/categories/", Astro.site).toString() },
+      {
+        name: categoryLabel,
+        url: new URL(`/categories/${category}/`, Astro.site).toString(),
+      },
+    ],
+  }),
+];
 ---
 
-<Layout title={`${formatCategoryLabel(category)} / Design Note`}>
+<Layout
+  title={categoryLabel}
+  description={description}
+  jsonLd={structuredData}
+>
   <main transition:animate={fadeUp}>
     <header class="category-title">
       <img src={CATEGORY_ICONS[category]} alt={formatCategoryLabel(category)} />

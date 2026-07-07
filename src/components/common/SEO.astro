@@ -1,0 +1,85 @@
+---
+import {
+  SITE,
+  absoluteUrl,
+  buildTitle,
+  serializeJsonLd,
+  type JsonLd,
+  type SeoProps,
+} from "@/utils";
+
+interface Props extends SeoProps {}
+
+const {
+  title,
+  description = SITE.description,
+  image,
+  type = "website",
+  canonical,
+  publishedTime,
+  modifiedTime,
+  section,
+  jsonLd = [],
+} = Astro.props;
+
+const site = Astro.site;
+const base = site ?? Astro.url;
+const fullTitle = buildTitle(title);
+
+// Canonical: prefer explicit prop, else the current page URL (stripped of query/hash).
+const canonicalURL = canonical
+  ? new URL(canonical, base).toString()
+  : new URL(Astro.url.pathname, base).toString();
+
+const ogImage = absoluteUrl(image ?? SITE.defaultOgImage, site);
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:locale" content={SITE.locale} />
+{ogImage && <meta property="og:image" content={ogImage} />}
+{
+  type === "article" && (
+    <>
+      {publishedTime && (
+        <meta
+          property="article:published_time"
+          content={publishedTime.toISOString()}
+        />
+      )}
+      {(modifiedTime ?? publishedTime) && (
+        <meta
+          property="article:modified_time"
+          content={(modifiedTime ?? publishedTime)!.toISOString()}
+        />
+      )}
+      {section && <meta property="article:section" content={section} />}
+    </>
+  )
+}
+
+<!-- X Cards: card type (+ optional site handle); title/description/image fall back to og:* -->
+<meta
+  name="twitter:card"
+  content={ogImage ? "summary_large_image" : "summary"}
+/>
+{SITE.x && <meta name="twitter:site" content={SITE.x} />}
+
+<!-- Structured data -->
+{
+  jsonLd.map((schema: JsonLd) => (
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={serializeJsonLd(schema)}
+    />
+  ))
+}

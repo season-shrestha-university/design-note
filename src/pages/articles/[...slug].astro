@@ -3,6 +3,9 @@ import { getCollection, getEntry, render } from "astro:content";
 
 import {
   CATEGORY_ICONS,
+  absoluteUrl,
+  articleSchema,
+  breadcrumbSchema,
   deriveCategory,
   fadeUp,
   formatCategoryLabel,
@@ -32,9 +35,45 @@ const categoryIcon =
 const takeaways = article.data.takeaways;
 const furtherReading = article.data.furtherReading;
 const { Content } = await render(article);
+
+const categoryLabel = formatCategoryLabel(articleCategory);
+const canonicalURL = new URL(`/articles/${article.id}/`, Astro.site).toString();
+const shareImage = absoluteUrl(article.data.ogImage, Astro.site);
+
+const structuredData = [
+  articleSchema({
+    title: article.data.title,
+    description: article.data.excerpt,
+    url: canonicalURL,
+    image: shareImage,
+    publishedTime: article.data.publishedAt,
+    modifiedTime: article.data.updatedAt,
+    author: article.data.author,
+    section: categoryLabel,
+  }),
+  breadcrumbSchema({
+    items: [
+      { name: "Home", url: new URL("/", Astro.site).toString() },
+      {
+        name: categoryLabel,
+        url: new URL(`/categories/${articleCategory}/`, Astro.site).toString(),
+      },
+      { name: article.data.title, url: canonicalURL },
+    ],
+  }),
+];
 ---
 
-<Layout title={`${article.data.title} / Design Note`}>
+<Layout
+  title={article.data.title}
+  description={article.data.excerpt}
+  type="article"
+  image={article.data.ogImage}
+  section={categoryLabel}
+  publishedTime={article.data.publishedAt}
+  modifiedTime={article.data.updatedAt}
+  jsonLd={structuredData}
+>
   <div transition:animate={fadeUp}>
     <main>
       <header class="note__header">

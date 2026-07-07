@@ -7,9 +7,16 @@ const articles = defineCollection({
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
-    publishedAt: z.coerce.date().default(() => new Date()),
+    // Omit blank/missing dates — never substitute build time (unstable SEO signals).
+    publishedAt: z.preprocess(
+      (value) => (value == null || value === "" ? undefined : value),
+      z.coerce.date().optional(),
+    ),
+    updatedAt: z.coerce.date().optional(),
     readTime: z.string(),
     featured: z.boolean().default(false),
+    author: z.string().optional(),
+    ogImage: z.string().optional(),
     takeaways: z.array(z.string()).optional(),
     furtherReading: z
       .array(
