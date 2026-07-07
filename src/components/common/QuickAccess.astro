@@ -1,13 +1,57 @@
 ---
 const currentPath = Astro.url.pathname;
+const isHome = currentPath === "/";
+const isCategories = currentPath === "/categories/";
+const isArticle = currentPath.startsWith("/articles/");
 ---
 
 <aside>
   <nav class="floating-sidebar">
     <ul class="floating-sidebar__list">
-      {
-        currentPath !== "/" && (
-          <li class="floating-sidebar__item" data-sidebar-tab="tab-featured">
+      <li
+        class:list={[
+          "floating-sidebar__item",
+          {
+            "floating-sidebar__item--active": isHome,
+            "floating-sidebar__item--disabled": isHome,
+          },
+        ]}
+        data-sidebar-tab="tab-featured"
+      >
+        {
+          isHome ? (
+            <span
+              aria-current="page"
+              aria-disabled="true"
+              style="display: flex; align-items: center; justify-content: center;"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                fill="none"
+              >
+                <>
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 16h2.667v9.333A2.667 2.667 0 0 0 9.333 28h13.334a2.667 2.667 0 0 0 2.666-2.667V16H28L16 4z"
+                  />
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 28v-8a2.667 2.667 0 0 1 2.667-2.667h2.666A2.667 2.667 0 0 1 20 20v8"
+                  />
+                </>
+              </svg>
+            </span>
+          ) : (
             <a href="/">
               <label
                 for="tab-featured"
@@ -40,12 +84,41 @@ const currentPath = Astro.url.pathname;
                 </svg>
               </label>
             </a>
-          </li>
-        )
-      }
-      {
-        currentPath !== "/categories/" && (
-          <li class="floating-sidebar__item" data-sidebar-tab="tab-categories">
+          )
+        }
+      </li>
+
+      <li
+        class:list={[
+          "floating-sidebar__item",
+          {
+            "floating-sidebar__item--active": isCategories,
+            "floating-sidebar__item--disabled": isCategories,
+          },
+        ]}
+        data-sidebar-tab="tab-categories"
+      >
+        {
+          isCategories ? (
+            <span
+              aria-current="page"
+              aria-disabled="true"
+              style="display: flex; align-items: center; justify-content: center;"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                fill="none"
+                viewBox="0 0 32 32"
+              >
+                <path
+                  fill="currentColor"
+                  d="m8.667 14.667 7.333-12 7.333 12zm14.666 14.667q-2.5 0-4.249-1.75-1.75-1.75-1.75-4.25-.002-2.501 1.75-4.25 1.751-1.748 4.25-1.75 2.496-.003 4.25 1.75 1.753 1.755 1.75 4.25-.004 2.495-1.75 4.25t-4.25 1.75M4 28.667V18h10.667v10.667zm19.333-2q1.401 0 2.367-.967.966-.966.967-2.366 0-1.401-.967-2.367-.966-.966-2.367-.967-1.4 0-2.366.967-.967.966-.967 2.367 0 1.4.967 2.366.966.967 2.366.967M6.667 26H12v-5.333H6.667zM13.4 12h5.2L16 7.8z"
+                />
+              </svg>
+            </span>
+          ) : (
             <a
               href="/categories/"
               style="cursor: pointer; display: flex; align-items: center; justify-content: center;"
@@ -63,12 +136,12 @@ const currentPath = Astro.url.pathname;
                 />
               </svg>
             </a>
-          </li>
-        )
-      }
+          )
+        }
+      </li>
 
       {
-        currentPath.startsWith("/articles/") && (
+        isArticle && (
           <li class="floating-sidebar__item" data-sidebar-tab="tab-copy-link">
             <button
               type="button"

@@ -35,6 +35,18 @@
   box-shadow: 0 0 0 1px var(--primary-color);
 }
 
+.floating-sidebar__item--disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.floating-sidebar__item--disabled:hover {
+  color: inherit;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  transform: none;
+}
+
 @media (min-width: 1024px) {
   .floating-sidebar {
     bottom: auto;
