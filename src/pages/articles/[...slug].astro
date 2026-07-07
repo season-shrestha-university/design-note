@@ -8,6 +8,7 @@ import {
   formatCategoryLabel,
 } from "@/utils";
 import Figure from "@components/ui/Figure.astro";
+import FurtherReadingCard from "@components/ui/FurtherReadingCard.astro";
 import Layout from "@layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -29,6 +30,7 @@ const articleCategory = deriveCategory(article.id);
 const categoryIcon =
   CATEGORY_ICONS[articleCategory] ?? "/icons/categories/fundamental-icon.svg";
 const takeaways = article.data.takeaways;
+const furtherReading = article.data.furtherReading;
 const { Content } = await render(article);
 ---
 
@@ -61,77 +63,22 @@ const { Content } = await render(article);
         <Content components={{ Figure }} />
       </div>
 
-      <h2 class="note__further__reading__title">Further Reading</h2>
-      <ul class="note__further__reading__list">
-        <li class="note__further__reading__item">
-          <a href="#/">
-            <h3 class="note__further__reading__item__title">
-              Feedback Makes Interaction Feel Real
-            </h3>
-            <p class="note__further__reading__item__source">JB Journal, 2019</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-              ><path
-                stroke="#ffa329"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6m-7 1 9-9m0 5V4h-5"
-              ></path></svg
-            >
-          </a>
-        </li>
-
-        <li class="note__further__reading__item">
-          <a href="#/">
-            <h3 class="note__further__reading__item__title">
-              Designing AI’s “Persona”
-            </h3>
-            <p class="note__further__reading__item__source">Anthropic</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-              ><path
-                stroke="#ffa329"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6m-7 1 9-9m0 5V4h-5"
-              ></path></svg
-            >
-          </a>
-        </li>
-
-        <li class="note__further__reading__item">
-          <a href="#/">
-            <h3 class="note__further__reading__item__title">
-              Meaningful Metrics
-            </h3>
-            <p class="note__further__reading__item__source">Design Observer</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-              ><path
-                stroke="#ffa329"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6m-7 1 9-9m0 5V4h-5"
-              ></path></svg
-            >
-          </a>
-        </li>
-      </ul>
+      {
+        furtherReading && furtherReading.length > 0 && (
+          <>
+            <h2 class="note__further__reading__title">Further Reading</h2>
+            <ul class="note__further__reading__list">
+              {furtherReading.map((item) => (
+                <FurtherReadingCard
+                  title={item.title}
+                  subtitle={item.subtitle}
+                  href={item.link}
+                />
+              ))}
+            </ul>
+          </>
+        )
+      }
     </main>
   </div>
 </Layout>

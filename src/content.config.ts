@@ -11,6 +11,15 @@ const articles = defineCollection({
     readTime: z.string(),
     featured: z.boolean().default(false),
     takeaways: z.array(z.string()).optional(),
+    furtherReading: z
+      .array(
+        z.object({
+          title: z.string(),
+          subtitle: z.string(),
+          link: z.url(),
+        }),
+      )
+      .optional(),
   }),
 });
 
