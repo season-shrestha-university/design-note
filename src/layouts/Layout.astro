@@ -4,6 +4,7 @@ import QuickAccess from "@components/common/QuickAccess.astro";
 import SEO from "@components/common/SEO.astro";
 import { SITE, websiteSchema, type JsonLd, type SeoProps } from "@/utils";
 import "@styles/main.css";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
 import { ClientRouter } from "astro:transitions";
 
@@ -41,5 +42,6 @@ const structuredData: JsonLd[] = [
     <slot />
     <Header hidden={Astro.url.pathname === "/"} />
     <QuickAccess />
+    <SpeedInsights />
   </body>
 </html>
