@@ -1,0 +1,33 @@
+---
+import Footer from "@/components/common/Footer.astro";
+import Layout from "@/layouts/Layout.astro";
+import { fadeUp } from "@/utils";
+---
+
+<Layout
+  title="Page not found"
+  description="The page you're looking for doesn't exist or may have been moved."
+>
+  <main transition:animate={fadeUp}>
+    <header class="page-header">
+      <div>
+        <h1 class="page-title">404</h1>
+        <p class="page-subtitle">Under construction ...</p>
+      </div>
+    </header>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .not-found__link {
+    text-align: center;
+    font-size: var(--font-size-lg);
+  }
+
+  .not-found__link a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>
