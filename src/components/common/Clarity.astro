@@ -1,0 +1,19 @@
+---
+/**
+ * Microsoft Clarity — loads only in production when PUBLIC_CLARITY_PROJECT_ID is set.
+ * Project ID: Clarity → Settings → Overview
+ */
+const projectId = import.meta.env.PUBLIC_CLARITY_PROJECT_ID as
+  | string
+  | undefined;
+const enabled = import.meta.env.PROD && Boolean(projectId);
+---
+
+{
+  enabled && (
+    <script>
+      import Clarity from "@microsoft/clarity";
+      Clarity.init(import.meta.env.PUBLIC_CLARITY_PROJECT_ID);
+    </script>
+  )
+}

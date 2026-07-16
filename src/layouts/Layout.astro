@@ -1,6 +1,7 @@
 ---
 import Header from "@/components/common/Header.astro";
 import QuickAccess from "@components/common/QuickAccess.astro";
+import Clarity from "@components/common/Clarity.astro";
 import SEO from "@components/common/SEO.astro";
 import { SITE, websiteSchema, type JsonLd, type SeoProps } from "@/utils";
 import "@styles/main.css";
@@ -27,6 +28,7 @@ const structuredData: JsonLd[] = [
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <SEO {...seo} jsonLd={structuredData} />
+    <Clarity />
   </head>
   <body class:list={["container", className]}>
     <slot />
