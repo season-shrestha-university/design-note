@@ -5,7 +5,7 @@ const isCategories = currentPath === "/categories/";
 const isArticle = currentPath.startsWith("/articles/");
 ---
 
-<aside>
+<aside aria-label="Quick access">
   <nav class="floating-sidebar" aria-label="Quick access">
     <ul class="floating-sidebar__list">
       <li
@@ -22,10 +22,9 @@ const isArticle = currentPath.startsWith("/articles/");
           isHome ? (
             <span
               aria-current="page"
-              aria-disabled="true"
-              aria-label="Home"
               style="display: flex; align-items: center; justify-content: center;"
             >
+              <span class="visually-hidden">Home</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
@@ -102,10 +101,9 @@ const isArticle = currentPath.startsWith("/articles/");
           isCategories ? (
             <span
               aria-current="page"
-              aria-disabled="true"
-              aria-label="Categories"
               style="display: flex; align-items: center; justify-content: center;"
             >
+              <span class="visually-hidden">Categories</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"

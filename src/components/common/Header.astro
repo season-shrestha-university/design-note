@@ -6,7 +6,10 @@ interface Props {
 const { hidden = false } = Astro.props;
 ---
 
-<aside class:list={["site-header", { "site-header--hidden": hidden }]}>
+<aside
+  class:list={["site-header", { "site-header--hidden": hidden }]}
+  aria-label="Back navigation"
+>
   <a href="/" class="back-link" data-back-button aria-label="Go back">
     <svg
       class="back__btn"

@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# Build static pages, then fail the commit if axe-core finds a11y violations.
+pnpm a11y

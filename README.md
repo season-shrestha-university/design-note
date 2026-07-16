@@ -47,6 +47,10 @@ The dev server runs at [http://localhost:4321](http://localhost:4321).
 | `pnpm lint`        | Run ESLint                                        |
 | `pnpm lint:fix`    | Run ESLint with auto-fix                          |
 | `pnpm format`      | Format files with Prettier                        |
+| `pnpm a11y`        | Build the site and run axe-core accessibility checks |
+| `pnpm a11y:check`  | Run axe-core against an existing build            |
+
+A Husky **pre-commit** hook runs `pnpm a11y` so commits fail if built pages have accessibility violations (for example, links without discernible text). Layout-dependent rules such as colour contrast are skipped under jsdom.
 
 ## Environment variables
 
