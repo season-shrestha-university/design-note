@@ -6,7 +6,7 @@ const isArticle = currentPath.startsWith("/articles/");
 ---
 
 <aside>
-  <nav class="floating-sidebar">
+  <nav class="floating-sidebar" aria-label="Quick access">
     <ul class="floating-sidebar__list">
       <li
         class:list={[
@@ -23,6 +23,7 @@ const isArticle = currentPath.startsWith("/articles/");
             <span
               aria-current="page"
               aria-disabled="true"
+              aria-label="Home"
               style="display: flex; align-items: center; justify-content: center;"
             >
               <svg
@@ -30,59 +31,58 @@ const isArticle = currentPath.startsWith("/articles/");
                 width="32"
                 height="32"
                 fill="none"
+                aria-hidden="true"
+                focusable="false"
               >
-                <>
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4 16h2.667v9.333A2.667 2.667 0 0 0 9.333 28h13.334a2.667 2.667 0 0 0 2.666-2.667V16H28L16 4z"
-                  />
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 28v-8a2.667 2.667 0 0 1 2.667-2.667h2.666A2.667 2.667 0 0 1 20 20v8"
-                  />
-                </>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16h2.667v9.333A2.667 2.667 0 0 0 9.333 28h13.334a2.667 2.667 0 0 0 2.666-2.667V16H28L16 4z"
+                />
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 28v-8a2.667 2.667 0 0 1 2.667-2.667h2.666A2.667 2.667 0 0 1 20 20v8"
+                />
               </svg>
             </span>
           ) : (
-            <a href="/">
-              <label
-                for="tab-featured"
-                style="cursor: pointer; display: flex; align-items: center; justify-content: center;"
+            <a
+              href="/"
+              aria-label="Home"
+              style="display: flex; align-items: center; justify-content: center;"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                fill="none"
+                aria-hidden="true"
+                focusable="false"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
+                <path
                   fill="none"
-                >
-                  <>
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 16h2.667v9.333A2.667 2.667 0 0 0 9.333 28h13.334a2.667 2.667 0 0 0 2.666-2.667V16H28L16 4z"
-                    />
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 28v-8a2.667 2.667 0 0 1 2.667-2.667h2.666A2.667 2.667 0 0 1 20 20v8"
-                    />
-                  </>
-                </svg>
-              </label>
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16h2.667v9.333A2.667 2.667 0 0 0 9.333 28h13.334a2.667 2.667 0 0 0 2.666-2.667V16H28L16 4z"
+                />
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 28v-8a2.667 2.667 0 0 1 2.667-2.667h2.666A2.667 2.667 0 0 1 20 20v8"
+                />
+              </svg>
             </a>
           )
         }
@@ -103,6 +103,7 @@ const isArticle = currentPath.startsWith("/articles/");
             <span
               aria-current="page"
               aria-disabled="true"
+              aria-label="Categories"
               style="display: flex; align-items: center; justify-content: center;"
             >
               <svg
@@ -111,6 +112,8 @@ const isArticle = currentPath.startsWith("/articles/");
                 height="32"
                 fill="none"
                 viewBox="0 0 32 32"
+                aria-hidden="true"
+                focusable="false"
               >
                 <path
                   fill="currentColor"
@@ -121,7 +124,8 @@ const isArticle = currentPath.startsWith("/articles/");
           ) : (
             <a
               href="/categories/"
-              style="cursor: pointer; display: flex; align-items: center; justify-content: center;"
+              aria-label="Categories"
+              style="display: flex; align-items: center; justify-content: center;"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -129,6 +133,8 @@ const isArticle = currentPath.startsWith("/articles/");
                 height="32"
                 fill="none"
                 viewBox="0 0 32 32"
+                aria-hidden="true"
+                focusable="false"
               >
                 <path
                   fill="currentColor"
@@ -154,6 +160,8 @@ const isArticle = currentPath.startsWith("/articles/");
                 width="32"
                 height="32"
                 fill="currentColor"
+                aria-hidden="true"
+                focusable="false"
               >
                 <path
                   fill="none"
