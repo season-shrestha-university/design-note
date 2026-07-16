@@ -5,7 +5,7 @@ import Footer from "@components/common/Footer.astro";
 import Card from "@components/ui/Card.astro";
 import Layout from "@layouts/Layout.astro";
 import Search from "@components/common/search/Search.astro";
-import { deriveCategory, fadeUp } from "@/utils";
+import { deriveCategory } from "@/utils";
 const articles = (await getCollection("articles")).sort((a, b) => {
   if (a.data.featured !== b.data.featured) {
     return Number(b.data.featured) - Number(a.data.featured);
@@ -19,7 +19,7 @@ const articles = (await getCollection("articles")).sort((a, b) => {
 <Layout
   description="A beginner-friendly collection of short articles that introduces UX and UI design concepts"
 >
-  <main transition:animate={fadeUp}>
+  <main class="page-enter">
     <header class="page-header">
       <div
         style="display: flex; justify-content: space-between; align-items: flex-start; gap: var(--spacing-md);"

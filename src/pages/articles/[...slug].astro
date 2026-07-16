@@ -7,7 +7,6 @@ import {
   articleSchema,
   breadcrumbSchema,
   deriveCategory,
-  fadeUp,
   formatCategoryLabel,
 } from "@/utils";
 import Figure from "@components/ui/Figure.astro";
@@ -74,7 +73,7 @@ const structuredData = [
   modifiedTime={article.data.updatedAt}
   jsonLd={structuredData}
 >
-  <div transition:animate={fadeUp}>
+  <div class="page-enter">
     <main>
       <header class="note__header">
         <h1 class="note__title">{article.data.title}</h1>

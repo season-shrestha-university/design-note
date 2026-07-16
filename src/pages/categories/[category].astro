@@ -4,7 +4,6 @@ import { getCollection } from "astro:content";
 import {
   CATEGORY_ICONS,
   breadcrumbSchema,
-  fadeUp,
   formatCategoryLabel,
 } from "@/utils";
 import Layout from "@layouts/Layout.astro";
@@ -52,14 +51,14 @@ const structuredData = [
   description={description}
   jsonLd={structuredData}
 >
-  <main transition:animate={fadeUp}>
+  <main class="page-enter">
     <header class="category-title">
       <img src={CATEGORY_ICONS[category]} alt={formatCategoryLabel(category)} />
       <h1>
         {formatCategoryLabel(category)}
       </h1>
     </header>
-    <div transition:animate={fadeUp}>
+    <div>
       {
         categoryArticles.map((article, index) => (
           <article style={`animation-delay: ${(index + 1) * 0.1}s`}>

@@ -6,8 +6,6 @@ import { SITE, websiteSchema, type JsonLd, type SeoProps } from "@/utils";
 import "@styles/main.css";
 import SpeedInsights from "@vercel/speed-insights/astro";
 
-import { ClientRouter } from "astro:transitions";
-
 interface Props extends SeoProps {
   class?: string;
 }
@@ -36,7 +34,6 @@ const structuredData: JsonLd[] = [
         }
       </style>
     </noscript>
-    <ClientRouter />
   </head>
   <body class:list={["container", className]}>
     <slot />
