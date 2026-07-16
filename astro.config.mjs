@@ -22,6 +22,7 @@ export default defineConfig({
       features: { directive: true },
     }),
   },
+
   devToolbar: { enabled: false },
   prefetch: true,
 });

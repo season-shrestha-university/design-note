@@ -8,7 +8,8 @@ A UI design reference site built with [Astro](https://astro.build). It explains 
 - **Categories** — Articles grouped by topic (user research, UX, UI, interaction design, usability testing)
 - **Search** — Client-side fuzzy search with optional semantic search via Gemini embeddings and Supabase
 - **Quick access sidebar** — Floating navigation for home, categories, and copy-link on article pages
-- **View transitions** — Page transitions powered by Astro's client router
+- **Page enter animation** — Lightweight CSS fade-up on load, with reduced-motion support
+- **Self-hosted fonts** — IBM Plex served locally via Fontsource (no Google Fonts CDN)
 
 ## Tech stack
 

@@ -27,13 +27,6 @@ const structuredData: JsonLd[] = [
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <SEO {...seo} jsonLd={structuredData} />
-    <noscript>
-      <style>
-        #nav-overlay {
-          display: none !important;
-        }
-      </style>
-    </noscript>
   </head>
   <body class:list={["container", className]}>
     <slot />
