@@ -24,5 +24,8 @@ export default defineConfig({
   },
 
   devToolbar: { enabled: false },
-  prefetch: { prefetchAll: true, defaultStrategy: "hover" },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "viewport",
+  },
 });
