@@ -6,31 +6,33 @@ interface Props {
 const { hidden = false } = Astro.props;
 ---
 
-<aside
-  class:list={["site-header", { "site-header--hidden": hidden }]}
-  aria-label="Back navigation"
->
-  <a href="/" class="back-link" data-back-button aria-label="Go back">
-    <svg
-      class="back__btn"
-      xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
-      fill="none"
-      viewBox="0 0 32 32"
-      aria-hidden="true"
-      focusable="false"
-      ><path fill="currentColor" d="M19 2 7 16l12 15 4-3-11-12L23 4z"
-      ></path></svg
-    >
-  </a>
-</aside>
+<div class:list={["site-header", { "site-header--hidden": hidden }]}>
+  <nav aria-label="Back navigation">
+    <a href="/" class="back-link" data-back-button aria-label="Go back">
+      <svg
+        class="back-link__icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        fill="none"
+        viewBox="0 0 32 32"
+        aria-hidden="true"
+        focusable="false"
+        ><path fill="currentColor" d="M19 2 7 16l12 15 4-3-11-12L23 4z"
+        ></path></svg
+      >
+    </a>
+  </nav>
+</div>
 
 
 <script>
   document.addEventListener("click", (e) => {
     const link = (e.target as Element)?.closest?.("[data-back-button]");
     if (!link) return;
+
+    e.preventDefault();
+
     if (window.history.length > 1) {
       history.back();
     } else {

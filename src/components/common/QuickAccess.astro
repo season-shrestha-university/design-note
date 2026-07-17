@@ -5,8 +5,7 @@ const isCategories = currentPath === "/categories/";
 const isArticle = currentPath.startsWith("/articles/");
 ---
 
-<aside aria-label="Quick access">
-  <nav class="floating-sidebar" aria-label="Quick access">
+<nav class="floating-sidebar" aria-label="Quick access">
     <ul class="floating-sidebar__list">
       <li
         class:list={[
@@ -30,6 +29,7 @@ const isArticle = currentPath.startsWith("/articles/");
                 width="32"
                 height="32"
                 fill="none"
+                viewBox="0 0 32 32"
                 aria-hidden="true"
                 focusable="false"
               >
@@ -62,6 +62,7 @@ const isArticle = currentPath.startsWith("/articles/");
                 width="32"
                 height="32"
                 fill="none"
+                viewBox="0 0 32 32"
                 aria-hidden="true"
                 focusable="false"
               >
@@ -158,6 +159,7 @@ const isArticle = currentPath.startsWith("/articles/");
                 width="32"
                 height="32"
                 fill="currentColor"
+                viewBox="0 0 32 32"
                 aria-hidden="true"
                 focusable="false"
               >
@@ -176,14 +178,17 @@ const isArticle = currentPath.startsWith("/articles/");
       }
     </ul>
   </nav>
-</aside>
 
 <script>
   document.addEventListener("click", async (e) => {
     const button = (e.target as Element)?.closest?.("[data-copy-link]");
     if (!button) return;
 
-    await navigator.clipboard.writeText(window.location.href);
-    alert("Link copied to clipboard");
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      alert("Link copied to clipboard");
+    } catch {
+      alert("Could not copy link. Please copy the URL from the address bar.");
+    }
   });
 </script>

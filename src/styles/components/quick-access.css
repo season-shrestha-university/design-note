@@ -1,10 +1,9 @@
 .floating-sidebar {
   position: fixed;
-  bottom: var(--spacing-md);
-  right: 10%;
+  bottom: calc(var(--spacing-md) + env(safe-area-inset-bottom, 0px));
+  left: 50%;
   transform: translateX(-50%);
-  width: 64px;
-  height: 64px;
+  z-index: 110;
 }
 
 .floating-sidebar__list {
@@ -18,12 +17,20 @@
 }
 
 .floating-sidebar__item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: var(--spacing-md);
   border-radius: 50%;
   background: var(--surface);
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
   cursor: pointer;
+}
+
+.floating-sidebar__item svg {
+  overflow: visible;
 }
 .floating-sidebar__item:hover {
   color: var(--primary-color);
@@ -47,9 +54,23 @@
   transform: none;
 }
 
+@media (max-width: 480px) {
+  .floating-sidebar__item {
+    padding: calc((44px - 24px) / 2);
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .floating-sidebar__item svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
 @media (min-width: 1024px) {
   .floating-sidebar {
     bottom: auto;
+    left: auto;
     right: 10%;
     top: 50%;
     transform: translateY(-50%);
