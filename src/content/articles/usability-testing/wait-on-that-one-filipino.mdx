@@ -1,0 +1,43 @@
+---
+title: Wait on that one Filipino.
+excerpt: When it’s a passion project, and definitely not a "corporate" one, you shouldn't forget to breathe.
+publishedAt: "2026-07-21"
+readTime: 5m
+featured: false
+
+furtherReading:
+  - title: How TikTok Uses 3 Algorithm-Driven UX Systems to Maximize Engagement
+    subtitle: Raw.Studio
+    link: https://raw.studio/blog/how-tiktok-uses-3-algorithm-driven-ux-systems-to-maximize-engagement/
+  - title: TikTok and the Art of Personalization
+    subtitle: arXiv
+    link: https://arxiv.org/html/2403.12410
+---
+
+Just take yourself to the park and stop wondering how users are going to use your web app. Stop stressing over how it looks on a phone, tablet, or laptop, whether there are dead clicks, or if you made it feel like a native app rather than a basic blog. Your goal was to make it theoretically loadless, did you make it happen? And that semantic AI search thing: is it resource-friendly now? The score, yes, the score! What was it again? The PageSpeed score, is it above 95?
+
+Okay, STOP.
+
+Look at that dog in the park. The speed of that running dog is how fast your site should load.
+My project (this webapp) was finally ready for the testing phase. I sent my site out for review in a few Reddit communities and the Astro Lounge Discord channel. I deployed it on Vercel with Vercel Web Analytics and Speed Insights integrated, allowing me to track visitors and real-time performance in one place. I became addicted to checking my stats, endlessly obsessing over whether the score would stay above 95. Day after day, I checked the visitor count and monitored performance on both Vercel and PageSpeed Insights.
+Then came the unfortunate day: I spotted a user from India with a Real User Experience Score of just 70.
+
+Oh, the pain!
+
+I checked PageSpeed Insights and Lighthouse again, it still had that beautiful 95+ performance rating. Yet, my guy was still struggling. I had no idea what went wrong until I realized PageSpeed simulates the environment; the score isn't 100% real-world data, but a blend of field and lab metrics. Since my curious mind couldn't just go back to the park to watch the dog, I researched everything the internet had to offer to figure out why the Indian user struggled.
+That’s when I found a delightfully creepy tool called Microsoft Clarity. It literally records how users interact with your site, a full video! It shows all the wild details: when a user pauses, scrolls, taps, and everything in between. I integrated Clarity, but I still wasn't sure about the exact pain points. Now, I had to wait for a new wave of users so that clarity could track the user interaction. I felt like a fisherman sitting by the water, waiting for a fish to take the hook.
+
+I waited and waited.
+
+Waited and waited... until one beautiful day, a user from the Philippines hit a below-average score. The perfect catch (just a joke, people!).
+You should have seen how fast I logged into my Clarity account—faster than that happy dog running in the park. I filtered the sessions, found the user, and watched the recording. The guy was tapping on links and cards everywhere, but the page was freezing for seconds.
+What?!
+Part of the reason I chose Astro with MDX was to make this blog feel like a blazing-fast native app. The framework offers a feature known as prefetching—a technique that loads a page before the user actually clicks the link. By default, when a user hovers over a link, the site prefetches the page in the background so that when they finally click, it opens instantly.
+If you have a sharper mind than mine, you probably already figured out the problem. What was the issue?
+
+Mobile phones don't have hover states.
+Okay, bye.
+
+I immediately changed my prefetching configuration from hover to viewport—meaning any link visible on the user's screen gets prefetched and served instantly. That single tweak dropped my dead clicks by about 80%.
+
+The remaining 20%? I am rebaiting the hook and getting ready for the next catch.
