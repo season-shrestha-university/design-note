@@ -1,5 +1,5 @@
 ---
-import { ARTICLE_CATEGORIES, formatCategoryLabel } from "@/utils";
+import { ARTICLE_CATEGORIES, formatCategoryLabel, fadeUp } from "@/utils";
 import Footer from "@components/common/Footer.astro";
 import Layout from "@layouts/Layout.astro";
 ---
@@ -8,7 +8,7 @@ import Layout from "@layouts/Layout.astro";
   title="Categories"
   description="Browse design notes organised by discipline — from research foundations to interaction patterns and usability testing."
 >
-  <main class="page-enter">
+  <main transition:animate={fadeUp}>
     <header class="page-header">
       <div>
         <h1 class="page-title">Categories</h1>

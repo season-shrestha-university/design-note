@@ -7,6 +7,8 @@ export {
 
 export { dateFormatter } from "./dateFormatter";
 
+export { fadeUp } from "./transitions";
+
 export {
   SITE,
   buildTitle,

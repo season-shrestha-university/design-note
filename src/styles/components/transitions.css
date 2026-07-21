@@ -1,3 +1,14 @@
+@keyframes fadeUpOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
 @keyframes fadeUpIn {
   from {
     opacity: 0;
@@ -6,15 +17,5 @@
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-.page-enter {
-  animation: fadeUpIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .page-enter {
-    animation: none;
   }
 }
