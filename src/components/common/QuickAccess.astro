@@ -6,178 +6,168 @@ const isArticle = currentPath.startsWith("/articles/");
 ---
 
 <nav class="floating-sidebar" aria-label="Quick access">
-    <ul class="floating-sidebar__list">
-      <li
-        class:list={[
-          "floating-sidebar__item",
-          {
-            "floating-sidebar__item--active": isHome,
-            "floating-sidebar__item--disabled": isHome,
-          },
-        ]}
-        data-sidebar-tab="tab-featured"
-      >
+  <ul class="floating-sidebar__list">
+    <li
+      class:list={[
+        "floating-sidebar__item",
         {
-          isHome ? (
-            <span
-              aria-current="page"
-              style="display: flex; align-items: center; justify-content: center;"
-            >
-              <span class="visually-hidden">Home</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                fill="none"
-                viewBox="0 0 32 32"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 16h2.667v9.333A2.667 2.667 0 0 0 9.333 28h13.334a2.667 2.667 0 0 0 2.666-2.667V16H28L16 4z"
-                />
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 28v-8a2.667 2.667 0 0 1 2.667-2.667h2.666A2.667 2.667 0 0 1 20 20v8"
-                />
-              </svg>
-            </span>
-          ) : (
-            <a
-              href="/"
-              aria-label="Home"
-              style="display: flex; align-items: center; justify-content: center;"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                fill="none"
-                viewBox="0 0 32 32"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 16h2.667v9.333A2.667 2.667 0 0 0 9.333 28h13.334a2.667 2.667 0 0 0 2.666-2.667V16H28L16 4z"
-                />
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 28v-8a2.667 2.667 0 0 1 2.667-2.667h2.666A2.667 2.667 0 0 1 20 20v8"
-                />
-              </svg>
-            </a>
-          )
-        }
-      </li>
-
-      <li
-        class:list={[
-          "floating-sidebar__item",
-          {
-            "floating-sidebar__item--active": isCategories,
-            "floating-sidebar__item--disabled": isCategories,
-          },
-        ]}
-        data-sidebar-tab="tab-categories"
-      >
-        {
-          isCategories ? (
-            <span
-              aria-current="page"
-              style="display: flex; align-items: center; justify-content: center;"
-            >
-              <span class="visually-hidden">Categories</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                fill="none"
-                viewBox="0 0 32 32"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path
-                  fill="currentColor"
-                  d="m8.667 14.667 7.333-12 7.333 12zm14.666 14.667q-2.5 0-4.249-1.75-1.75-1.75-1.75-4.25-.002-2.501 1.75-4.25 1.751-1.748 4.25-1.75 2.496-.003 4.25 1.75 1.753 1.755 1.75 4.25-.004 2.495-1.75 4.25t-4.25 1.75M4 28.667V18h10.667v10.667zm19.333-2q1.401 0 2.367-.967.966-.966.967-2.366 0-1.401-.967-2.367-.966-.966-2.367-.967-1.4 0-2.366.967-.967.966-.967 2.367 0 1.4.967 2.366.966.967 2.366.967M6.667 26H12v-5.333H6.667zM13.4 12h5.2L16 7.8z"
-                />
-              </svg>
-            </span>
-          ) : (
-            <a
-              href="/categories/"
-              aria-label="Categories"
-              style="display: flex; align-items: center; justify-content: center;"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                fill="none"
-                viewBox="0 0 32 32"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path
-                  fill="currentColor"
-                  d="m8.667 14.667 7.333-12 7.333 12zm14.666 14.667q-2.5 0-4.249-1.75-1.75-1.75-1.75-4.25-.002-2.501 1.75-4.25 1.751-1.748 4.25-1.75 2.496-.003 4.25 1.75 1.753 1.755 1.75 4.25-.004 2.495-1.75 4.25t-4.25 1.75M4 28.667V18h10.667v10.667zm19.333-2q1.401 0 2.367-.967.966-.966.967-2.366 0-1.401-.967-2.367-.966-.966-2.367-.967-1.4 0-2.366.967-.967.966-.967 2.367 0 1.4.967 2.366.966.967 2.366.967M6.667 26H12v-5.333H6.667zM13.4 12h5.2L16 7.8z"
-                />
-              </svg>
-            </a>
-          )
-        }
-      </li>
-
+          "floating-sidebar__item--active": isHome,
+          "floating-sidebar__item--disabled": isHome,
+        },
+      ]}
+      data-sidebar-tab="tab-featured"
+    >
       {
-        isArticle && (
-          <li class="floating-sidebar__item" data-sidebar-tab="tab-copy-link">
-            <button
-              type="button"
-              data-copy-link
-              aria-label="Copy link"
-              style="cursor: pointer; display: flex; align-items: center; justify-content: center; border: none; background: transparent; padding: 0; color: inherit;"
+        isHome ? (
+          <span class="floating-sidebar__control" aria-current="page">
+            <span class="visually-hidden">Home</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="none"
+              viewBox="0 0 32 32"
+              aria-hidden="true"
+              focusable="false"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                fill="currentColor"
-                viewBox="0 0 32 32"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17.333 8 20 5.333C21.333 4 24 4 25.333 5.333l1.333 1.333C28 8 28 10.666 26.666 12L20 18.666c-1.334 1.334-4 1.334-5.334 0m0 5.334L12 26.666C10.666 28 8 28 6.666 26.666l-1.333-1.333C4 24 4 21.333 5.333 20L12 13.333c1.333-1.333 4-1.333 5.333 0"
-                />
-              </svg>
-            </button>
-          </li>
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 16h2.667v9.333A2.667 2.667 0 0 0 9.333 28h13.334a2.667 2.667 0 0 0 2.666-2.667V16H28L16 4z"
+              />
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 28v-8a2.667 2.667 0 0 1 2.667-2.667h2.666A2.667 2.667 0 0 1 20 20v8"
+              />
+            </svg>
+          </span>
+        ) : (
+          <a href="/" class="floating-sidebar__control" aria-label="Home">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="none"
+              viewBox="0 0 32 32"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 16h2.667v9.333A2.667 2.667 0 0 0 9.333 28h13.334a2.667 2.667 0 0 0 2.666-2.667V16H28L16 4z"
+              />
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 28v-8a2.667 2.667 0 0 1 2.667-2.667h2.666A2.667 2.667 0 0 1 20 20v8"
+              />
+            </svg>
+          </a>
         )
       }
-    </ul>
-  </nav>
+    </li>
+
+    <li
+      class:list={[
+        "floating-sidebar__item",
+        {
+          "floating-sidebar__item--active": isCategories,
+          "floating-sidebar__item--disabled": isCategories,
+        },
+      ]}
+      data-sidebar-tab="tab-categories"
+    >
+      {
+        isCategories ? (
+          <span class="floating-sidebar__control" aria-current="page">
+            <span class="visually-hidden">Categories</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="none"
+              viewBox="0 0 32 32"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="m8.667 14.667 7.333-12 7.333 12zm14.666 14.667q-2.5 0-4.249-1.75-1.75-1.75-1.75-4.25-.002-2.501 1.75-4.25 1.751-1.748 4.25-1.75 2.496-.003 4.25 1.75 1.753 1.755 1.75 4.25-.004 2.495-1.75 4.25t-4.25 1.75M4 28.667V18h10.667v10.667zm19.333-2q1.401 0 2.367-.967.966-.966.967-2.366 0-1.401-.967-2.367-.966-.966-2.367-.967-1.4 0-2.366.967-.967.966-.967 2.367 0 1.4.967 2.366.966.967 2.366.967M6.667 26H12v-5.333H6.667zM13.4 12h5.2L16 7.8z"
+              />
+            </svg>
+          </span>
+        ) : (
+          <a
+            href="/categories/"
+            class="floating-sidebar__control"
+            aria-label="Categories"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="none"
+              viewBox="0 0 32 32"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="m8.667 14.667 7.333-12 7.333 12zm14.666 14.667q-2.5 0-4.249-1.75-1.75-1.75-1.75-4.25-.002-2.501 1.75-4.25 1.751-1.748 4.25-1.75 2.496-.003 4.25 1.75 1.753 1.755 1.75 4.25-.004 2.495-1.75 4.25t-4.25 1.75M4 28.667V18h10.667v10.667zm19.333-2q1.401 0 2.367-.967.966-.966.967-2.366 0-1.401-.967-2.367-.966-.966-2.367-.967-1.4 0-2.366.967-.967.966-.967 2.367 0 1.4.967 2.366.966.967 2.366.967M6.667 26H12v-5.333H6.667zM13.4 12h5.2L16 7.8z"
+              />
+            </svg>
+          </a>
+        )
+      }
+    </li>
+
+    {
+      isArticle && (
+        <li class="floating-sidebar__item" data-sidebar-tab="tab-copy-link">
+          <button
+            type="button"
+            class="floating-sidebar__control"
+            data-copy-link
+            aria-label="Copy link"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="currentColor"
+              viewBox="0 0 32 32"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17.333 8 20 5.333C21.333 4 24 4 25.333 5.333l1.333 1.333C28 8 28 10.666 26.666 12L20 18.666c-1.334 1.334-4 1.334-5.334 0m0 5.334L12 26.666C10.666 28 8 28 6.666 26.666l-1.333-1.333C4 24 4 21.333 5.333 20L12 13.333c1.333-1.333 4-1.333 5.333 0"
+              />
+            </svg>
+          </button>
+        </li>
+      )
+    }
+  </ul>
+</nav>
 
 <script>
   document.addEventListener("click", async (e) => {
