@@ -107,6 +107,13 @@ nav,
 section {
   display: block;
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   background-color: var(--background);
 }
