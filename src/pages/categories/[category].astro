@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import {
   CATEGORY_ICONS,
   breadcrumbSchema,
+  fadeUp,
   formatCategoryLabel,
 } from "@/utils";
 import Layout from "@layouts/Layout.astro";
@@ -36,7 +37,10 @@ const structuredData = [
   breadcrumbSchema({
     items: [
       { name: "Home", url: new URL("/", Astro.site).toString() },
-      { name: "Categories", url: new URL("/categories/", Astro.site).toString() },
+      {
+        name: "Categories",
+        url: new URL("/categories/", Astro.site).toString(),
+      },
       {
         name: categoryLabel,
         url: new URL(`/categories/${category}/`, Astro.site).toString(),
@@ -46,12 +50,8 @@ const structuredData = [
 ];
 ---
 
-<Layout
-  title={categoryLabel}
-  description={description}
-  jsonLd={structuredData}
->
-  <main class="page-enter">
+<Layout title={categoryLabel} description={description} jsonLd={structuredData}>
+  <main transition:animate={fadeUp}>
     <header class="category-title">
       <img src={CATEGORY_ICONS[category]} alt={formatCategoryLabel(category)} />
       <h1>
