@@ -5,7 +5,6 @@
   --text-color: #9ca18f;
   --surface: #121719;
 
-  --icon-size: 24px;
   --border-radius: 24px;
 
   --spacing-xs: 4px;
@@ -15,7 +14,6 @@
   --spacing-xl: 32px;
   --spacing-2xl: clamp(32px, 6vw, 48px);
   --spacing-3xl: clamp(40px, 8vw, 64px);
-  --spacing-4xl: clamp(56px, 12vw, 96px);
   --spacing-5xl: clamp(64px, 14vw, 120px);
 
   /* Typography */
@@ -25,5 +23,4 @@
   --font-size-lg: clamp(20px, 3vw, 24px);
   --font-size-xl: clamp(24px, 4vw, 32px);
   --font-size-2xl: clamp(32px, 6vw, 48px);
-  --font-size-3xl: clamp(36px, 7vw, 50px);
 }

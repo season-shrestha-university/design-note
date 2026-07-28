@@ -152,7 +152,6 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
   content: none;
 }
 table {
@@ -174,22 +173,18 @@ button {
 p {
   font-size: var(--font-size-md);
   line-height: 1.5;
-  color: var(--text-color);
   text-rendering: optimizeLegibility;
 }
 
 h1 {
   font-size: var(--font-size-2xl);
   font-weight: 700;
-  font-family: "IBM Plex Sans", sans-serif;
   line-height: 1.3;
 }
 
 h2 {
   font-size: var(--font-size-xl);
   font-weight: 700;
-  font-family: "IBM Plex Sans", sans-serif;
-  color: var(--text-color);
   line-height: 1.3;
 }
 

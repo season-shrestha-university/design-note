@@ -1,5 +1,3 @@
-@import "./token.css";
-
 /* ── Card Block ── */
 
 .card {
@@ -18,7 +16,6 @@
 .card:hover {
   box-shadow: 0 0 0 1px var(--primary-color);
   transform: scale(1.02);
-  cursor: pointer;
 }
 .card:hover .card__badge {
   transform: translateY(-4px);
@@ -105,21 +102,4 @@
   color: var(--background);
   transition: all 0.2s ease;
   transform: rotate(-2.5deg);
-}
-
-/* ── Card Grid (for category view) ── */
-
-.card-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-lg);
-}
-
-/* ── Category Card Variant ── */
-
-.card--category {
-  border-radius: var(--border-radius);
-  transition: all 0.2s ease;
-  padding: var(--spacing-lg);
-  background: var(--surface);
 }

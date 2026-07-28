@@ -23,15 +23,19 @@
   filter: blur(2px);
 }
 
-@media (min-width: 768px) {
-  .note__header {
-    overflow: visible;
-  }
-  .note__visual {
-    right: -15%;
-    max-width: none;
-  }
+/* ── Takeaways ── */
+
+.note__takeaway {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
 }
+
+.note__takeaway__item {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
 .note__takeaway__number {
   font-size: var(--font-size-2xl);
   font-weight: 700;
@@ -40,9 +44,21 @@
   font-family: "IBM Plex Mono", monospace;
 }
 
+@media (min-width: 768px) {
+  .note__header {
+    overflow: visible;
+  }
+  .note__visual {
+    right: -15%;
+    max-width: none;
+  }
+  .note__takeaway__item {
+    gap: var(--spacing-2xl);
+  }
+}
+
 .note__description {
   margin-top: var(--spacing-2xl);
-
   margin-bottom: var(--spacing-3xl);
 }
 

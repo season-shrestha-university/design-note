@@ -8,7 +8,6 @@
 
 .floating-sidebar__list {
   display: flex;
-  flex-direction: row;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm);
   background: var(--surface);
@@ -24,7 +23,10 @@
   border-radius: 50%;
   background: var(--surface);
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
+  transition:
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
   cursor: pointer;
 }
 
@@ -47,26 +49,22 @@
 .floating-sidebar__item svg {
   overflow: visible;
 }
-.floating-sidebar__item:hover {
-  color: var(--primary-color);
-  box-shadow: 0 0 0 1px var(--primary-color);
-  transform: scale(1.2);
-}
+
+/* Disabled items have pointer-events: none, so :hover can never
+   match them — no reset rule is needed. */
+.floating-sidebar__item:hover,
 .floating-sidebar__item--active {
   color: var(--primary-color);
   box-shadow: 0 0 0 1px var(--primary-color);
 }
 
-.floating-sidebar__item--disabled {
-  cursor: not-allowed;
-  pointer-events: none;
-  opacity: 0.7;
+.floating-sidebar__item:hover {
+  transform: scale(1.2);
 }
 
-.floating-sidebar__item--disabled:hover {
-  color: inherit;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  transform: none;
+.floating-sidebar__item--disabled {
+  pointer-events: none;
+  opacity: 0.7;
 }
 
 @media (max-width: 480px) {
