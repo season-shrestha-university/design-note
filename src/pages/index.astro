@@ -36,29 +36,33 @@ const articleRows = groupIntoStaggeredRows(articles);
         </p>
       </div>
     </header>
-  </main>
 
-  <section class="grid-staggered" style="--grid-gap: var(--spacing-2xl);">
-    {
-      articleRows.map((row, rowIndex) => (
-        <div
-          class="grid-staggered__row"
-          style={`--row-columns: ${row.length};`}
-        >
-          {row.map((article, columnIndex) => (
-            <Card
-              category={deriveCategory(article.id)}
-              title={article.data.title}
-              readTime={article.data.readTime}
-              index={staggeredCardIndex(rowIndex, columnIndex)}
-              thumbnail={article.data.thumbnail}
-              href={`/articles/${article.id}/`}
-            />
-          ))}
-        </div>
-      ))
-    }
-  </section>
+    <section
+      class="grid-staggered"
+      aria-label="Articles"
+      style="--grid-gap: var(--spacing-2xl);"
+    >
+      {
+        articleRows.map((row, rowIndex) => (
+          <div
+            class="grid-staggered__row"
+            style={`--row-columns: ${row.length};`}
+          >
+            {row.map((article, columnIndex) => (
+              <Card
+                category={deriveCategory(article.id)}
+                title={article.data.title}
+                readTime={article.data.readTime}
+                index={staggeredCardIndex(rowIndex, columnIndex)}
+                thumbnail={article.data.thumbnail}
+                href={`/articles/${article.id}/`}
+              />
+            ))}
+          </div>
+        ))
+      }
+    </section>
+  </main>
 </Layout>
 
 <Footer />
