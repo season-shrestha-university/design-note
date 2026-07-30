@@ -5,7 +5,7 @@
   border-radius: var(--border-radius);
   padding: var(--spacing-lg);
   background: var(--surface);
-  transition: all 0.3s ease;
+  transition: box-shadow 0.3s ease;
   overflow: hidden;
   text-decoration: none;
   display: block;
@@ -15,13 +15,30 @@
 
 .card:hover {
   box-shadow: 0 0 0 1px var(--primary-color);
-  transform: scale(1.02);
 }
+
 .card:hover .card__badge {
   transform: translateY(-4px);
 }
 .card:hover .card__tag {
   transform: rotate(-2deg);
+}
+
+/* ── Thumbnail ── */
+
+.card__thumbnail {
+  margin: calc(-1 * var(--spacing-lg)) calc(-1 * var(--spacing-lg))
+    var(--spacing-md);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.card__thumbnail img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* ── Card Header ── */

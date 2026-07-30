@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import {
   CATEGORY_ICONS,
   breadcrumbSchema,
+  deriveCategory,
   fadeUp,
   formatCategoryLabel,
 } from "@/utils";
@@ -12,7 +13,7 @@ import Layout from "@layouts/Layout.astro";
 export async function getStaticPaths() {
   const articles = await getCollection("articles");
   const categories = [
-    ...new Set(articles.map((article) => article.id.split("/")[0])),
+    ...new Set(articles.map((article) => deriveCategory(article.id))),
   ];
 
   return categories.map((category) => ({
@@ -23,7 +24,7 @@ export async function getStaticPaths() {
 const category = Astro.params.category as string;
 
 const categoryArticles = (
-  await getCollection("articles", ({ id }) => id.split("/")[0] === category)
+  await getCollection("articles", ({ id }) => deriveCategory(id) === category)
 ).sort((a, b) => {
   const aTime = a.data.publishedAt?.getTime() ?? 0;
   const bTime = b.data.publishedAt?.getTime() ?? 0;

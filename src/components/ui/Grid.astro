@@ -1,0 +1,30 @@
+---
+type Gap = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
+
+type Props = {
+  /** Minimum column width before the grid wraps to fewer columns */
+  minColumnWidth?: string;
+  /** Fixed column count; stacks to one column on small screens */
+  columns?: number;
+  gap?: Gap;
+  class?: string;
+  as?: "div" | "section" | "ul" | "nav";
+};
+
+const {
+  minColumnWidth = "280px",
+  columns,
+  gap = "lg",
+  class: className,
+  as: Tag = "div",
+}: Props = Astro.props;
+
+const gapValue = `var(--spacing-${gap})`;
+const style = columns
+  ? `--grid-columns: ${columns}; --grid-gap: ${gapValue};`
+  : `--grid-min-column-width: ${minColumnWidth}; --grid-gap: ${gapValue};`;
+---
+
+<Tag class:list={["grid", columns && "grid--fixed", className]} style={style}>
+  <slot />
+</Tag>

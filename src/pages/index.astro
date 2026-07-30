@@ -1,11 +1,16 @@
 ---
 import { getCollection } from "astro:content";
 
+import {
+  deriveCategory,
+  fadeUp,
+  groupIntoStaggeredRows,
+  staggeredCardIndex,
+} from "@/utils";
 import Footer from "@components/common/Footer.astro";
 import Card from "@components/ui/Card.astro";
 import Layout from "@layouts/Layout.astro";
-import Search from "@components/common/search/Search.astro";
-import { deriveCategory, fadeUp } from "@/utils";
+
 const articles = (await getCollection("articles")).sort((a, b) => {
   if (a.data.featured !== b.data.featured) {
     return Number(b.data.featured) - Number(a.data.featured);
@@ -14,6 +19,8 @@ const articles = (await getCollection("articles")).sort((a, b) => {
   const bTime = b.data.publishedAt?.getTime() ?? 0;
   return bTime - aTime;
 });
+
+const articleRows = groupIntoStaggeredRows(articles);
 ---
 
 <Layout
@@ -21,37 +28,43 @@ const articles = (await getCollection("articles")).sort((a, b) => {
 >
   <main transition:animate={fadeUp}>
     <header class="page-header">
-      <div
-        style="display: flex; justify-content: space-between; align-items: flex-start; gap: var(--spacing-md);"
-      >
-        <div>
-          <h1 class="page-title">Design Note</h1>
-          <p class="page-subtitle">
-            A beginner-friendly collection of short articles that introduces UX
-            and UI design concepts.
-          </p>
-        </div>
+      <div>
+        <h1 class="page-title">Design Note</h1>
+        <p class="page-subtitle">
+          A beginner-friendly collection of short articles that introduces UX
+          and UI design concepts.
+        </p>
       </div>
     </header>
-    <div style="margin-bottom: var(--spacing-2xl);">
-      <Search />
-    </div>
-    <div>
-      <section>
-        {
-          articles.map((article, index) => (
+  </main>
+
+  <section class="grid-staggered" style="--grid-gap: var(--spacing-2xl);">
+    {
+      articleRows.map((row, rowIndex) => (
+        <div
+          class="grid-staggered__row"
+          style={`--row-columns: ${row.length};`}
+        >
+          {row.map((article, columnIndex) => (
             <Card
-              title={article.data.title}
-              excerpt={article.data.excerpt}
-              readTime={article.data.readTime}
               category={deriveCategory(article.id)}
-              index={index + 1}
+              title={article.data.title}
+              readTime={article.data.readTime}
+              index={staggeredCardIndex(rowIndex, columnIndex)}
+              thumbnail={article.data.thumbnail}
               href={`/articles/${article.id}/`}
             />
-          ))
-        }
-      </section>
-    </div>
-  </main>
-  <Footer />
+          ))}
+        </div>
+      ))
+    }
+  </section>
 </Layout>
+
+<Footer />
+
+<style>
+  section {
+    margin-bottom: var(--spacing-2xl);
+  }
+</style>

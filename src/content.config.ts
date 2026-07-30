@@ -17,6 +17,7 @@ const articles = defineCollection({
     featured: z.boolean().default(false),
     author: z.string().optional(),
     ogImage: z.string().optional(),
+    thumbnail: z.string().optional(),
     takeaways: z.array(z.string()).optional(),
     furtherReading: z
       .array(

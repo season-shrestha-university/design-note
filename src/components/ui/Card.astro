@@ -3,36 +3,46 @@ import { CATEGORY_ICONS, formatCategoryLabel } from "@/utils";
 
 interface Props {
   title: string;
-  excerpt: string;
   readTime: string;
-  category: string;
+  category?: string;
   index: number;
   href: string;
+  thumbnail?: string;
 }
 
-const { title, excerpt, readTime, category, index, href } = Astro.props;
+const { title, readTime, category, index, href, thumbnail } = Astro.props;
 
 const displayIndex = String(index).padStart(2, "0");
-const categoryLabel = formatCategoryLabel(category);
-
-const iconSrc =
-  CATEGORY_ICONS[category] ?? "/icons/categories/fundamental-icon.svg";
+const categoryLabel = category ? formatCategoryLabel(category) : undefined;
+const iconSrc = category
+  ? (CATEGORY_ICONS[category] ?? "/icons/categories/fundamental-icon.svg")
+  : undefined;
 ---
 
 <a href={href} class="card" id={`card-${displayIndex}`}>
+  {
+    thumbnail && (
+      <div class="card__thumbnail">
+        <img src={thumbnail} alt="" width="400" height="225" loading="lazy" />
+      </div>
+    )
+  }
   <div class="card__header">
-    <span class="card__tag">
-      <span class="card__tag-icon">
-        <img src={iconSrc} alt="" width="16" height="16" />
-      </span>
-      {categoryLabel}
-    </span>
+    {
+      category && (
+        <span class="card__tag">
+          <span class="card__tag-icon">
+            <img src={iconSrc} alt="" width="16" height="16" />
+          </span>
+          {categoryLabel}
+        </span>
+      )
+    }
     <span class="card__index">{displayIndex}</span>
   </div>
 
   <div class="card__body">
     <h2 class="card__title">{title}</h2>
-    <p class="card__excerpt">{excerpt}</p>
     <span class="card__badge">
       <svg
         xmlns="http://www.w3.org/2000/svg"

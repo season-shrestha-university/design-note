@@ -5,9 +5,9 @@ export {
   formatCategoryLabel,
 } from "./categories";
 
-export { dateFormatter } from "./dateFormatter";
-
 export { fadeUp } from "./transitions";
+
+export { groupIntoStaggeredRows, staggeredCardIndex } from "./staggeredGrid";
 
 export {
   SITE,
@@ -18,4 +18,4 @@ export {
   articleSchema,
   breadcrumbSchema,
 } from "./seo";
-export type { JsonLd, SeoProps, SeoType } from "./seo";
+export type { JsonLd, SeoProps } from "./seo";
