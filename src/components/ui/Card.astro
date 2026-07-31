@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import { CATEGORY_ICONS, formatCategoryLabel } from "@/utils";
 
 interface Props {
@@ -7,29 +9,44 @@ interface Props {
   readTime: string;
   category: string;
   href: string;
+  thumbnail?: ImageMetadata;
 }
 
-const { title, excerpt, readTime, category, href } = Astro.props;
+const { title, excerpt, readTime, category, href, thumbnail } = Astro.props;
 
 const categoryLabel = formatCategoryLabel(category);
+const showExcerpt = !thumbnail;
 
 const iconSrc =
   CATEGORY_ICONS[category] ?? "/icons/categories/fundamental-icon.svg";
 ---
 
 <a href={href} class="card">
-  <div class="card__header">
+  {
+    thumbnail && (
+      <div class="card__media">
+        <Image
+          class="card__thumbnail"
+          src={thumbnail}
+          alt={title}
+          widths={[320, 480, 640]}
+          sizes="(max-width: 768px) 100vw, 33vw"
+          loading="lazy"
+        />
+      </div>
+    )
+  }
+
+  <div class="card__body">
     <span class="card__tag">
       <span class="card__tag-icon">
         <img src={iconSrc} alt="" width="16" height="16" />
       </span>
       {categoryLabel}
     </span>
-  </div>
 
-  <div class="card__body">
     <h2 class="card__title">{title}</h2>
-    <p class="card__excerpt">{excerpt}</p>
+    {showExcerpt && <p class="card__excerpt">{excerpt}</p>}
     <span class="card__badge">
       <svg
         xmlns="http://www.w3.org/2000/svg"
