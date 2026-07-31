@@ -60,24 +60,7 @@
   color: var(--text-color);
 }
 
-/* ── Index Number ── */
-
-.card__index {
-  position: absolute;
-  top: var(--spacing-lg);
-  right: var(--spacing-lg);
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-  color: var(--primary-color);
-  opacity: 0.3;
-  font-family: "IBM Plex Mono", monospace;
-}
-
 /* ── Card Body ── */
-
-.card__body {
-  padding-right: var(--spacing-2xl);
-}
 
 .card__title {
   margin-bottom: 12px;

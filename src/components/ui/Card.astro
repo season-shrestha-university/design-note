@@ -6,20 +6,18 @@ interface Props {
   excerpt: string;
   readTime: string;
   category: string;
-  index: number;
   href: string;
 }
 
-const { title, excerpt, readTime, category, index, href } = Astro.props;
+const { title, excerpt, readTime, category, href } = Astro.props;
 
-const displayIndex = String(index).padStart(2, "0");
 const categoryLabel = formatCategoryLabel(category);
 
 const iconSrc =
   CATEGORY_ICONS[category] ?? "/icons/categories/fundamental-icon.svg";
 ---
 
-<a href={href} class="card" id={`card-${displayIndex}`}>
+<a href={href} class="card">
   <div class="card__header">
     <span class="card__tag">
       <span class="card__tag-icon">
@@ -27,7 +25,6 @@ const iconSrc =
       </span>
       {categoryLabel}
     </span>
-    <span class="card__index">{displayIndex}</span>
   </div>
 
   <div class="card__body">

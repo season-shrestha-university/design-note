@@ -60,13 +60,10 @@ const structuredData = [
     </header>
     <div>
       {
-        categoryArticles.map((article, index) => (
+        categoryArticles.map((article) => (
           <article>
             <a href={`/articles/${article.id}/`} class="card">
               <div class="card__body">
-                <span class="card__index">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
                 <h2 class="card__title">{article.data.title}</h2>
                 <p class="card__excerpt">{article.data.excerpt}</p>
                 <span class="card__badge">
