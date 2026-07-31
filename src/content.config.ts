@@ -8,6 +8,7 @@ const articles = defineCollection({
     z.object({
       title: z.string(),
       excerpt: z.string(),
+      enableExcerpt: z.boolean().default(true),
       thumbnail: image().optional(),
       // Omit blank/missing dates — never substitute build time (unstable SEO signals).
       publishedAt: z.preprocess(

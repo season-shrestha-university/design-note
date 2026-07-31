@@ -30,7 +30,9 @@
 .card__thumbnail {
   position: absolute;
   inset: 0;
-  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .card__body {

@@ -6,16 +6,18 @@ import { CATEGORY_ICONS, formatCategoryLabel } from "@/utils";
 interface Props {
   title: string;
   excerpt: string;
+  enableExcerpt?: boolean;
   readTime: string;
   category: string;
   href: string;
   thumbnail?: ImageMetadata;
 }
 
-const { title, excerpt, readTime, category, href, thumbnail } = Astro.props;
+const { title, excerpt, enableExcerpt, readTime, category, href, thumbnail } =
+  Astro.props;
 
 const categoryLabel = formatCategoryLabel(category);
-const showExcerpt = !thumbnail;
+const showExcerpt = enableExcerpt ?? true;
 
 const iconSrc =
   CATEGORY_ICONS[category] ?? "/icons/categories/fundamental-icon.svg";
