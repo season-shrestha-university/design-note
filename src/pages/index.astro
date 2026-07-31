@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import { deriveCategory, fadeUp } from "@/utils";
 import Footer from "@components/common/Footer.astro";
 import Card from "@components/ui/Card.astro";
+import Grid from "@components/ui/Grid.astro";
 import Layout from "@layouts/Layout.astro";
 
 // Get all articles sorted by published date
@@ -27,7 +28,7 @@ const articles = (await getCollection("articles")).sort((a, b) => {
       </p>
     </header>
     <!-- Articles -->
-    <section>
+    <Grid as="section" gap="var(--spacing-xl)">
       {
         articles.map((article, index) => (
           <Card
@@ -40,7 +41,7 @@ const articles = (await getCollection("articles")).sort((a, b) => {
           />
         ))
       }
-    </section>
+    </Grid>
   </main>
   <Footer />
 </Layout>

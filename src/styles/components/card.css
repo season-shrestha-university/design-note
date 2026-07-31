@@ -10,7 +10,6 @@
   text-decoration: none;
   display: block;
   color: inherit;
-  margin: var(--spacing-lg) 0;
 }
 
 .card:hover {
