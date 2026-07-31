@@ -1,11 +1,10 @@
 ---
 import { getCollection } from "astro:content";
 
+import { deriveCategory, fadeUp } from "@/utils";
 import Footer from "@components/common/Footer.astro";
 import Card from "@components/ui/Card.astro";
 import Layout from "@layouts/Layout.astro";
-import Search from "@components/common/search/Search.astro";
-import { deriveCategory, fadeUp } from "@/utils";
 const articles = (await getCollection("articles")).sort((a, b) => {
   if (a.data.featured !== b.data.featured) {
     return Number(b.data.featured) - Number(a.data.featured);
@@ -33,9 +32,6 @@ const articles = (await getCollection("articles")).sort((a, b) => {
         </div>
       </div>
     </header>
-    <div style="margin-bottom: var(--spacing-2xl);">
-      <Search />
-    </div>
     <div>
       <section>
         {
