@@ -6,11 +6,34 @@
   z-index: 110;
   background-color: var(--surface);
   height: 100dvh;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-md);
 }
 
 .sidebar__list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-lg);
+}
+
+.sidebar__item:first-child {
+  margin-bottom: var(--spacing-xl);
+}
+
+.sidebar__item {
+  text-align: center;
+}
+
+.sidebar__item-link:hover {
+  color: var(--primary-color);
+}
+
+.sidebar__item-title {
+  display: block;
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-size-xs);
+}
+
+.sidebar__item-title > span {
+  display: block;
+  padding-bottom: var(--spacing-xs);
 }
