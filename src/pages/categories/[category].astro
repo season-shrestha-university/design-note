@@ -7,6 +7,8 @@ import {
   fadeUp,
   formatCategoryLabel,
 } from "@/utils";
+import Card from "@components/ui/Card.astro";
+import Grid from "@components/ui/Grid.astro";
 import Layout from "@layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -58,49 +60,21 @@ const structuredData = [
         {formatCategoryLabel(category)}
       </h1>
     </header>
-    <div>
+    <Grid as="section" gap="var(--spacing-xl)">
       {
-        categoryArticles.map((article, index) => (
-          <article>
-            <a href={`/articles/${article.id}/`} class="card">
-              <div class="card__body">
-                <span class="card__index">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h2 class="card__title">{article.data.title}</h2>
-                <p class="card__excerpt">{article.data.excerpt}</p>
-                <span class="card__badge">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="17"
-                    height="17"
-                    fill="none"
-                    viewBox="0 0 17 17"
-                    aria-hidden="true"
-                  >
-                    <circle
-                      cx="8.5"
-                      cy="8.5"
-                      r="6.25"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                    />
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="M8.5 5.25V8.5l2.125 1.062"
-                    />
-                  </svg>
-                  {article.data.readTime} read
-                </span>
-              </div>
-            </a>
-          </article>
+        categoryArticles.map((article) => (
+          <Card
+            title={article.data.title}
+            excerpt={article.data.excerpt}
+            enableExcerpt={article.data.enableExcerpt}
+            thumbnail={article.data.thumbnail}
+            readTime={article.data.readTime}
+            category={category}
+            href={`/articles/${article.id}/`}
+          />
         ))
       }
-    </div>
+    </Grid>
   </main>
 </Layout>
 

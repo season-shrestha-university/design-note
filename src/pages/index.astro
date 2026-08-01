@@ -1,15 +1,14 @@
 ---
 import { getCollection } from "astro:content";
 
+import { deriveCategory, fadeUp } from "@/utils";
 import Footer from "@components/common/Footer.astro";
 import Card from "@components/ui/Card.astro";
+import Grid from "@components/ui/Grid.astro";
 import Layout from "@layouts/Layout.astro";
-import Search from "@components/common/search/Search.astro";
-import { deriveCategory, fadeUp } from "@/utils";
+
+// Get all articles sorted by published date
 const articles = (await getCollection("articles")).sort((a, b) => {
-  if (a.data.featured !== b.data.featured) {
-    return Number(b.data.featured) - Number(a.data.featured);
-  }
   const aTime = a.data.publishedAt?.getTime() ?? 0;
   const bTime = b.data.publishedAt?.getTime() ?? 0;
   return bTime - aTime;
@@ -20,38 +19,30 @@ const articles = (await getCollection("articles")).sort((a, b) => {
   description="A beginner-friendly collection of short articles that introduces UX and UI design concepts"
 >
   <main transition:animate={fadeUp}>
+    <!-- Header -->
     <header class="page-header">
-      <div
-        style="display: flex; justify-content: space-between; align-items: flex-start; gap: var(--spacing-md);"
-      >
-        <div>
-          <h1 class="page-title">Design Note</h1>
-          <p class="page-subtitle">
-            A beginner-friendly collection of short articles that introduces UX
-            and UI design concepts.
-          </p>
-        </div>
-      </div>
+      <h1 class="page-title">Design Note</h1>
+      <p class="page-subtitle">
+        A beginner-friendly collection of short articles that introduces UX and
+        UI design concepts.
+      </p>
     </header>
-    <div style="margin-bottom: var(--spacing-2xl);">
-      <Search />
-    </div>
-    <div>
-      <section>
-        {
-          articles.map((article, index) => (
-            <Card
-              title={article.data.title}
-              excerpt={article.data.excerpt}
-              readTime={article.data.readTime}
-              category={deriveCategory(article.id)}
-              index={index + 1}
-              href={`/articles/${article.id}/`}
-            />
-          ))
-        }
-      </section>
-    </div>
+    <!-- Articles -->
+    <Grid as="section" gap="var(--spacing-xl)">
+      {
+        articles.map((article) => (
+          <Card
+            title={article.data.title}
+            excerpt={article.data.excerpt}
+            enableExcerpt={article.data.enableExcerpt}
+            thumbnail={article.data.thumbnail}
+            readTime={article.data.readTime}
+            category={deriveCategory(article.id)}
+            href={`/articles/${article.id}/`}
+          />
+        ))
+      }
+    </Grid>
   </main>
   <Footer />
 </Layout>

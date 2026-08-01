@@ -38,8 +38,10 @@ const { Content } = await render(article);
 
 const categoryLabel = formatCategoryLabel(articleCategory);
 const canonicalURL = new URL(`/articles/${article.id}/`, Astro.site).toString();
-const shareImage = absoluteUrl(article.data.ogImage, Astro.site);
-
+const shareImage = absoluteUrl(
+  article.data.ogImage ?? article.data.thumbnail?.src,
+  Astro.site,
+);
 const structuredData = [
   articleSchema({
     title: article.data.title,
@@ -48,7 +50,6 @@ const structuredData = [
     image: shareImage,
     publishedTime: article.data.publishedAt,
     modifiedTime: article.data.updatedAt,
-    author: article.data.author,
     section: categoryLabel,
   }),
   breadcrumbSchema({
@@ -65,10 +66,11 @@ const structuredData = [
 ---
 
 <Layout
+  class="container--narrow"
   title={article.data.title}
   description={article.data.excerpt}
   type="article"
-  image={article.data.ogImage}
+  image={article.data.ogImage ?? article.data.thumbnail?.src}
   section={categoryLabel}
   publishedTime={article.data.publishedAt}
   modifiedTime={article.data.updatedAt}
@@ -81,9 +83,7 @@ const structuredData = [
         <span class="note_category card__badge"
           >{formatCategoryLabel(articleCategory)}</span
         >
-        <p class="note__subtitle">
-          {article.data.excerpt}
-        </p>
+        <p class="note__subtitle">{article.data.excerpt}</p>
         <img class="note__visual" src={categoryIcon} alt="" />
       </header>
       <ol class="note__takeaway">

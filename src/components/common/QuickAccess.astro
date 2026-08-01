@@ -1,184 +1,123 @@
----
-const currentPath = Astro.url.pathname;
-const isHome = currentPath === "/";
-const isCategories = currentPath === "/categories/";
-const isArticle = currentPath.startsWith("/articles/");
----
-
-<nav class="floating-sidebar" aria-label="Quick access">
-  <ul class="floating-sidebar__list">
-    <li
-      class:list={[
-        "floating-sidebar__item",
-        {
-          "floating-sidebar__item--active": isHome,
-          "floating-sidebar__item--disabled": isHome,
-        },
-      ]}
-      data-sidebar-tab="tab-featured"
-    >
-      {
-        isHome ? (
-          <span class="floating-sidebar__control" aria-current="page">
-            <span class="visually-hidden">Home</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              fill="none"
-              viewBox="0 0 32 32"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 16h2.667v9.333A2.667 2.667 0 0 0 9.333 28h13.334a2.667 2.667 0 0 0 2.666-2.667V16H28L16 4z"
-              />
-              <path
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 28v-8a2.667 2.667 0 0 1 2.667-2.667h2.666A2.667 2.667 0 0 1 20 20v8"
-              />
-            </svg>
-          </span>
-        ) : (
-          <a href="/" class="floating-sidebar__control" aria-label="Home">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              fill="none"
-              viewBox="0 0 32 32"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 16h2.667v9.333A2.667 2.667 0 0 0 9.333 28h13.334a2.667 2.667 0 0 0 2.666-2.667V16H28L16 4z"
-              />
-              <path
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 28v-8a2.667 2.667 0 0 1 2.667-2.667h2.666A2.667 2.667 0 0 1 20 20v8"
-              />
-            </svg>
-          </a>
-        )
-      }
+<nav class="sidebar" aria-label="Site navigation">
+  <ul class="sidebar__list">
+    <li class="sidebar__item">
+      <a href="/" aria-label="Home">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          aria-hidden="true"
+          ><path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M6.133 21C4.955 21 4 20.02 4 18.81v-8.802c0-.665.295-1.295.8-1.71l5.867-4.818a2.09 2.09 0 0 1 2.666 0l5.866 4.818c.506.415.801 1.045.801 1.71v8.802c0 1.21-.955 2.19-2.133 2.19z"
+          ></path><path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M9.5 21v-5.5a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2V21"></path></svg
+        >
+      </a>
     </li>
-
-    <li
-      class:list={[
-        "floating-sidebar__item",
-        {
-          "floating-sidebar__item--active": isCategories,
-          "floating-sidebar__item--disabled": isCategories,
-        },
-      ]}
-      data-sidebar-tab="tab-categories"
-    >
-      {
-        isCategories ? (
-          <span class="floating-sidebar__control" aria-current="page">
-            <span class="visually-hidden">Categories</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              fill="none"
-              viewBox="0 0 32 32"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path
-                fill="currentColor"
-                d="m8.667 14.667 7.333-12 7.333 12zm14.666 14.667q-2.5 0-4.249-1.75-1.75-1.75-1.75-4.25-.002-2.501 1.75-4.25 1.751-1.748 4.25-1.75 2.496-.003 4.25 1.75 1.753 1.755 1.75 4.25-.004 2.495-1.75 4.25t-4.25 1.75M4 28.667V18h10.667v10.667zm19.333-2q1.401 0 2.367-.967.966-.966.967-2.366 0-1.401-.967-2.367-.966-.966-2.367-.967-1.4 0-2.366.967-.967.966-.967 2.367 0 1.4.967 2.366.966.967 2.366.967M6.667 26H12v-5.333H6.667zM13.4 12h5.2L16 7.8z"
-              />
-            </svg>
-          </span>
-        ) : (
-          <a
-            href="/categories/"
-            class="floating-sidebar__control"
-            aria-label="Categories"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              fill="none"
-              viewBox="0 0 32 32"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path
-                fill="currentColor"
-                d="m8.667 14.667 7.333-12 7.333 12zm14.666 14.667q-2.5 0-4.249-1.75-1.75-1.75-1.75-4.25-.002-2.501 1.75-4.25 1.751-1.748 4.25-1.75 2.496-.003 4.25 1.75 1.753 1.755 1.75 4.25-.004 2.495-1.75 4.25t-4.25 1.75M4 28.667V18h10.667v10.667zm19.333-2q1.401 0 2.367-.967.966-.966.967-2.366 0-1.401-.967-2.367-.966-.966-2.367-.967-1.4 0-2.366.967-.967.966-.967 2.367 0 1.4.967 2.366.966.967 2.366.967M6.667 26H12v-5.333H6.667zM13.4 12h5.2L16 7.8z"
-              />
-            </svg>
-          </a>
-        )
-      }
+    <li class="sidebar__item">
+      <a href="/categories/user-research/" class="sidebar__item-link">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 120 120"
+          fill="none"
+          aria-hidden="true"
+        >
+          <rect width="120" height="120" fill="#44694F"></rect>
+          <rect x="27.5" y="27.5" width="60" height="60" fill="#FFA329"></rect>
+        </svg>
+        <span class="sidebar__item-title"
+          ><span>User</span><span>Research</span></span
+        >
+      </a>
     </li>
-
-    {
-      isArticle && (
-        <li class="floating-sidebar__item" data-sidebar-tab="tab-copy-link">
-          <button
-            type="button"
-            class="floating-sidebar__control"
-            data-copy-link
-            aria-label="Copy link"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              fill="currentColor"
-              viewBox="0 0 32 32"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17.333 8 20 5.333C21.333 4 24 4 25.333 5.333l1.333 1.333C28 8 28 10.666 26.666 12L20 18.666c-1.334 1.334-4 1.334-5.334 0m0 5.334L12 26.666C10.666 28 8 28 6.666 26.666l-1.333-1.333C4 24 4 21.333 5.333 20L12 13.333c1.333-1.333 4-1.333 5.333 0"
-              />
-            </svg>
-          </button>
-        </li>
-      )
-    }
+    <li class="sidebar__item">
+      <a href="/categories/user-experience/" class="sidebar__item-link">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 120 120"
+          fill="none"
+          aria-hidden="true"
+        >
+          <circle cx="60" cy="60" r="60" fill="#44694F"></circle>
+          <circle cx="60.2712" cy="60.2717" r="35.8371" fill="#FFA329"></circle>
+        </svg>
+        <span class="sidebar__item-title"
+          ><span>User</span><span>Experience</span></span
+        >
+      </a>
+    </li>
+    <li class="sidebar__item">
+      <a href="/categories/user-interface/" class="sidebar__item-link">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 120 120"
+          fill="none"
+          aria-hidden="true"
+        >
+          <circle cx="60" cy="60" r="60" fill="#FFA329"></circle>
+        </svg>
+        <span class="sidebar__item-title"
+          ><span>User</span><span>Interface</span></span
+        >
+      </a>
+    </li>
+    <li class="sidebar__item">
+      <a href="/categories/interaction-design/" class="sidebar__item-link">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 120 120"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M83.5395 29.3113L67.2736 100.729L17.5542 49.96L83.5395 29.3113Z"
+            fill="#44694F"></path>
+          <ellipse
+            cx="94.2209"
+            cy="27.562"
+            rx="25.779"
+            ry="27.56"
+            fill="#FFA329"></ellipse>
+        </svg>
+        <span class="sidebar__item-title"
+          ><span>Interaction</span><span>Design</span></span
+        >
+      </a>
+    </li>
+    <li class="sidebar__item">
+      <a href="/categories/usability-testing/" class="sidebar__item-link">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 120 120"
+          fill="none"
+          aria-hidden="true"
+        >
+          <rect width="52" height="120" rx="8" fill="#FFA329"></rect>
+          <rect x="68" width="52" height="120" rx="8" fill="#44694F"></rect>
+        </svg>
+        <span class="sidebar__item-title"
+          ><span>Usability</span><span>Testing</span></span
+        >
+      </a>
+    </li>
   </ul>
 </nav>
-
-<script>
-  document.addEventListener("click", async (e) => {
-    const button = (e.target as Element)?.closest?.("[data-copy-link]");
-    if (!button) return;
-
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      alert("Link copied to clipboard");
-    } catch {
-      alert("Could not copy link. Please copy the URL from the address bar.");
-    }
-  });
-</script>

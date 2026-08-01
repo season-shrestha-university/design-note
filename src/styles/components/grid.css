@@ -1,0 +1,31 @@
+/* 6-column track: spans 3 (2-up) and 2 (3-up) for a repeating 2 → 3 → 2 row pattern */
+.grid {
+  display: grid;
+  gap: var(--grid-gap, var(--spacing-lg));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.grid > :nth-child(5n + 1),
+.grid > :nth-child(5n + 2) {
+  grid-column: span 3;
+}
+
+.grid > :nth-child(5n + 3),
+.grid > :nth-child(5n + 4),
+.grid > :nth-child(5n + 5) {
+  grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grid > :nth-child(n) {
+    grid-column: span 1;
+  }
+}
+
+.grid > * {
+  margin: 0;
+}

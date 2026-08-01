@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  as?: keyof HTMLElementTagNameMap;
+  gap?: string;
+}
+
+const { as: Tag = "div", gap, class: className, ...rest } = Astro.props;
+
+const style = {
+  ...(gap && { "--grid-gap": gap }),
+};
+---
+
+<Tag class:list={["grid", className]} style={style} {...rest}>
+  <slot />
+</Tag>
