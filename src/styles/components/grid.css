@@ -3,7 +3,6 @@
   display: grid;
   gap: var(--grid-gap, var(--spacing-lg));
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  align-items: start;
 }
 
 .grid > :nth-child(5n + 1),
