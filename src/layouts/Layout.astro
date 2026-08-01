@@ -39,10 +39,12 @@ const structuredData: JsonLd[] = [
     <SEO {...seo} jsonLd={structuredData} />
     <Clarity />
   </head>
-  <body class:list={["container", className]}>
-    <slot />
-    <Header hidden={Astro.url.pathname === "/"} />
+  <body>
     <QuickAccess />
-    <SpeedInsights />
+    <div class:list={["container", className]}>
+      <slot />
+      <Header hidden={Astro.url.pathname === "/"} />
+      <SpeedInsights />
+    </div>
   </body>
 </html>

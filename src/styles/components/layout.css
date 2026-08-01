@@ -1,9 +1,16 @@
+body {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  min-height: 100dvh;
+}
+
 .container {
   min-height: 100vh;
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
   padding: var(--spacing-5xl) var(--spacing-md);
+  min-width: 0;
 }
 
 .container--narrow {

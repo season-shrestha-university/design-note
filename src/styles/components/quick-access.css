@@ -1,9 +1,8 @@
 .sidebar {
-  position: fixed;
-  left: 0;
+  position: sticky;
   top: 0;
+  align-self: start;
   width: max-content;
-  z-index: 110;
   background-color: var(--surface);
   height: 100dvh;
   padding: var(--spacing-md);
