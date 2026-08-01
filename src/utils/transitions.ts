@@ -1,7 +1,7 @@
 const fadeUpAnimation = {
   old: {
     name: "fadeUpOut",
-    duration: "0.45s",
+    duration: "0s",
     easing: "ease-in",
     fillMode: "forwards",
   },

@@ -43,7 +43,7 @@ const structuredData: JsonLd[] = [
     <QuickAccess />
     <div class:list={["container", className]}>
       <slot />
-      <Header hidden={Astro.url.pathname === "/"} />
+      <Header hidden={!Astro.url.pathname.startsWith("/articles/")} />
       <SpeedInsights />
     </div>
   </body>
