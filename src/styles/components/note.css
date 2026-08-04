@@ -8,6 +8,26 @@
   margin-bottom: var(--spacing-3xl);
 }
 
+.note__subtitle:has(+ .note__thumbnail-media) {
+  margin-bottom: var(--spacing-lg);
+}
+
+.note__thumbnail-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-3xl);
+}
+
+.note__thumbnail {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .note__header {
   position: relative;
   overflow: hidden;
@@ -29,6 +49,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
+  padding-bottom: var(--spacing-2xl);
 }
 
 .note__takeaway__item {
@@ -58,7 +79,6 @@
 }
 
 .note__description {
-  margin-top: var(--spacing-2xl);
   margin-bottom: var(--spacing-3xl);
 }
 

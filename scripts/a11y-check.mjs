@@ -94,6 +94,45 @@ function printViolations(relativePath, violations) {
   }
 }
 
+/**
+ * Article pages should render a hero thumbnail with alt text after the excerpt.
+ * @param {string} filePath
+ * @param {string} html
+ */
+function checkArticleThumbnail(filePath, html) {
+  if (!filePath.includes(`${path.sep}articles${path.sep}`)) {
+    return [];
+  }
+
+  const dom = new JSDOM(html);
+  const { document } = dom.window;
+  /** @type {string[]} */
+  const errors = [];
+
+  const subtitle = document.querySelector(".note__subtitle");
+  const thumbnail = document.querySelector(".note__thumbnail");
+
+  if (!thumbnail) {
+    dom.window.close();
+    return errors;
+  }
+
+  const alt = thumbnail.getAttribute("alt");
+  if (alt == null || alt.trim() === "") {
+    errors.push("article hero thumbnail has empty alt text");
+  }
+  if (thumbnail.getAttribute("loading") === "lazy") {
+    errors.push("article hero thumbnail should not use loading=\"lazy\"");
+  }
+
+  if (subtitle && !subtitle.nextElementSibling?.classList.contains("note__thumbnail-media")) {
+    errors.push("thumbnail must immediately follow excerpt (.note__subtitle)");
+  }
+
+  dom.window.close();
+  return errors;
+}
+
 async function main() {
   const htmlRoot = findHtmlRoot();
   if (!htmlRoot) {
@@ -119,14 +158,29 @@ async function main() {
   for (const filePath of files) {
     const relativePath = path.relative(ROOT, filePath);
     try {
+      const html = fs.readFileSync(filePath, "utf8");
+      const thumbnailErrors = checkArticleThumbnail(filePath, html);
       const violations = await scanFile(filePath, htmlRoot);
-      if (violations.length === 0) {
+
+      if (thumbnailErrors.length === 0 && violations.length === 0) {
         console.log(`✓ ${relativePath}`);
         continue;
       }
+
       failedPages += 1;
-      totalViolations += violations.length;
-      printViolations(relativePath, violations);
+
+      if (thumbnailErrors.length > 0) {
+        totalViolations += thumbnailErrors.length;
+        console.error(`\n✖ ${relativePath}`);
+        for (const error of thumbnailErrors) {
+          console.error(`  [moderate] article-thumbnail: ${error}`);
+        }
+      }
+
+      if (violations.length > 0) {
+        totalViolations += violations.length;
+        printViolations(relativePath, violations);
+      }
     } catch (error) {
       failedPages += 1;
       console.error(`\n✖ ${relativePath}`);
