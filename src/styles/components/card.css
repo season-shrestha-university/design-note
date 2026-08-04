@@ -9,8 +9,8 @@
 }
 
 .card:hover {
-  box-shadow: 0 0 0 1px var(--primary-color);
   transform: scale(1.02);
+  background: #1a2024;
 }
 
 .card:hover .card__badge {
