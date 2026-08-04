@@ -69,6 +69,7 @@ const categoryIcons: Record<string, string> = {
           <a
             href={`/categories/${slug}/`}
             class="sidebar__item-link"
+            aria-label={formatCategoryLabel(slug)}
             aria-current={ariaCurrent(slug)}
           >
             <svg
