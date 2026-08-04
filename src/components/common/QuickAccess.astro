@@ -1,123 +1,95 @@
+---
+import { ARTICLE_CATEGORIES, formatCategoryLabel } from "@/utils";
+
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const ariaCurrent = (slug?: string) => {
+  if (!slug) return pathname === "/" ? "page" : undefined;
+  return pathname === `/categories/${slug}` ||
+    pathname.startsWith(`/articles/${slug}/`)
+    ? "page"
+    : undefined;
+};
+
+const categoryIcons: Record<string, string> = {
+  "user-research":
+    '<rect x="2" y="2" width="116" height="116" stroke="currentColor" stroke-width="4" data-fill="primary"/><rect x="27.5" y="27.5" width="60" height="60" stroke="currentColor" stroke-width="4" data-fill="accent"/>',
+  "user-experience":
+    '<circle cx="60" cy="60" r="58" stroke="currentColor" stroke-width="4" data-fill="primary"/><circle cx="60.2712" cy="60.2717" r="35.8371" stroke="currentColor" stroke-width="4" data-fill="accent"/>',
+  "user-interface":
+    '<circle cx="60" cy="60" r="58" stroke="currentColor" stroke-width="4" data-fill="accent"/>',
+  "interaction-design":
+    '<path d="M83.5395 29.3113L67.2736 100.729L17.5542 49.96L83.5395 29.3113Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round" data-fill="primary"/><ellipse cx="94.2209" cy="27.562" rx="25.779" ry="27.56" stroke="currentColor" stroke-width="4" data-fill="accent"/>',
+  "usability-testing":
+    '<rect x="2" y="2" width="48" height="116" rx="8" stroke="currentColor" stroke-width="4" data-fill="accent"/><rect x="70" y="2" width="48" height="116" rx="8" stroke="currentColor" stroke-width="4" data-fill="primary"/>',
+};
+---
+
 <nav class="sidebar" aria-label="Site navigation">
   <ul class="sidebar__list">
     <li class="sidebar__item">
-      <a href="/" aria-label="Home">
+      <a href="/" aria-label="Home" aria-current={ariaCurrent()}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
+          width="32"
+          height="32"
+          viewBox="0 0 512 512"
           fill="none"
-          aria-hidden="true"
-          ><path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M6.133 21C4.955 21 4 20.02 4 18.81v-8.802c0-.665.295-1.295.8-1.71l5.867-4.818a2.09 2.09 0 0 1 2.666 0l5.866 4.818c.506.415.801 1.045.801 1.71v8.802c0 1.21-.955 2.19-2.133 2.19z"
-          ></path><path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M9.5 21v-5.5a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2V21"></path></svg
         >
-      </a>
-    </li>
-    <li class="sidebar__item">
-      <a href="/categories/user-research/" class="sidebar__item-link">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="28"
-          viewBox="0 0 120 120"
-          fill="none"
-          aria-hidden="true"
-        >
-          <rect width="120" height="120" fill="#44694F"></rect>
-          <rect x="27.5" y="27.5" width="60" height="60" fill="#FFA329"></rect>
+          <rect
+            x="460"
+            y="52"
+            width="407"
+            height="407"
+            transform="rotate(90 460 52)"
+            stroke="#979D8A"
+            stroke-width="12"></rect>
+          <rect
+            x="256.536"
+            y="91.5006"
+            width="231.738"
+            height="231.97"
+            transform="rotate(45.0028 256.536 91.5006)"
+            stroke="#979D8A"
+            stroke-width="12"></rect>
+          <rect
+            x="324.714"
+            y="179.256"
+            width="144.64"
+            height="144.64"
+            rx="72.3199"
+            transform="rotate(87.1271 324.714 179.256)"
+            fill="#979D8A"></rect>
         </svg>
-        <span class="sidebar__item-title"
-          ><span>User</span><span>Research</span></span
-        >
       </a>
     </li>
-    <li class="sidebar__item">
-      <a href="/categories/user-experience/" class="sidebar__item-link">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="28"
-          viewBox="0 0 120 120"
-          fill="none"
-          aria-hidden="true"
-        >
-          <circle cx="60" cy="60" r="60" fill="#44694F"></circle>
-          <circle cx="60.2712" cy="60.2717" r="35.8371" fill="#FFA329"></circle>
-        </svg>
-        <span class="sidebar__item-title"
-          ><span>User</span><span>Experience</span></span
-        >
-      </a>
-    </li>
-    <li class="sidebar__item">
-      <a href="/categories/user-interface/" class="sidebar__item-link">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="28"
-          viewBox="0 0 120 120"
-          fill="none"
-          aria-hidden="true"
-        >
-          <circle cx="60" cy="60" r="60" fill="#FFA329"></circle>
-        </svg>
-        <span class="sidebar__item-title"
-          ><span>User</span><span>Interface</span></span
-        >
-      </a>
-    </li>
-    <li class="sidebar__item">
-      <a href="/categories/interaction-design/" class="sidebar__item-link">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="28"
-          viewBox="0 0 120 120"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M83.5395 29.3113L67.2736 100.729L17.5542 49.96L83.5395 29.3113Z"
-            fill="#44694F"></path>
-          <ellipse
-            cx="94.2209"
-            cy="27.562"
-            rx="25.779"
-            ry="27.56"
-            fill="#FFA329"></ellipse>
-        </svg>
-        <span class="sidebar__item-title"
-          ><span>Interaction</span><span>Design</span></span
-        >
-      </a>
-    </li>
-    <li class="sidebar__item">
-      <a href="/categories/usability-testing/" class="sidebar__item-link">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="28"
-          viewBox="0 0 120 120"
-          fill="none"
-          aria-hidden="true"
-        >
-          <rect width="52" height="120" rx="8" fill="#FFA329"></rect>
-          <rect x="68" width="52" height="120" rx="8" fill="#44694F"></rect>
-        </svg>
-        <span class="sidebar__item-title"
-          ><span>Usability</span><span>Testing</span></span
-        >
-      </a>
-    </li>
+    {
+      ARTICLE_CATEGORIES.map(({ slug }) => (
+        <li class="sidebar__item">
+          <a
+            href={`/categories/${slug}/`}
+            class="sidebar__item-link"
+            aria-current={ariaCurrent(slug)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 120 120"
+              fill="none"
+              aria-hidden="true"
+              set:html={categoryIcons[slug]}
+            />
+            <span class="sidebar__item-title">
+              {formatCategoryLabel(slug)
+                .split(" ")
+                .map((line) => (
+                  <span>{line}</span>
+                ))}
+            </span>
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </nav>
