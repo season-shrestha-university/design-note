@@ -11,10 +11,21 @@ interface Props {
   category: string;
   href: string;
   thumbnail?: ImageMetadata;
+  loading?: "lazy" | "eager";
+  fetchpriority?: "high";
 }
 
-const { title, excerpt, enableExcerpt, readTime, category, href, thumbnail } =
-  Astro.props;
+const {
+  title,
+  excerpt,
+  enableExcerpt,
+  readTime,
+  category,
+  href,
+  thumbnail,
+  loading = "lazy",
+  fetchpriority,
+} = Astro.props;
 
 const categoryLabel = formatCategoryLabel(category);
 const showExcerpt = enableExcerpt ?? true;
@@ -34,7 +45,8 @@ const iconSrc =
           widths={[640, 960, 1200, 1600]}
           sizes="(max-width: 768px) 100vw, 50vw"
           quality={85}
-          loading="lazy"
+          loading={loading}
+          fetchpriority={fetchpriority}
         />
       </div>
     )

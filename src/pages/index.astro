@@ -30,7 +30,7 @@ const articles = (await getCollection("articles")).sort((a, b) => {
     <!-- Articles -->
     <Grid as="section" gap="var(--spacing-xl)">
       {
-        articles.map((article) => (
+        articles.map((article, index) => (
           <Card
             title={article.data.title}
             excerpt={article.data.excerpt}
@@ -39,6 +39,8 @@ const articles = (await getCollection("articles")).sort((a, b) => {
             readTime={article.data.readTime}
             category={deriveCategory(article.id)}
             href={`/articles/${article.id}/`}
+            loading={index < 2 ? "eager" : "lazy"}
+            fetchpriority={index < 2 ? "high" : undefined}
           />
         ))
       }
