@@ -1,10 +1,10 @@
 import type { SearchResult } from "./types";
 
-export function stripMarkTags(text: string): string {
+function stripMarkTags(text: string): string {
   return text.replace(/<\/?mark>/gi, "");
 }
 
-export function escapeHtml(text: string): string {
+function escapeHtml(text: string): string {
   return text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -13,14 +13,11 @@ export function escapeHtml(text: string): string {
     .replace(/'/g, "&#39;");
 }
 
-export function isSafeUrl(url: string): boolean {
+function isSafeUrl(url: string): boolean {
   return url.startsWith("/") && !url.startsWith("//");
 }
 
-export function renderResultItem(
-  article: SearchResult,
-  isAI: boolean,
-): string {
+function renderResultItem(article: SearchResult, isAI: boolean): string {
   const rawTitle = isAI
     ? (article as { title: string }).title
     : (article as { meta?: { title: string } }).meta?.title;
@@ -39,10 +36,7 @@ export function renderResultItem(
   return `
     <li>
       <a href="${escapeHtml(url)}">
-        <h4>
-          <span>${escapeHtml(title)}</span>
-          ${isAI ? '<span class="ai-badge">AI</span>' : ""}
-        </h4>
+        <h4>${escapeHtml(title)}</h4>
         <p>${escapeHtml(excerpt)}</p>
       </a>
     </li>

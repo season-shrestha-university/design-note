@@ -2,7 +2,7 @@ import Fuse from "fuse.js";
 import { FUZZY_THRESHOLD, MAX_RESULTS } from "./constants";
 import type { SearchMetadata, PagefindResult } from "./types";
 
-export function createFuzzySearch(metadata: SearchMetadata[]) {
+function createFuzzySearch(metadata: SearchMetadata[]) {
   return new Fuse(metadata, {
     keys: [
       { name: "title", weight: 0.7 },
@@ -11,7 +11,6 @@ export function createFuzzySearch(metadata: SearchMetadata[]) {
     threshold: FUZZY_THRESHOLD,
     ignoreLocation: true,
     minMatchCharLength: 2,
-    includeScore: true,
     ignoreFieldNorm: true,
   });
 }

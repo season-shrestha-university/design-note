@@ -29,6 +29,18 @@
   fill: var(--fill);
 }
 
+.sidebar a:is(:hover, [aria-current="page"]) .icon-stroke-hover {
+  color: var(--icon-accent);
+}
+
+.sidebar
+  a:is(:hover, [aria-current="page"])
+  .icon-stroke-hover
+  :is(.icon-fill-primary, .icon-fill-accent) {
+  stroke: currentColor;
+  fill: none;
+}
+
 .sidebar {
   position: sticky;
   top: 0;
@@ -46,7 +58,7 @@
 }
 
 .sidebar__item:first-child {
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
 }
 
 .sidebar__item {
@@ -93,5 +105,12 @@
 
   .sidebar__item-title {
     display: none;
+  }
+}
+
+/* margin bottom only in larger screens */
+@media (min-width: 768px) {
+  .sidebar__item--search {
+    margin-bottom: var(--spacing-xl);
   }
 }

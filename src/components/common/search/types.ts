@@ -1,5 +1,4 @@
 export interface SearchMetadata {
-  id: string;
   title: string;
   excerpt: string;
   slug: string;

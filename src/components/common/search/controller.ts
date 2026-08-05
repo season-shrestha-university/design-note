@@ -5,7 +5,7 @@ import type { AiSearchResult, PagefindResult, SearchMetadata } from "./types";
 
 class AstroSearch extends HTMLElement {
   private input: HTMLInputElement | null = null;
-  private status: HTMLDivElement | null = null;
+  private resultsLabel: HTMLParagraphElement | null = null;
   private results: HTMLUListElement | null = null;
   private debounceTimer: number | undefined;
   private pagefind: any = null;
@@ -17,7 +17,7 @@ class AstroSearch extends HTMLElement {
 
   async connectedCallback() {
     this.input = this.querySelector(".search-input");
-    this.status = this.querySelector(".search-status");
+    this.resultsLabel = this.querySelector(".search-label");
     this.results = this.querySelector(".search-results");
 
     const metadataAttr = this.getAttribute("data-metadata");
@@ -71,7 +71,7 @@ class AstroSearch extends HTMLElement {
     const query = this.input?.value.trim() || "";
 
     if (query.length < MIN_QUERY_LENGTH) {
-      this.clearAll();
+      this.clearResults();
       return;
     }
 
@@ -85,7 +85,7 @@ class AstroSearch extends HTMLElement {
     const generation = ++this.searchGeneration;
     const isStale = () => generation !== this.searchGeneration;
 
-    this.updateStatus("Searching...");
+    this.setLabel("Searching...");
 
     await this.initPagefind();
     if (isStale()) return;
@@ -95,12 +95,12 @@ class AstroSearch extends HTMLElement {
       if (isStale()) return;
 
       if (search.results.length > 0) {
-        this.updateStatus(`Found ${search.results.length} matches`);
         const topResults = search.results.slice(0, MAX_RESULTS);
         const loadedResults = await Promise.all(
           topResults.map((result: any) => result.data()),
         );
         if (isStale()) return;
+        this.setLabel("Search results");
         this.renderResults(loadedResults, false);
         return;
       }
@@ -109,12 +109,10 @@ class AstroSearch extends HTMLElement {
     const localResults = searchLocalMetadata(this.metadata, query);
     if (isStale()) return;
     if (localResults.length > 0) {
-      this.updateStatus(`Found ${localResults.length} matches`);
+      this.setLabel("Search results");
       this.renderResults(localResults, false);
       return;
     }
-
-    this.updateStatus("No exact matches. Asking AI to find recommendations...");
 
     this.abortController = new AbortController();
     try {
@@ -125,45 +123,37 @@ class AstroSearch extends HTMLElement {
 
       const data = await res.json();
 
-      if (!res.ok) {
-        this.updateStatus(
-          res.status === 429
-            ? "Too many searches. Please try again later."
-            : "Search request failed.",
-        );
+      if (!res.ok || !Array.isArray(data) || data.length === 0) {
         this.clearResults();
         return;
       }
 
-      if (!Array.isArray(data) || data.length === 0) {
-        this.updateStatus("No articles found matching your query.");
-        this.clearResults();
-        return;
-      }
-
-      this.updateStatus("AI Recommendations:");
+      this.setLabel("Search results");
       this.renderResults(data as AiSearchResult[], true);
     } catch (error) {
       if (error instanceof DOMException && error.name === "AbortError") return;
       if (isStale()) return;
-      this.updateStatus("Search request failed.");
+      this.clearResults();
       console.error(error);
     } finally {
       this.abortController = null;
     }
   }
 
-  private updateStatus(text: string) {
-    if (this.status) this.status.innerText = text;
+  private setLabel(text: string | null) {
+    if (!this.resultsLabel) return;
+    if (text) {
+      this.resultsLabel.textContent = text;
+      this.resultsLabel.hidden = false;
+    } else {
+      this.resultsLabel.textContent = "";
+      this.resultsLabel.hidden = true;
+    }
   }
 
   private clearResults() {
     if (this.results) this.results.replaceChildren();
-  }
-
-  private clearAll() {
-    this.clearResults();
-    if (this.status) this.status.innerText = "";
+    this.setLabel(null);
   }
 
   private renderResults(

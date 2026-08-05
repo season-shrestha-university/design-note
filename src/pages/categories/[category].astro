@@ -52,6 +52,7 @@ const structuredData = [buildBreadcrumbJsonLd(breadcrumbItems, Astro.site)];
         {formatCategoryLabel(category)}
       </h1>
     </header>
+
     <Grid as="section" gap="var(--spacing-xl)">
       {
         categoryArticles.map((article, index) => (
