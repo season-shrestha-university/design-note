@@ -6,6 +6,9 @@ interface Props {
 }
 
 const { items } = Astro.props;
+
+const truncateLabel = (label: string, maxLength = 18) =>
+  label.length > maxLength ? `${label.slice(0, maxLength)}…` : label;
 ---
 
 <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -17,8 +20,13 @@ const { items } = Astro.props;
         return (
           <li class="breadcrumb__item">
             {isCurrent ? (
-              <span class="breadcrumb__current" aria-current="page">
-                {item.label}
+              <span
+                class="breadcrumb__current"
+                aria-current="page"
+                aria-label={item.label}
+                title={item.label}
+              >
+                {truncateLabel(item.label)}
               </span>
             ) : (
               <a class="breadcrumb__link" href={item.href}>
