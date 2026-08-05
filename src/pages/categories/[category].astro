@@ -3,10 +3,11 @@ import { getCollection } from "astro:content";
 
 import {
   CATEGORY_ICONS,
-  breadcrumbSchema,
+  buildBreadcrumbJsonLd,
   fadeUp,
   formatCategoryLabel,
 } from "@/utils";
+import Breadcrumb from "@components/ui/Breadcrumb.astro";
 import Card from "@components/ui/Card.astro";
 import Grid from "@components/ui/Grid.astro";
 import Layout from "@layouts/Layout.astro";
@@ -34,26 +35,20 @@ const categoryArticles = (
 
 const categoryLabel = formatCategoryLabel(category);
 const description = `Design notes on ${categoryLabel.toLowerCase()} — ${categoryArticles.length} browsable references on interface patterns and why they work.`;
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "Categories", href: "/categories/" },
+  { label: categoryLabel, href: `/categories/${category}/` },
+];
 
 const structuredData = [
-  breadcrumbSchema({
-    items: [
-      { name: "Home", url: new URL("/", Astro.site).toString() },
-      {
-        name: "Categories",
-        url: new URL("/categories/", Astro.site).toString(),
-      },
-      {
-        name: categoryLabel,
-        url: new URL(`/categories/${category}/`, Astro.site).toString(),
-      },
-    ],
-  }),
+  buildBreadcrumbJsonLd(breadcrumbItems, Astro.site),
 ];
 ---
 
 <Layout title={categoryLabel} description={description} jsonLd={structuredData}>
   <main transition:animate={fadeUp}>
+    <Breadcrumb items={breadcrumbItems} />
     <header class="category-title">
       <img src={CATEGORY_ICONS[category]} alt={formatCategoryLabel(category)} />
       <h1>

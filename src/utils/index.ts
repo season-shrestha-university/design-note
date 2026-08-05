@@ -19,3 +19,6 @@ export {
   breadcrumbSchema,
 } from "./seo";
 export type { JsonLd, SeoProps, SeoType } from "./seo";
+
+export { buildBreadcrumbJsonLd } from "./breadcrumb";
+export type { BreadcrumbItem } from "./breadcrumb";

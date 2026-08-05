@@ -1,0 +1,33 @@
+---
+import type { BreadcrumbItem } from "@/utils/breadcrumb";
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol class="breadcrumb__list">
+    {
+      items.map((item, index) => {
+        const isCurrent = index === items.length - 1;
+
+        return (
+          <li class="breadcrumb__item">
+            {isCurrent ? (
+              <span class="breadcrumb__current" aria-current="page">
+                {item.label}
+              </span>
+            ) : (
+              <a class="breadcrumb__link" href={item.href}>
+                {item.label}
+              </a>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>

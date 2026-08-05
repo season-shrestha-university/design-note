@@ -5,6 +5,7 @@
 @import "./components/card.css";
 @import "./components/quick-access.css";
 @import "./components/button.css";
+@import "./components/breadcrumb.css";
 @import "./components/note.css";
 @import "./components/transitions.css";
 @import "./components/scrollbar.css";
