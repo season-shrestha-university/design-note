@@ -13,15 +13,15 @@ const ariaCurrent = (slug?: string) => {
 
 const categoryIcons: Record<string, string> = {
   "user-research":
-    '<rect x="2" y="2" width="116" height="116" stroke="currentColor" stroke-width="4" data-fill="primary"/><rect x="27.5" y="27.5" width="60" height="60" stroke="currentColor" stroke-width="4" data-fill="accent"/>',
+    '<rect x="2" y="2" width="116" height="116" class="icon-fill-primary" stroke-width="4"/><rect x="27.5" y="27.5" width="60" height="60" class="icon-fill-accent" stroke-width="4"/>',
   "user-experience":
-    '<circle cx="60" cy="60" r="58" stroke="currentColor" stroke-width="4" data-fill="primary"/><circle cx="60.2712" cy="60.2717" r="35.8371" stroke="currentColor" stroke-width="4" data-fill="accent"/>',
+    '<circle cx="60" cy="60" r="58" class="icon-fill-primary" stroke-width="4"/><circle cx="60.2712" cy="60.2717" r="35.8371" class="icon-fill-accent" stroke-width="4"/>',
   "user-interface":
-    '<circle cx="60" cy="60" r="58" stroke="currentColor" stroke-width="4" data-fill="accent"/>',
+    '<circle cx="60" cy="60" r="58" class="icon-fill-accent" stroke-width="4"/>',
   "interaction-design":
-    '<path d="M83.5395 29.3113L67.2736 100.729L17.5542 49.96L83.5395 29.3113Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round" data-fill="primary"/><ellipse cx="94.2209" cy="27.562" rx="25.779" ry="27.56" stroke="currentColor" stroke-width="4" data-fill="accent"/>',
+    '<path d="M83.5395 29.3113L67.2736 100.729L17.5542 49.96L83.5395 29.3113Z" class="icon-fill-primary" stroke-width="4" stroke-linejoin="round"/><ellipse cx="94.2209" cy="27.562" rx="25.779" ry="27.56" class="icon-fill-accent" stroke-width="4"/>',
   "usability-testing":
-    '<rect x="2" y="2" width="48" height="116" rx="8" stroke="currentColor" stroke-width="4" data-fill="accent"/><rect x="70" y="2" width="48" height="116" rx="8" stroke="currentColor" stroke-width="4" data-fill="primary"/>',
+    '<rect x="2" y="2" width="48" height="116" rx="8" class="icon-fill-accent" stroke-width="4"/><rect x="70" y="2" width="48" height="116" rx="8" class="icon-fill-primary" stroke-width="4"/>',
 };
 ---
 
@@ -30,9 +30,10 @@ const categoryIcons: Record<string, string> = {
     <li class="sidebar__item">
       <a href="/" aria-label="Home" aria-current={ariaCurrent()}>
         <svg
+          class="icon"
           xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
+          width="28"
+          height="28"
           viewBox="0 0 512 512"
           fill="none"
         >
@@ -41,16 +42,16 @@ const categoryIcons: Record<string, string> = {
             y="52"
             width="407"
             height="407"
+            class="icon-fill-primary"
             transform="rotate(90 460 52)"
-            stroke="#979D8A"
             stroke-width="12"></rect>
           <rect
             x="256.536"
             y="91.5006"
             width="231.738"
             height="231.97"
+            class="icon-fill-accent"
             transform="rotate(45.0028 256.536 91.5006)"
-            stroke="#979D8A"
             stroke-width="12"></rect>
           <rect
             x="324.714"
@@ -58,8 +59,9 @@ const categoryIcons: Record<string, string> = {
             width="144.64"
             height="144.64"
             rx="72.3199"
+            class="icon-fill-accent"
             transform="rotate(87.1271 324.714 179.256)"
-            fill="#979D8A"></rect>
+            stroke-width="12"></rect>
         </svg>
       </a>
     </li>
@@ -73,6 +75,7 @@ const categoryIcons: Record<string, string> = {
             aria-current={ariaCurrent(slug)}
           >
             <svg
+              class="icon"
               xmlns="http://www.w3.org/2000/svg"
               width="28"
               height="28"

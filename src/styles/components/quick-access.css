@@ -1,8 +1,35 @@
-.sidebar {
-  --icon-stroke: #979d8a;
+.icon {
+  --icon-stroke: #9ca18f;
   --icon-primary: #44694f;
   --icon-accent: #ffa329;
+  color: var(--icon-stroke);
+}
 
+.icon-fill-primary,
+.icon-fill-accent {
+  fill: none;
+  stroke: currentColor;
+  transition:
+    fill 0.2s ease,
+    stroke 0.2s ease;
+}
+
+.icon-fill-primary {
+  --fill: var(--icon-primary);
+}
+
+.icon-fill-accent {
+  --fill: var(--icon-accent);
+}
+
+.sidebar
+  a:is(:hover, [aria-current="page"])
+  :is(.icon-fill-primary, .icon-fill-accent) {
+  stroke: none;
+  fill: var(--fill);
+}
+
+.sidebar {
   position: sticky;
   top: 0;
   align-self: start;
@@ -28,39 +55,6 @@
 
 .sidebar__item-link:is(:hover, [aria-current="page"]) {
   color: var(--primary-color);
-}
-
-.sidebar svg {
-  color: var(--icon-stroke);
-}
-
-.sidebar svg [data-fill] {
-  fill: none;
-  transition:
-    fill 0.2s ease,
-    stroke 0.2s ease;
-}
-
-.sidebar svg [data-fill="primary"] {
-  --fill: var(--icon-primary);
-}
-
-.sidebar svg [data-fill="accent"] {
-  --fill: var(--icon-accent);
-}
-
-.sidebar svg [data-fill="brand"] {
-  --fill: var(--icon-stroke);
-}
-
-.sidebar__item-link:is(:hover, [aria-current="page"])
-  svg
-  :is(rect, circle, path, ellipse) {
-  stroke: none;
-}
-
-.sidebar__item-link:is(:hover, [aria-current="page"]) svg [data-fill] {
-  fill: var(--fill);
 }
 
 .sidebar__item-title {
