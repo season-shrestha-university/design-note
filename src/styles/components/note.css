@@ -124,3 +124,26 @@
   opacity: 1;
   transform: translateX(0);
 }
+
+.note__content {
+  margin-inline: auto;
+  width: 100%;
+}
+
+.note__other-posts {
+  margin-top: var(--spacing-3xl);
+}
+
+.note__other-posts .grid {
+  margin-top: var(--spacing-xl);
+}
+
+@media (min-width: 768px) {
+  .note__other-posts .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .note__other-posts .grid > * {
+    grid-column: span 1;
+  }
+}

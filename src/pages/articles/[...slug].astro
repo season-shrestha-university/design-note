@@ -10,10 +10,13 @@ import {
   deriveCategory,
   fadeUp,
   formatCategoryLabel,
+  pickOtherPosts,
 } from "@/utils";
 import Breadcrumb from "@components/ui/Breadcrumb.astro";
+import Card from "@components/ui/Card.astro";
 import Figure from "@components/ui/Figure.astro";
 import FurtherReadingCard from "@components/ui/FurtherReadingCard.astro";
+import Grid from "@components/ui/Grid.astro";
 import Layout from "@layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -21,9 +24,13 @@ export async function getStaticPaths() {
 
   return articles.map((article) => ({
     params: { slug: article.id },
+    props: {
+      otherPosts: pickOtherPosts(articles, article.id),
+    },
   }));
 }
 
+const { otherPosts } = Astro.props;
 const slug = Astro.params.slug;
 const article = slug ? await getEntry("articles", slug) : undefined;
 
@@ -64,7 +71,6 @@ const structuredData = [
 ---
 
 <Layout
-  class="container--narrow"
   title={article.data.title}
   description={article.data.excerpt}
   type="article"
@@ -76,6 +82,7 @@ const structuredData = [
 >
   <div transition:animate={fadeUp}>
     <main>
+      <div class="note__content container--narrow">
       <Breadcrumb items={breadcrumbItems} />
       <header class="note__header">
         <h1 class="note__title">{article.data.title}</h1>
@@ -134,6 +141,30 @@ const structuredData = [
               ))}
             </ul>
           </>
+        )
+      }
+      </div>
+
+      {
+        otherPosts.length > 0 && (
+          <section class="note__other-posts" aria-labelledby="other-posts-heading">
+            <h2 id="other-posts-heading" class="note__further__reading__title">
+              Other posts
+            </h2>
+            <Grid gap="var(--spacing-xl)">
+              {otherPosts.map((post) => (
+                <Card
+                  title={post.data.title}
+                  excerpt={post.data.excerpt}
+                  enableExcerpt={false}
+                  thumbnail={post.data.thumbnail}
+                  readTime={post.data.readTime}
+                  category={deriveCategory(post.id)}
+                  href={`/articles/${post.id}/`}
+                />
+              ))}
+            </Grid>
+          </section>
         )
       }
     </main>
