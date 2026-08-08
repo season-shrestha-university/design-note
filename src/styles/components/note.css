@@ -96,6 +96,14 @@
   margin-top: var(--spacing-xl);
 }
 
+/* ── Poem ── */
+.note__poem p {
+  margin: 0;
+}
+.note__poem p + p {
+  margin-top: var(--spacing-md);
+}
+
 .note__further__reading__item {
   background: var(--surface);
   padding: var(--spacing-xl);
