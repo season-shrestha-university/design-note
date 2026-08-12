@@ -83,71 +83,74 @@ const structuredData = [
   <div transition:animate={fadeUp}>
     <main>
       <div class="note__content container--narrow">
-      <Breadcrumb items={breadcrumbItems} />
-      <header class="note__header">
-        <h1 class="note__title">{article.data.title}</h1>
-        <span class="note_category card__badge"
-          >{formatCategoryLabel(articleCategory)}</span
-        >
-        <p class="note__subtitle">{article.data.excerpt}</p>
+        <Breadcrumb items={breadcrumbItems} />
+        <header class="note__header">
+          <h1 class="note__title">{article.data.title}</h1>
+          <span class="note_category card__badge"
+            >{formatCategoryLabel(articleCategory)}</span
+          >
+          <p class="note__subtitle">{article.data.excerpt}</p>
+          {
+            article.data.thumbnail && (
+              <div class="note__thumbnail-media">
+                <Image
+                  class="note__thumbnail"
+                  src={article.data.thumbnail}
+                  alt={article.data.title}
+                  widths={[640, 960, 1200]}
+                  sizes="(max-width: 800px) 100vw, 800px"
+                  quality={85}
+                  loading="eager"
+                  fetchpriority="high"
+                />
+              </div>
+            )
+          }
+          <img class="note__visual" src={categoryIcon} alt="" />
+        </header>
         {
-          article.data.thumbnail && (
-            <div class="note__thumbnail-media">
-              <Image
-                class="note__thumbnail"
-                src={article.data.thumbnail}
-                alt={article.data.title}
-                widths={[640, 960, 1200]}
-                sizes="(max-width: 800px) 100vw, 800px"
-                quality={85}
-                loading="eager"
-                fetchpriority="high"
-              />
-            </div>
+          takeaways && takeaways.length > 0 && (
+            <ol class="note__takeaway">
+              {takeaways.map((takeaway, index) => (
+                <li class="note__takeaway__item">
+                  <span class="note__takeaway__number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <p>{takeaway}</p>
+                </li>
+              ))}
+            </ol>
           )
         }
-        <img class="note__visual" src={categoryIcon} alt="" />
-      </header>
-      {
-        takeaways && takeaways.length > 0 && (
-          <ol class="note__takeaway">
-            {takeaways.map((takeaway, index) => (
-              <li class="note__takeaway__item">
-                <span class="note__takeaway__number">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <p>{takeaway}</p>
-              </li>
-            ))}
-          </ol>
-        )
-      }
 
-      <div class="note__description">
-        <Content components={{ Figure }} />
-      </div>
+        <div class="note__description">
+          <Content components={{ Figure }} />
+        </div>
 
-      {
-        furtherReading && furtherReading.length > 0 && (
-          <>
-            <h2 class="note__further__reading__title">Further Reading</h2>
-            <ul class="note__further__reading__list">
-              {furtherReading.map((item) => (
-                <FurtherReadingCard
-                  title={item.title}
-                  subtitle={item.subtitle}
-                  href={item.link}
-                />
-              ))}
-            </ul>
-          </>
-        )
-      }
+        {
+          furtherReading && furtherReading.length > 0 && (
+            <>
+              <h2 class="note__further__reading__title">Further Reading</h2>
+              <ul class="note__further__reading__list">
+                {furtherReading.map((item) => (
+                  <FurtherReadingCard
+                    title={item.title}
+                    subtitle={item.subtitle}
+                    href={item.link}
+                  />
+                ))}
+              </ul>
+            </>
+          )
+        }
       </div>
 
       {
         otherPosts.length > 0 && (
-          <section class="note__other-posts" aria-labelledby="other-posts-heading">
+          <section
+            class="note__other-posts"
+            aria-labelledby="other-posts-heading"
+          >
             <h2 id="other-posts-heading" class="note__further__reading__title">
               Other posts
             </h2>
