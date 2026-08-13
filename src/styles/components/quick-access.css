@@ -29,6 +29,13 @@
   fill: var(--fill);
 }
 
+.sidebar__item:first-child
+  a:is(:hover, [aria-current="page"])
+  :is(.icon-fill-primary, .icon-fill-accent) {
+  stroke: var(--primary-color);
+  fill: none;
+}
+
 .sidebar a:is(:hover, [aria-current="page"]) .icon-stroke-hover {
   color: var(--icon-accent);
 }
@@ -63,6 +70,9 @@
 
 .sidebar__item {
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sidebar__item-link:is(:hover, [aria-current="page"]) {
