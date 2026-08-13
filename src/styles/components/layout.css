@@ -12,11 +12,17 @@ body {
 
 .container {
   min-height: 100vh;
-  max-width: 1200px;
+  max-width: 1300px;
   width: 100%;
   margin: 0 auto;
   padding: var(--spacing-3xl) var(--spacing-md);
   min-width: 0;
+}
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1500px;
+  }
 }
 
 .container--narrow {

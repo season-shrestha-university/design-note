@@ -28,7 +28,7 @@ const articles = (await getCollection("articles")).sort((a, b) => {
       </p>
     </header>
     <!-- Articles -->
-    <Grid as="section" gap="var(--spacing-xl)">
+    <Grid as="section" gap="var(--spacing-md)">
       {
         articles.map((article, index) => (
           <Card
