@@ -104,6 +104,7 @@
 }
 
 .note__highlight__text__q {
+  margin: 0;
   font-family: "IBM Plex Mono", monospace;
   font-size: var(--font-size-lg);
   font-weight: 700;
