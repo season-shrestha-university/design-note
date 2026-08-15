@@ -122,10 +122,13 @@ function checkArticleThumbnail(filePath, html) {
     errors.push("article hero thumbnail has empty alt text");
   }
   if (thumbnail.getAttribute("loading") === "lazy") {
-    errors.push("article hero thumbnail should not use loading=\"lazy\"");
+    errors.push('article hero thumbnail should not use loading="lazy"');
   }
 
-  if (subtitle && !subtitle.nextElementSibling?.classList.contains("note__thumbnail-media")) {
+  if (
+    subtitle &&
+    !subtitle.nextElementSibling?.classList.contains("note__thumbnail-media")
+  ) {
     errors.push("thumbnail must immediately follow excerpt (.note__subtitle)");
   }
 

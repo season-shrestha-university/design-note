@@ -118,6 +118,12 @@
   margin-bottom: var(--spacing-md);
 }
 
+.note__highlight__word {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
 .note__further__reading__title {
   font-size: var(--font-size-xl);
 }
