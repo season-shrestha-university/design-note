@@ -1,0 +1,28 @@
+.article-listen {
+  display: block;
+  margin-bottom: var(--spacing-lg);
+}
+
+.article-listen__button {
+  appearance: none;
+  border: 1px solid var(--primary-color);
+  border-radius: var(--border-radius);
+  background: transparent;
+  color: var(--primary-color);
+  font: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  padding: var(--spacing-sm) var(--spacing-md);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.article-listen__button:hover {
+  background: var(--primary-color);
+  color: var(--background);
+}
+
+.article-listen__button[aria-pressed="true"] {
+  background: var(--primary-color);
+  color: var(--background);
+}
