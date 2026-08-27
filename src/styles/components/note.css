@@ -1,3 +1,20 @@
+.note__reading-aids {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.note__readable {
+  --font-size-xs: calc(12px * var(--font-scale, 1));
+  --font-size-sm: calc(14px * var(--font-scale, 1));
+  --font-size-md: calc(clamp(16px, 2.5vw, 20px) * var(--font-scale, 1));
+  --font-size-lg: calc(clamp(20px, 3vw, 24px) * var(--font-scale, 1));
+  --font-size-xl: calc(clamp(24px, 4vw, 32px) * var(--font-scale, 1));
+  --font-size-2xl: calc(clamp(32px, 6vw, 48px) * var(--font-scale, 1));
+}
+
 .note__title {
   margin-bottom: var(--spacing-sm);
 }

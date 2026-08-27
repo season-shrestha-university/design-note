@@ -4,6 +4,10 @@ import QuickAccess from "@components/common/QuickAccess.astro";
 import Clarity from "@components/common/Clarity.astro";
 import SEO from "@components/common/SEO.astro";
 import { SITE, websiteSchema, type JsonLd, type SeoProps } from "@/utils";
+import {
+  TEXT_SIZE_SCALE_STEPS,
+  TEXT_SIZE_STORAGE_KEY,
+} from "@/utils/textSize";
 import "@fontsource/ibm-plex-sans/latin-400.css";
 import "@fontsource/ibm-plex-sans/latin-400-italic.css";
 import "@fontsource/ibm-plex-sans/latin-500.css";
@@ -34,6 +38,26 @@ const structuredData: JsonLd[] = [
     <ClientRouter />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      is:inline
+      define:vars={{
+        storageKey: TEXT_SIZE_STORAGE_KEY,
+        scaleSteps: TEXT_SIZE_SCALE_STEPS,
+      }}
+    >
+      try {
+        var step = localStorage.getItem(storageKey);
+        if (step !== null) {
+          var index = Number(step);
+          if (index >= 0 && index < scaleSteps.length) {
+            document.documentElement.style.setProperty(
+              "--font-scale",
+              String(scaleSteps[index]),
+            );
+          }
+        }
+      } catch (_) {}
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <SEO {...seo} jsonLd={structuredData} />

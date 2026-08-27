@@ -14,7 +14,7 @@ class ArticleListen extends HTMLElement {
       return;
     }
 
-    this.button = this.querySelector(".article-listen__button");
+    this.button = this.querySelector(".reading-aid__button");
     if (this.button) {
       this.button.addEventListener("click", this.boundHandleClick);
     }

@@ -1,0 +1,29 @@
+<text-size-control class="text-size-control">
+  <div class="text-size-control__group" role="group" aria-label="Text size">
+    <button
+      type="button"
+      class="reading-aid__button"
+      data-action="decrease"
+      aria-label="Decrease text size">A−</button
+    >
+    <button
+      type="button"
+      class="reading-aid__button"
+      data-action="reset"
+      aria-label="Reset text size">Reset</button
+    >
+    <button
+      type="button"
+      class="reading-aid__button"
+      data-action="increase"
+      aria-label="Increase text size">A+</button
+    >
+  </div>
+  <p class="visually-hidden" aria-live="polite" data-status></p>
+</text-size-control>
+
+<script>
+  import { registerTextSizeControlElement } from "./controller";
+
+  registerTextSizeControlElement();
+</script>
