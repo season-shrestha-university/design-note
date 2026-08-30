@@ -103,6 +103,21 @@
   margin-top: var(--spacing-lg);
 }
 
+.note__description ul {
+  margin-block: var(--spacing-lg);
+  padding-left: 1.25em;
+  list-style: disc;
+}
+
+.note__description li {
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+}
+
+.note__description li + li {
+  margin-top: var(--spacing-sm);
+}
+
 .note__description :is(h2, h3) {
   margin-top: var(--spacing-2xl);
   margin-bottom: var(--spacing-lg);
