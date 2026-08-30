@@ -1,0 +1,70 @@
+---
+title: "Performance Is a Design Decision"
+excerpt: We obsess over pixel-perfect layouts and complex animations, but if a page takes three seconds to load, the user will leave before they ever see it. Speed is a UX fundamental.
+publishedAt: "2026-09-10"
+readTime: 3m
+thumbnail: ../../../assets/images/interaction-design/performance-is-design-decision/thumbnail.webp
+enableExcerpt: false
+
+takeaways:
+  - "The Doherty Threshold dictates that system response times under 400ms keep users in a productive state of flow."
+  - "High-resolution images and heavy animations look incredible on a design canvas but can completely cripple a mobile experience."
+  - "Managing 'perceived performance' through skeleton screens and optimistic UI is a core interaction mechanic, not just an engineering task."
+
+furtherReading:
+  - title: "Doherty Threshold"
+    subtitle: "Jon Yablonski (Laws of UX)"
+    link: "https://lawsofux.com/doherty-threshold/"
+  - title: "Response Times: The 3 Important Limits"
+    subtitle: "Jakob Nielsen (Nielsen Norman Group)"
+    link: "https://www.nngroup.com/articles/response-times-3-important-limits/"
+  - title: "Why Performance Matters: The Perception Of Time"
+    subtitle: "Smashing Magazine"
+    link: "https://www.smashingmagazine.com/2015/09/why-performance-matters-the-perception-of-time/"
+  - title: "Core Web Vitals: Designing for Performance"
+    subtitle: "Google Web.dev Team"
+    link: "https://web.dev/articles/vitals"
+---
+
+When crafting an interface, it is easy to assume that "performance" is strictly a developer's problem. As designers, we want to include full-bleed hero images, intricate micro-interactions, and custom web fonts to make the experience feel premium.
+
+In a design tool, everything loads instantly. But out in the world, your user might be on a spotty 3G connection on a crowded train.
+
+If your page takes four seconds to render because of heavy assets, the user's cognitive flow breaks. They become frustrated and leave. Before a design can be beautiful, it has to be fast.
+
+## The Doherty Threshold and the state of flow
+
+In the 1980s, IBM researchers discovered a principle that still governs digital product design today: the **Doherty Threshold**.
+
+They found that when a computer and its user interact at a pace of under 400 milliseconds, neither has to wait on the other. This creates a state of psychological "flow." The moment a system takes longer than that to respond, the user's attention wanders.
+
+Usability limits define this even more strictly:
+
+- **0.1 seconds:** Feels instantaneous.
+- **1.0 second:** The user notices a delay, but their train of thought stays unbroken.
+- **Over 3 seconds:** The user starts to abandon the task.
+
+When a designer demands five heavy custom font weights or unoptimized 4K imagery, they are directly contributing to the breaking of that flow state.
+
+## Perceived performance vs. actual performance
+
+Sometimes, wait times are unavoidable like fetching a large set of search results from a database. This is where design steps in to manage **perceived performance**.
+
+How fast a page _actually_ loads is technical. How fast it _feels_ is design.
+
+- **Skeleton Screens:** Instead of showing a blank white page or a spinning wheel, show a low-fidelity wireframe of the layout that pulses gently. This tells the brain that the structure is already there and data is arriving, making the wait feel much shorter.
+- **Optimistic UI:** When a user clicks a "Like" button or saves a note, do not make them wait for the server to confirm it. Immediately show the button in its active state. If the request fails in the background, you can gently revert it and show an error but most of the time, the user experiences zero latency.
+
+<span class="note__highlight__word">
+  A slow interface is a broken interface, no matter how beautiful it is.
+</span>
+
+## Bridging the gap with engineering
+
+Great interaction mechanics happen when design and development overlap. You can protect your user's time before a single line of code is written:
+
+- **Audit your assets:** Ask yourself if that heavy background video is genuinely adding value, or if a highly optimized static image would achieve the same emotional impact.
+- **Design fallback states:** Web fonts can take a moment to load. Choose standard system fonts (like Arial or sans-serif) that closely match your brand font's vertical metrics so the layout does not violently shift when the custom font finally kicks in.
+- **Keep animations snappy:** If you are designing hover states or page transitions, keep the duration under 300ms. Anything slower makes the interface feel sluggish rather than smooth.
+
+Respecting a user's time is the highest form of digital empathy. When you treat speed as a core design feature, you build products that people actually want to come back to.
