@@ -10,7 +10,7 @@
 
 .card:hover {
   transform: scale(1.02);
-  background: #1a2024;
+  background: var(--surface-hover);
 }
 
 .card:hover .card__badge {

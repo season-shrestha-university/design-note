@@ -10,5 +10,6 @@
 @import "./components/note.css";
 @import "./components/reading-aids.css";
 @import "./components/text-size.css";
+@import "./components/theme-switcher.css";
 @import "./components/transitions.css";
 @import "./components/scrollbar.css";

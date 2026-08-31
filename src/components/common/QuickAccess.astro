@@ -1,4 +1,5 @@
 ---
+import ThemeSwitcher from "@components/common/theme/ThemeSwitcher.astro";
 import { ARTICLE_CATEGORIES, formatCategoryLabel } from "@/utils";
 
 const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
@@ -120,5 +121,8 @@ const categoryIcons: Record<string, string> = {
         </li>
       ))
     }
+    <li class="sidebar__item sidebar__item--theme">
+      <ThemeSwitcher />
+    </li>
   </ul>
 </nav>

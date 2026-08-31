@@ -4,10 +4,7 @@ import QuickAccess from "@components/common/QuickAccess.astro";
 import Clarity from "@components/common/Clarity.astro";
 import SEO from "@components/common/SEO.astro";
 import { SITE, websiteSchema, type JsonLd, type SeoProps } from "@/utils";
-import {
-  TEXT_SIZE_SCALE_STEPS,
-  TEXT_SIZE_STORAGE_KEY,
-} from "@/utils/textSize";
+import { TEXT_SIZE_SCALE_STEPS, TEXT_SIZE_STORAGE_KEY } from "@/utils/textSize";
 import "@fontsource/ibm-plex-sans/latin-400.css";
 import "@fontsource/ibm-plex-sans/latin-400-italic.css";
 import "@fontsource/ibm-plex-sans/latin-500.css";
@@ -33,7 +30,12 @@ const structuredData: JsonLd[] = [
 ---
 
 <!doctype html>
-<html lang={SITE.lang} transition:name="root" transition:animate="none">
+<html
+  lang={SITE.lang}
+  data-theme="light"
+  transition:name="root"
+  transition:animate="none"
+>
   <head>
     <ClientRouter />
     <meta charset="UTF-8" />
@@ -55,6 +57,13 @@ const structuredData: JsonLd[] = [
               String(scaleSteps[index]),
             );
           }
+        }
+      } catch (_) {}
+
+      try {
+        var theme = localStorage.getItem("theme");
+        if (theme === "light" || theme === "dark") {
+          document.documentElement.setAttribute("data-theme", theme);
         }
       } catch (_) {}
     </script>
