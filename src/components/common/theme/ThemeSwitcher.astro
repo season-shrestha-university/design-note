@@ -1,4 +1,9 @@
-<button type="button" class="theme-toggle" aria-label="Switch to dark mode">
+---
+const lightLabel = "Switch to dark mode";
+const darkLabel = "Switch to light mode";
+---
+
+<button type="button" class="theme-toggle" aria-label={darkLabel}>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -39,47 +44,91 @@
   </svg>
 </button>
 
+<script is:inline define:vars={{ lightLabel, darkLabel }}>
+  (function () {
+    var button = document.querySelector(".theme-toggle");
+    if (!button) return;
+    var theme = document.documentElement.getAttribute("data-theme");
+    button.setAttribute(
+      "aria-label",
+      theme === "dark" ? darkLabel : lightLabel,
+    );
+  })();
+</script>
+
 <script>
   const THEME_KEY = "theme";
+  let listenersBound = false;
 
-  function currentTheme() {
-    return document.documentElement.getAttribute("data-theme") === "dark"
-      ? "dark"
-      : "light";
+  type Theme = "light" | "dark";
+
+  function parseTheme(value: string | null): Theme | null {
+    return value === "light" || value === "dark" ? value : null;
   }
 
-  function applyTheme(theme: string, button: HTMLButtonElement | null) {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem(THEME_KEY, theme);
-    button?.setAttribute(
-      "aria-label",
-      theme === "dark" ? "Switch to light mode" : "Switch to dark mode",
+  function currentTheme(): Theme {
+    return (
+      parseTheme(document.documentElement.getAttribute("data-theme")) ?? "dark"
     );
   }
 
-  function bindToggle() {
-    const button = document.querySelector<HTMLButtonElement>(".theme-toggle");
-    if (!button || button.dataset.bound === "true") return;
-
-    button.dataset.bound = "true";
-    const stored = localStorage.getItem(THEME_KEY);
-    applyTheme(
-      stored === "dark" || stored === "light" ? stored : currentTheme(),
-      button,
-    );
-
-    button.addEventListener("click", () => {
-      applyTheme(currentTheme() === "dark" ? "light" : "dark", button);
-    });
+  function themeToggleLabel(theme: Theme): string {
+    return theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
   }
 
-  document.addEventListener("astro:before-swap", (event) => {
-    const theme = localStorage.getItem(THEME_KEY);
-    if (theme === "light" || theme === "dark") {
-      event.newDocument.documentElement.setAttribute("data-theme", theme);
+  function readStoredTheme(): Theme | null {
+    try {
+      return parseTheme(localStorage.getItem(THEME_KEY));
+    } catch {
+      return null;
     }
-  });
+  }
 
-  bindToggle();
-  document.addEventListener("astro:after-swap", bindToggle);
+  function persistTheme(theme: Theme): void {
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch {
+      // localStorage unavailable (private browsing, etc.)
+    }
+  }
+
+  function applyTheme(theme: Theme, button?: HTMLButtonElement | null): void {
+    document.documentElement.setAttribute("data-theme", theme);
+    persistTheme(theme);
+
+    const toggle =
+      button ?? document.querySelector<HTMLButtonElement>(".theme-toggle");
+    toggle?.setAttribute("aria-label", themeToggleLabel(theme));
+  }
+
+  function syncToggle(): void {
+    const button = document.querySelector<HTMLButtonElement>(".theme-toggle");
+    const theme = readStoredTheme() ?? currentTheme();
+    document.documentElement.setAttribute("data-theme", theme);
+    button?.setAttribute("aria-label", themeToggleLabel(theme));
+  }
+
+  function initThemeToggle(): void {
+    if (!listenersBound) {
+      listenersBound = true;
+
+      document.addEventListener("click", (event) => {
+        const button = (event.target as Element).closest(".theme-toggle");
+        if (!(button instanceof HTMLButtonElement)) return;
+
+        applyTheme(currentTheme() === "dark" ? "light" : "dark", button);
+      });
+
+      document.addEventListener("astro:before-swap", (event) => {
+        const theme = readStoredTheme() ?? currentTheme();
+        event.newDocument.documentElement.setAttribute("data-theme", theme);
+      });
+
+      document.addEventListener("astro:after-swap", syncToggle);
+    }
+
+    syncToggle();
+  }
+
+  initThemeToggle();
 </script>

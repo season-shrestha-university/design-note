@@ -20,17 +20,6 @@
 }
 
 :root,
-[data-theme="light"] {
-  --background: #e2ccad;
-  --surface: #f1debd;
-  --surface-hover: #ded3c0;
-  --text-color: #1f2949;
-  --primary-color: #1f2949;
-  color-scheme: light;
-}
-
-/* Dark theme remains exactly the same */
-
 [data-theme="dark"] {
   --background: #040f13;
   --primary-color: #ffa329;
@@ -38,4 +27,13 @@
   --surface: #121719;
   --surface-hover: #1a2024;
   color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --background: #e2ccad;
+  --surface: #f1debd;
+  --surface-hover: #ded3c0;
+  --text-color: #1f2949;
+  --primary-color: #1f2949;
+  color-scheme: light;
 }

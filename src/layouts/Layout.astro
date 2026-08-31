@@ -22,6 +22,8 @@ interface Props extends SeoProps {
 
 const { class: className, jsonLd, ...seo } = Astro.props;
 
+const THEME_STORAGE_KEY = "theme";
+
 // Every page carries the WebSite schema; pages may append their own (Article, Breadcrumb).
 const structuredData: JsonLd[] = [
   websiteSchema({ site: Astro.site }),
@@ -32,7 +34,7 @@ const structuredData: JsonLd[] = [
 <!doctype html>
 <html
   lang={SITE.lang}
-  data-theme="light"
+  data-theme="dark"
   transition:name="root"
   transition:animate="none"
 >
@@ -45,6 +47,7 @@ const structuredData: JsonLd[] = [
       define:vars={{
         storageKey: TEXT_SIZE_STORAGE_KEY,
         scaleSteps: TEXT_SIZE_SCALE_STEPS,
+        themeKey: THEME_STORAGE_KEY,
       }}
     >
       try {
@@ -61,7 +64,7 @@ const structuredData: JsonLd[] = [
       } catch (_) {}
 
       try {
-        var theme = localStorage.getItem("theme");
+        var theme = localStorage.getItem(themeKey);
         if (theme === "light" || theme === "dark") {
           document.documentElement.setAttribute("data-theme", theme);
         }
