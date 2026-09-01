@@ -27,49 +27,47 @@ const categoryIcons: Record<string, string> = {
 ---
 
 <nav class="sidebar" aria-label="Site navigation">
-  <ul class="sidebar__list">
-    <li class="sidebar__item">
-      <a href="/" aria-label="Home" aria-current={ariaCurrent()}>
-        <svg
-          class="icon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="40"
-          height="40"
-          viewBox="0 0 512 512"
-          fill="none"
-        >
-          <rect
-            x="460"
-            y="52"
-            width="407"
-            height="407"
-            class="icon-fill-primary"
-            transform="rotate(90 460 52)"
-            stroke-width="20"></rect>
-          <rect
-            x="256.536"
-            y="91.5006"
-            width="231.738"
-            height="231.97"
-            class="icon-fill-accent"
-            transform="rotate(45.0028 256.536 91.5006)"
-            stroke-width="20"></rect>
-          <rect
-            x="324.714"
-            y="179.256"
-            width="144.64"
-            height="144.64"
-            rx="72.3199"
-            class="icon-fill-accent"
-            transform="rotate(87.1271 324.714 179.256)"
-            stroke-width="20"></rect>
-        </svg>
-      </a>
-    </li>
-    <li class="sidebar__item sidebar__item--search">
+  <div class="sidebar__toolbar">
+    <a href="/" class="sidebar__logo" aria-label="Home" aria-current={ariaCurrent()}>
+      <svg
+        class="icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="40"
+        viewBox="0 0 512 512"
+        fill="none"
+      >
+        <rect
+          x="460"
+          y="52"
+          width="407"
+          height="407"
+          class="icon-fill-primary"
+          transform="rotate(90 460 52)"
+          stroke-width="20"></rect>
+        <rect
+          x="256.536"
+          y="91.5006"
+          width="231.738"
+          height="231.97"
+          class="icon-fill-accent"
+          transform="rotate(45.0028 256.536 91.5006)"
+          stroke-width="20"></rect>
+        <rect
+          x="324.714"
+          y="179.256"
+          width="144.64"
+          height="144.64"
+          rx="72.3199"
+          class="icon-fill-accent"
+          transform="rotate(87.1271 324.714 179.256)"
+          stroke-width="20"></rect>
+      </svg>
+    </a>
+    <div class="sidebar__toolbar-actions">
       <a
         href="/search/"
-        class="sidebar__item-link sidebar__action"
+        class="sidebar__item-link sidebar__action sidebar__item--search"
         aria-label="Search"
         aria-current={pathname === "/search" ? "page" : undefined}
       >
@@ -90,7 +88,13 @@ const categoryIcons: Record<string, string> = {
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
       </a>
-    </li>
+      <div class="sidebar__theme sidebar__theme--mobile">
+        <ThemeSwitcher />
+      </div>
+    </div>
+  </div>
+
+  <ul class="sidebar__list sidebar__categories">
     {
       ARTICLE_CATEGORIES.map(({ slug }) => (
         <li class="sidebar__item">
@@ -121,8 +125,9 @@ const categoryIcons: Record<string, string> = {
         </li>
       ))
     }
-    <li class="sidebar__item sidebar__item--theme">
-      <ThemeSwitcher />
-    </li>
   </ul>
+
+  <div class="sidebar__theme sidebar__theme--desktop">
+    <ThemeSwitcher />
+  </div>
 </nav>

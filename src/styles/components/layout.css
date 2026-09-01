@@ -7,6 +7,13 @@ body {
 @media (max-width: 768px) {
   body {
     grid-template-columns: 1fr;
+    padding-top: calc(var(--mobile-nav-top) + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(
+      var(--mobile-nav-bottom) + env(safe-area-inset-bottom, 0px)
+    );
+    scroll-padding-top: calc(
+      var(--mobile-nav-top) + env(safe-area-inset-top, 0px)
+    );
   }
 }
 
