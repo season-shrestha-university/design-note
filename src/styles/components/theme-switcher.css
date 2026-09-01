@@ -1,9 +1,5 @@
 .theme-toggle {
-  display: grid;
-  place-items: center;
-  padding: var(--spacing-xs);
   border: 0;
-  background: transparent;
   color: var(--text-color);
   cursor: pointer;
 }
