@@ -9,3 +9,7 @@
   margin-top: var(--spacing-md);
   margin-bottom: var(--spacing-3xl);
 }
+
+.inline-link {
+  margin-inline: var(--spacing-xs);
+}

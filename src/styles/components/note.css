@@ -175,22 +175,28 @@
 }
 
 .note__further__reading__item {
-  background: var(--surface);
+  border-radius: var(--border-radius);
+}
+
+.note__further__reading__item a {
+  display: block;
+  position: relative;
   padding: var(--spacing-xl);
+  background: var(--surface);
   border-radius: var(--border-radius);
   transition: all 0.2s ease;
-  cursor: pointer;
-  position: relative;
 }
-.note__further__reading__item:hover {
-  box-shadow: 0 0 0 1px var(--primary-color);
+
+.note__further__reading__item a:is(:hover, :focus-visible) {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--primary-color);
 }
 
 .note__further__reading__item__title {
   margin-bottom: var(--spacing-xs);
 }
 
-.note__further__reading__item svg {
+.note__further__reading__item a svg {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -198,7 +204,8 @@
   transform: translateX(-10px);
   transition: all 0.2s ease;
 }
-.note__further__reading__item:hover svg {
+
+.note__further__reading__item a:is(:hover, :focus-visible) svg {
   opacity: 1;
   transform: translateX(0);
 }

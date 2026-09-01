@@ -1,5 +1,4 @@
 ---
-import Footer from "@components/common/Footer.astro";
 import Search from "@components/common/search/Search.astro";
 import Layout from "@layouts/Layout.astro";
 import { fadeUp } from "@/utils";
@@ -9,8 +8,7 @@ import { fadeUp } from "@/utils";
   title="Search"
   description="Search design notes on UX, UI, interaction design, and usability testing."
 >
-  <main transition:animate={fadeUp}>
+  <main id="main-content" tabindex="-1" transition:animate={fadeUp}>
     <Search />
   </main>
-  <Footer />
 </Layout>

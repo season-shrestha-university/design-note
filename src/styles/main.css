@@ -1,9 +1,12 @@
 @import "./components/base.css";
+@import "./components/focus.css";
 @import "./components/layout.css";
 @import "./components/grid.css";
 @import "./components/typography.css";
 @import "./components/card.css";
 @import "./components/quick-access.css";
+@import "./components/skip-link.css";
+@import "./components/footer.css";
 @import "./components/search.css";
 @import "./components/button.css";
 @import "./components/breadcrumb.css";

@@ -1,5 +1,6 @@
 ---
 import Header from "@/components/common/Header.astro";
+import Footer from "@components/common/Footer.astro";
 import QuickAccess from "@components/common/QuickAccess.astro";
 import Clarity from "@components/common/Clarity.astro";
 import SEO from "@components/common/SEO.astro";
@@ -76,9 +77,11 @@ const structuredData: JsonLd[] = [
     <Clarity />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <QuickAccess />
     <div class:list={["container", className]}>
       <slot />
+      <Footer />
       <Header hidden={!Astro.url.pathname.startsWith("/articles/")} />
       <SpeedInsights />
     </div>

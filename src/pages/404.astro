@@ -1,5 +1,4 @@
 ---
-import Footer from "@/components/common/Footer.astro";
 import Layout from "@/layouts/Layout.astro";
 import { fadeUp } from "@/utils";
 ---
@@ -8,7 +7,7 @@ import { fadeUp } from "@/utils";
   title="Page not found"
   description="The page you're looking for doesn't exist or may have been moved."
 >
-  <main transition:animate={fadeUp}>
+  <main id="main-content" tabindex="-1" transition:animate={fadeUp}>
     <header class="page-header">
       <div>
         <h1 class="page-title">404</h1>
@@ -16,5 +15,4 @@ import { fadeUp } from "@/utils";
       </div>
     </header>
   </main>
-  <Footer />
 </Layout>

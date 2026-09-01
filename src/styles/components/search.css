@@ -12,11 +12,10 @@
   color: inherit;
   font-family: inherit;
   font-size: var(--font-size-md);
-  outline: none;
   transition: border-color 0.2s ease;
 }
 
-.search-input:focus {
+.search-input:focus-visible {
   border-color: var(--primary-color);
 }
 
@@ -39,7 +38,8 @@
   transition: all 0.2s ease;
 }
 
-.search-results li:hover {
+.search-results li:hover,
+.search-results li:has(a:focus-visible) {
   transform: translateX(4px);
   border-color: var(--primary-color);
 }

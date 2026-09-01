@@ -44,7 +44,7 @@ const structuredData = [buildBreadcrumbJsonLd(breadcrumbItems, Astro.site)];
 ---
 
 <Layout title={categoryLabel} description={description} jsonLd={structuredData}>
-  <main transition:animate={fadeUp}>
+  <main id="main-content" tabindex="-1" transition:animate={fadeUp}>
     <Breadcrumb items={breadcrumbItems} />
     <header class="category-title">
       <img src={CATEGORY_ICONS[category]} alt={formatCategoryLabel(category)} />

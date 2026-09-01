@@ -1,0 +1,121 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { fadeUp } from "@/utils";
+
+const lastReviewed = new Date("2026-09-01").toLocaleDateString("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<Layout
+  title="Accessibility statement"
+  description="How Design Note is built to be readable and usable by as many people as possible, and where it still falls short."
+>
+  <main id="main-content" tabindex="-1" transition:animate={fadeUp}>
+    <div class="note__content container--narrow">
+      <header class="note__header">
+        <h1 class="note__title page-title">Accessibility statement</h1>
+        <p class="note__subtitle">
+          Design Note is written for people who are new to design, so it should
+          be readable and usable by as many people as possible.
+        </p>
+      </header>
+
+      <div class="note__description">
+        <h2>What this site does</h2>
+        <ul>
+          <li>
+            Pages are built from semantic HTML, so headings, lists and landmarks
+            make sense to screen readers.
+          </li>
+          <li>
+            Navigation, search, and every control can be reached with a keyboard
+            alone.
+          </li>
+          <li>
+            A skip-to-content link is the first tab stop, so keyboard users can
+            jump past the site navigation.
+          </li>
+          <li>
+            Text size can be increased on articles without breaking the layout,
+            and the site also responds to browser zoom up to 200%.
+          </li>
+          <li>
+            A visible focus indicator appears on links, buttons, cards, and form
+            fields as you move through the page with a keyboard.
+          </li>
+          <li>
+            A light and a dark theme are both available, and the site remembers
+            your choice.
+          </li>
+          <li>
+            Articles can be listened to as spoken audio for anyone who prefers
+            or needs to read that way.
+          </li>
+          <li>
+            Images that carry meaning have alternative text; decorative images
+            are hidden from assistive technology.
+          </li>
+        </ul>
+
+        <h2>How accessible this site is</h2>
+        <p>
+          Design Note aims to meet the
+          <a
+            class="accessibility__link inline-link"
+            href="https://www.w3.org/WAI/WCAG22/quickref/"
+            rel="noopener noreferrer"
+            target="_blank">WCAG 2.2 AA</a
+          > standard. Most of the site meets it, but some parts are still being improved:
+        </p>
+        <ul>
+          <li>
+            Some illustrations inside articles have short alternative text that
+            does not fully describe the diagram.
+          </li>
+          <li>
+            The spoken-article feature depends on the voices installed on your
+            device, so pronunciation and quality vary.
+          </li>
+        </ul>
+
+        <h2>Telling me about a problem</h2>
+        <p>
+          If something on this site is hard to read, hard to reach, or does not
+          work with the assistive technology you use, I would like to know.
+        </p>
+        <p>
+          Email
+          <a
+            class="accessibility__link inline-link"
+            href="mailto:czon.herald75@gmail.com">czon.herald75@gmail.com</a
+          > any report helps, even a short one, and I will do my best to fix the issue
+          or offer the content another way.
+        </p>
+
+        <h2>About this statement</h2>
+        <p>
+          This statement applies to Design Note. It was last reviewed on {
+            lastReviewed
+          }, and is based on my own testing with a keyboard, browser zoom, and a
+          screen reader rather than a formal external audit.
+        </p>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .accessibility__link {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+  }
+
+  .accessibility__link:hover,
+  .accessibility__link:focus-visible {
+    color: var(--primary-color);
+  }
+</style>

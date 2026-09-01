@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 
 import { deriveCategory, fadeUp } from "@/utils";
-import Footer from "@components/common/Footer.astro";
 import Card from "@components/ui/Card.astro";
 import Grid from "@components/ui/Grid.astro";
 import Layout from "@layouts/Layout.astro";
@@ -18,7 +17,7 @@ const articles = (await getCollection("articles")).sort((a, b) => {
 <Layout
   description="A beginner-friendly collection of short articles that introduces UX and UI design concepts"
 >
-  <main transition:animate={fadeUp}>
+  <main id="main-content" tabindex="-1" transition:animate={fadeUp}>
     <!-- Header -->
     <header class="page-header">
       <h1 class="page-title">Design Note</h1>
@@ -46,5 +45,4 @@ const articles = (await getCollection("articles")).sort((a, b) => {
       }
     </Grid>
   </main>
-  <Footer />
 </Layout>
