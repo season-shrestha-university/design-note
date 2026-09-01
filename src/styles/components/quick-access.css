@@ -215,6 +215,32 @@
   .sidebar__theme--desktop {
     display: none;
   }
+  .sidebar__toolbar {
+    view-transition-name: sidebar-toolbar;
+  }
+
+  .sidebar__categories {
+    view-transition-name: sidebar-categories;
+  }
+
+  ::view-transition-group(sidebar-toolbar),
+  ::view-transition-group(sidebar-categories) {
+    animation: none;
+    z-index: 1;
+  }
+
+  ::view-transition-old(sidebar-toolbar),
+  ::view-transition-old(sidebar-categories) {
+    animation: none;
+    opacity: 0;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-new(sidebar-toolbar),
+  ::view-transition-new(sidebar-categories) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
 }
 
 @media (min-width: 769px) {
