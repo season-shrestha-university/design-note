@@ -12,17 +12,19 @@ const ariaCurrent = (slug?: string) => {
     : undefined;
 };
 
+// Drawn on a 28-unit grid so the viewBox maps 1:1 to the rendered 28px box:
+// stroke centres sit on integers and shapes are inset by 1 so no outline clips.
 const categoryIcons: Record<string, string> = {
   "user-research":
-    '<rect x="2" y="2" width="116" height="116" class="icon-fill-primary" stroke-width="4"/><rect x="27.5" y="27.5" width="60" height="60" class="icon-fill-accent" stroke-width="4"/>',
+    '<rect x="1" y="1" width="26" height="26" class="icon-fill-primary" stroke-width="2"/><rect x="8" y="8" width="12" height="12" class="icon-fill-accent" stroke-width="2"/>',
   "user-experience":
-    '<circle cx="60" cy="60" r="58" class="icon-fill-primary" stroke-width="4"/><circle cx="60.2712" cy="60.2717" r="35.8371" class="icon-fill-accent" stroke-width="4"/>',
+    '<circle cx="14" cy="14" r="13" class="icon-fill-primary" stroke-width="2"/><circle cx="14" cy="14" r="8" class="icon-fill-accent" stroke-width="2"/>',
   "user-interface":
-    '<circle cx="60" cy="60" r="58" class="icon-fill-accent" stroke-width="4"/>',
+    '<circle cx="14" cy="14" r="13" class="icon-fill-accent" stroke-width="2"/>',
   "interaction-design":
-    '<path d="M83.5395 29.3113L67.2736 100.729L17.5542 49.96L83.5395 29.3113Z" class="icon-fill-primary" stroke-width="4" stroke-linejoin="round"/><ellipse cx="94.2209" cy="27.562" rx="25.779" ry="27.56" class="icon-fill-accent" stroke-width="4"/>',
+    '<path d="M19 7L16 23L4 12L19 7Z" class="icon-fill-primary" stroke-width="2" stroke-linejoin="round"/><circle cx="21" cy="7" r="6" class="icon-fill-accent" stroke-width="2"/>',
   "usability-testing":
-    '<rect x="2" y="2" width="48" height="116" rx="8" class="icon-fill-accent" stroke-width="4"/><rect x="70" y="2" width="48" height="116" rx="8" class="icon-fill-primary" stroke-width="4"/>',
+    '<rect x="1" y="1" width="11" height="26" rx="2" class="icon-fill-accent" stroke-width="2"/><rect x="16" y="1" width="11" height="26" rx="2" class="icon-fill-primary" stroke-width="2"/>',
 };
 ---
 
@@ -109,7 +111,7 @@ const categoryIcons: Record<string, string> = {
               xmlns="http://www.w3.org/2000/svg"
               width="28"
               height="28"
-              viewBox="0 0 120 120"
+              viewBox="0 0 28 28"
               fill="none"
               aria-hidden="true"
               set:html={categoryIcons[slug]}

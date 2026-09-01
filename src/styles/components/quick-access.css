@@ -22,10 +22,6 @@
   --fill: var(--icon-accent);
 }
 
-.sidebar__item-link :is(.icon-fill-primary, .icon-fill-accent) {
-  stroke-width: 7;
-}
-
 .sidebar
   a:is(:hover, [aria-current="page"])
   :is(.icon-fill-primary, .icon-fill-accent) {
